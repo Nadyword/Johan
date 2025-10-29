@@ -1,0 +1,144 @@
+import type { Raffle, Ticket, Payment } from "./types"
+
+export const mockRaffles: Raffle[] = [
+  {
+    id: "r1",
+    title: "iPhone 15 Pro Max 256GB",
+    description:
+      "Participa por el último iPhone 15 Pro Max en color Titanio Natural. Incluye cargador y audífonos originales.",
+    image: "/iphone-15-pro-max-titanium-on-dark-background-with.jpg",
+    price: 2500,
+    ticketPrice: 5,
+    stock: 3247,
+    totalTickets: 5000,
+    soldTickets: 1753,
+    endsAt: "2025-12-31T23:59:59Z",
+    status: "active",
+    discounts: [
+      { quantity: 5, percentage: 5 },
+      { quantity: 10, percentage: 10 },
+      { quantity: 20, percentage: 15 },
+    ],
+  },
+  {
+    id: "r5",
+    title: "PlayStation 5 Digital Edition",
+    description: "Consola PS5 Digital con 2 controles DualSense y 3 juegos digitales incluidos.",
+    image: "/playstation-5-console.png",
+    price: 1800,
+    ticketPrice: 3,
+    stock: 2100,
+    totalTickets: 3000,
+    soldTickets: 900,
+    endsAt: "2025-11-30T23:59:59Z",
+    status: "active",
+    discounts: [
+      { quantity: 5, percentage: 5 },
+      { quantity: 10, percentage: 10 },
+    ],
+  },
+  {
+    id: "r6",
+    title: "MacBook Air M3",
+    description: 'MacBook Air 13" con chip M3, 16GB RAM y 512GB SSD. Color Medianoche.',
+    image: "/macbook-pro-on-dark-surface.jpg",
+    price: 2800,
+    ticketPrice: 7,
+    stock: 1500,
+    totalTickets: 2000,
+    soldTickets: 500,
+    endsAt: "2025-12-15T23:59:59Z",
+    status: "active",
+    discounts: [
+      { quantity: 5, percentage: 5 },
+      { quantity: 10, percentage: 10 },
+      { quantity: 20, percentage: 15 },
+    ],
+  },
+]
+
+export const mockActiveRaffle: Raffle = mockRaffles[0]
+
+export const mockPreviousRaffles: Raffle[] = [
+  {
+    id: "r2",
+    title: "MacBook Pro M3",
+    description: 'MacBook Pro 14" con chip M3 Pro',
+    image: "/macbook-pro-on-dark-surface.jpg",
+    price: 3000,
+    stock: 0,
+    totalTickets: 4000,
+    endsAt: "2025-10-15T23:59:59Z",
+    status: "ended",
+    winner: "Juan P. – Santiago, CL",
+    discounts: [],
+  },
+  {
+    id: "r3",
+    title: "PlayStation 5 + 3 Juegos",
+    description: "PS5 edición estándar con 3 juegos AAA",
+    image: "/playstation-5-console-with-games.jpg",
+    price: 1500,
+    stock: 0,
+    totalTickets: 3000,
+    endsAt: "2025-09-20T23:59:59Z",
+    status: "ended",
+    winner: "María G. – Valparaíso, CL",
+    discounts: [],
+  },
+  {
+    id: "r4",
+    title: "Apple Watch Ultra 2",
+    description: "Apple Watch Ultra 2 con correa Alpine",
+    image: "/apple-watch-ultra-on-wrist.jpg",
+    price: 1800,
+    stock: 0,
+    totalTickets: 2500,
+    endsAt: "2025-08-10T23:59:59Z",
+    status: "ended",
+    winner: "Carlos R. – Concepción, CL",
+    discounts: [],
+  },
+]
+
+export const mockTickets: Ticket[] = [
+  {
+    id: "t_001",
+    raffleId: "r1",
+    number: "045678",
+    qr: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23fff" width="200" height="200"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23000" font-size="14"%3EQR Code%3C/text%3E%3C/svg%3E',
+    status: "pending",
+    purchasedAt: "2025-10-25T14:30:00Z",
+    raffleName: "iPhone 15 Pro Max 256GB",
+  },
+  {
+    id: "t_002",
+    raffleId: "r1",
+    number: "045679",
+    qr: 'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" width="200" height="200"%3E%3Crect fill="%23fff" width="200" height="200"/%3E%3Ctext x="50%25" y="50%25" text-anchor="middle" dy=".3em" fill="%23000" font-size="14"%3EQR Code%3C/text%3E%3C/svg%3E',
+    status: "pending",
+    purchasedAt: "2025-10-25T14:30:00Z",
+    raffleName: "iPhone 15 Pro Max 256GB",
+  },
+]
+
+export const mockPayments: Payment[] = [
+  {
+    id: "pay_abc123",
+    amount: 25000,
+    method: "Tarjeta de Crédito",
+    status: "approved",
+    reference: "REF-2025-001",
+    createdAt: "2025-10-25T14:30:00Z",
+    tickets: 10,
+  },
+  {
+    id: "pay_def456",
+    amount: 5000,
+    method: "Transferencia",
+    status: "approved",
+    reference: "REF-2025-002",
+    createdAt: "2025-10-20T10:15:00Z",
+    tickets: 2,
+  },
+]

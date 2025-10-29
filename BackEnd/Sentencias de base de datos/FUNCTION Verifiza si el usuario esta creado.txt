@@ -1,0 +1,11 @@
+CREATE OR REPLACE FUNCTION usuario_existe(p_nombre text, p_email text)
+RETURNS boolean
+LANGUAGE sql
+AS $$
+  SELECT EXISTS (
+    SELECT 1 FROM usuarios
+    WHERE nombre = p_nombre OR email = p_email
+  );
+$$;
+
+SELECT usuario_existe('pepe', 'pepe@acme.com'); -- true/false

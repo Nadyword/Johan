@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activación de Cuenta</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .activation-container {
+            background-color: #1a1a1a;
+            border: 2px solid rgb(158, 155, 0);
+            border-radius: 12px;
+            padding: 40px;
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(158, 155, 0, 0.2);
+        }
+
+        .logo-container {
+            margin-bottom: 30px;
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            background-color: rgb(158, 155, 0);
+            border-radius: 50%;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            font-weight: bold;
+            color: #000000;
+        }
+
+        .title {
+            font-size: 28px;
+            font-weight: 600;
+            color: rgb(158, 155, 0);
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: #cccccc;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: rgb(158, 155, 0);
+            margin-bottom: 8px;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 14px 16px;
+            font-size: 16px;
+            background-color: #2a2a2a;
+            border: 2px solid #444444;
+            border-radius: 8px;
+            color: #ffffff;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: rgb(158, 155, 0);
+            box-shadow: 0 0 0 3px rgba(158, 155, 0, 0.1);
+        }
+
+        .activation-button {
+            width: 100%;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 600;
+            background-color: rgb(158, 155, 0);
+            color: #000000;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .activation-button:hover {
+            background-color: rgb(178, 175, 0);
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(158, 155, 0, 0.3);
+        }
+
+        .activation-button:active {
+            transform: translateY(0);
+        }
+
+        .footer-text {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #888888;
+            line-height: 1.4;
+        }
+
+        @media (max-width: 480px) {
+            .activation-container {
+                padding: 30px 20px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .description {
+                font-size: 14px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="activation-container">
+        <div class="logo-container">
+            <div class="logo">
+                <img src="" alt="Logo">
+            </div>
+        </div>
+        
+        <h1 class="title">Activación de Cuenta</h1>
+        
+        <div class="description">
+            <p>Para completar el proceso de registro y acceder a todos los servicios de nuestra plataforma, es necesario activar su cuenta.</p>
+            <br>
+            <p>Por favor, presione el botón para activar su cuenta.</p>
+        </div>
+        
+        <form id="activationForm">        
+            <button type="submit" class="activation-button">
+                Activar Mi Cuenta
+            </button>
+        </form>
+        
+        <p class="footer-text">
+            Al activar su cuenta, acepta nuestros términos de servicio y política de privacidad.
+        </p>
+    </div>
+
+    <script>
+        document.getElementById('activationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            fetch('{{url_activar_cuenta}}', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ codigo: '{{codigo_activacion}}' }) 
+            });
+        });
+    </script>
+</body>
+</html>

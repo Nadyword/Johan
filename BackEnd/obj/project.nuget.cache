@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "2kzANaMuR9E=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Api inmobiliaria.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\samue\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\8.0.2\\microsoft.extensions.dependencyinjection.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\samue\\.nuget\\packages\\microsoft.extensions.logging.abstractions\\8.0.2\\microsoft.extensions.logging.abstractions.8.0.2.nupkg.sha512",
+    "C:\\Users\\samue\\.nuget\\packages\\npgsql\\9.0.3\\npgsql.9.0.3.nupkg.sha512"
+  ],
+  "logs": []
+}

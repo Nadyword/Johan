@@ -1,0 +1,38 @@
+CREATE OR REPLACE FUNCTION usuario_crear(
+    p_nombre           text,
+    p_email            text,
+    p_password_plano   text,
+    p_telefono         text DEFAULT NULL,
+    p_fecha_nacimiento date DEFAULT NULL
+)
+RETURNS integer
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  v_id integer;
+BEGIN
+  -- si ya existe por nombre o email, devolvemos NULL
+  IF EXISTS (SELECT 1 FROM usuarios WHERE nombre = p_nombre OR email = p_email) THEN
+    RETURN NULL;
+  END IF;
+
+  INSERT INTO usuarios (nombre, email, password, telefono, fecha_nacimiento)
+  VALUES (
+    p_nombre,
+    p_email,
+    crypt(p_password_plano, gen_salt('bf')), -- bcrypt
+    p_telefono,
+    p_fecha_nacimiento
+  )
+  RETURNING id INTO v_id;
+
+  RETURN v_id;
+END;
+$$;
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto; -- para crypt()/gen_salt('bf')
+
+
+SELECT usuario_crear('pepe', 'pepe@acme.com', 'MiSecreta123', '5551234', '1990-06-01');
+-- devuelve el id o NULL si ya existe nombre/email
+

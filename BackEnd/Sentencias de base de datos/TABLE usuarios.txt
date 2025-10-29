@@ -1,0 +1,10 @@
+CREATE TABLE usuarios (
+    id SERIAL PRIMARY KEY,                -- Identificador único
+    nombre VARCHAR(200) NOT NULL,         -- Nombre del usuario
+    email VARCHAR(250) UNIQUE NOT NULL,   -- Correo electrónico (para login/contacto)
+    password TEXT NOT NULL,               -- Contraseña (idealmente encriptada con bcrypt/argon2)
+    telefono VARCHAR(25),                 -- Teléfono opcional
+    fecha_nacimiento DATE,                -- Fecha de nacimiento
+    creado_en TIMESTAMP DEFAULT NOW(),    -- Fecha de creación
+    actualizado_en TIMESTAMP DEFAULT NOW() -- Última actualización
+);
