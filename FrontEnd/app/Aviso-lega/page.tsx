@@ -1,6 +1,6 @@
 import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 
-export default function TerminosPage() {
+export default function AvisoLegalPage() {
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="fixed inset-0 bg-gradient-to-br from-background via-primary/5 to-secondary/10 animate-gradient" />
@@ -16,51 +16,71 @@ export default function TerminosPage() {
           <div className="inline-flex items-center gap-3 mb-4">
             <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-secondary" />
             <h1 className="font-display text-4xl md:text-5xl font-extrabold text-foreground">
-              Términos y Condiciones
+              Aviso Legal
             </h1>
             <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-secondary" />
           </div>
-          <p className="text-muted-foreground">Última actualización: Enero 2025</p>
         </div>
 
         <div className="bg-card/80 backdrop-blur-sm rounded-2xl border-2 border-secondary/20 p-8 md:p-12 shadow-2xl space-y-8 animate-fade-up">
           <section>
             <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              1. Primero
+              1. Información General
             </h2>
             <p className="text-muted-foreground leading-relaxed">
-              Los números disponibles a comprar de nuestro sorteo serán descritos en la página de detalles de las mismas.
+              De conformidad con las obligaciones de información, se informa que el titular de este sitio web es:
+              <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+                <li>Denominación: Élite Emporium Properties, C.A.</li>
+                <li>Domicilio: Calle Veracruz, Edificio Hacienda, piso 3, oficina 33F, Urb. Las Mercedes, Caracas, Municipio Baruta, Edo. Miranda. </li>
+                <li>RIF: J-50756511-4</li>
+                <li>Correo Electrónico: eliteemporiove@gmail.com</li>
+                <li>Teléfono: +58 (424) 225-85-05</li>
+              </ul>
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              2. Segundo
+              2. Propiedad Intelectual e Industrial
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-3">
-              Solo pueden participar personas naturales mayores de 18 años.
+              Todo el contenido de este sitio web (textos, imágenes, logotipos, diseños, software) es propiedad de Élite Emporium Properties C.A., o de sus licenciantes y está protegido por las leyes de propiedad intelectual e industrial. Queda expresamente prohibida su reproducción, distribución o comunicación pública sin autorización previa y por escrito.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              3. Tercero
+              3. Condiciones de Uso y Limitación de Responsabilidad
+            </h2>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground">
+              <li>El usuario se compromete a utilizar el sitio web de forma lícita y a no realizar actividades que dañen los sistemas o la imagen de la empresa.</li>
+              <li>Domicilio: Calle Veracruz, Edificio Hacienda, piso 3, oficina 33F, Urb. Las Mercedes, Caracas, Municipio Baruta, Edo. Miranda. </li>
+              <li>RIF: J-50756511-4</li>
+              <li>Correo Electrónico: eliteemporiove@gmail.com</li>
+              <li>Teléfono: +58 (424) 225-85-05</li>
+            </ul>
+          </section>
+
+          <section>
+            <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
+              4. Enlaces a Terceros
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-3">
-              Los premios serán pagados exclusivamente en criptomoneda especificamente USDT por la plataforma Binance a los ganadores de los premios.
+              Este sitio web puede contener enlaces a sitios externos. Élite Emporium Properties C.A., no ejerce control sobre estos sitios y no es responsable de sus contenidos o prácticas de privacidad. La inclusión de un enlace no implica una recomendación o aprobación de su contenido.
             </p>
           </section>
 
           <section>
             <h2 className="text-2xl font-bold text-foreground mb-4 flex items-center gap-2">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              4. Cuarto
+              5. Legislación Aplicable y Jurisdicción
             </h2>
             <p className="text-muted-foreground leading-relaxed mb-3">
-              Los ganadores deberán aceptar que Chain Of Lucky difunda en todas sus redes sociales fotografías y videos con la presencia de los ganadores luego de haber sido cancelados los premios.
+              Este Aviso Legal se rige por la legislación de la República Bolivariana de Venezuela. Para cualquier controversia, las partes se someterán expresamente a los juzgados y tribunales de Caracas, Distrito Capital, con renuncia a cualquier otro fuero que pudiera corresponderles.
             </p>
           </section>
         </div>

@@ -3,6 +3,8 @@ export interface Raffle {
   title: string
   description: string
   image: string
+  ticketPrice: number
+  soldTickets: number
   price: number
   stock: number
   totalTickets: number

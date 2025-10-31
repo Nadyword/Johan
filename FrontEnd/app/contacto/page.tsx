@@ -2,7 +2,7 @@
 
 import type React from "react"
 
-import { CloverIcon } from "@/components/clover-icon"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
@@ -18,17 +18,15 @@ export default function ContactoPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
-    // Aquí iría la lógica de envío del formulario
     alert("¡Mensaje enviado! Te responderemos pronto.")
     setFormData({ nombre: "", email: "", asunto: "", mensaje: "" })
   }
 
   return (
     <div className="min-h-screen relative overflow-hidden">
-      {/* Animated gradient background */}
+ 
       <div className="fixed inset-0 bg-gradient-to-br from-background via-secondary/5 to-accent/10 animate-gradient -z-10" />
 
-      {/* Floating clovers - more particles */}
       {[...Array(25)].map((_, i) => (
         <div
           key={i}
@@ -42,19 +40,18 @@ export default function ContactoPage() {
             zIndex: 0,
           }}
         >
-          <CloverIcon className="w-8 h-8 text-accent" />
+          <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-8 h-8 text-accent" />
         </div>
       ))}
 
       <div className="container mx-auto px-4 py-16 relative z-10">
-        {/* Header */}
         <div className="text-center mb-16 animate-fade-up">
           <div className="inline-flex items-center gap-3 mb-6">
-            <CloverIcon className="w-12 h-12 text-accent animate-float" />
+            <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-accent animate-float" />
             <h1 className="font-display text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-secondary via-accent to-primary bg-clip-text text-transparent">
               Contáctanos
             </h1>
-            <CloverIcon className="w-12 h-12 text-secondary animate-float-delayed" />
+            <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-secondary animate-float-delayed" />
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             ¿Tienes preguntas? Estamos aquí para ayudarte
@@ -62,7 +59,6 @@ export default function ContactoPage() {
         </div>
 
         <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-12">
-          {/* Contact Form */}
           <div className="animate-fade-up">
             <div className="bg-card/50 backdrop-blur-sm border border-secondary/20 rounded-2xl p-8 hover:border-secondary/50 transition-all duration-300 shadow-lg">
               <h2 className="text-2xl font-display font-bold mb-6 text-foreground">Envíanos un Mensaje</h2>
@@ -113,16 +109,13 @@ export default function ContactoPage() {
                 </div>
                 <Button
                   type="submit"
-                  className="w-full bg-gradient-to-r from-secondary to-accent text-background font-bold py-6 rounded-full hover:shadow-lg hover:shadow-secondary/50 transition-all duration-300 hover:scale-105"
+                  className="w-full bg-black text-white font-bold py-6 rounded-full hover:shadow-lg hover:shadow-secondary/50 transition-all duration-300 hover:scale-105"
                 >
-                  <CloverIcon className="w-5 h-5 mr-2" />
                   Enviar Mensaje
                 </Button>
               </form>
             </div>
           </div>
-
-          {/* Contact Info */}
           <div className="space-y-8 animate-fade-up" style={{ animationDelay: "0.2s" }}>
             <div className="bg-card/50 backdrop-blur-sm border border-accent/20 rounded-2xl p-8 hover:border-accent/50 transition-all duration-300 shadow-lg">
               <h2 className="text-2xl font-display font-bold mb-6 text-foreground">Información de Contacto</h2>
@@ -134,10 +127,10 @@ export default function ContactoPage() {
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Email</h3>
                     <a
-                      href="mailto:info@chainoflucky.cl"
+                      href="mailto:eliteemporiove@gmail.com"
                       className="text-muted-foreground hover:text-secondary transition-colors"
                     >
-                      info@chainoflucky.cl
+                      eliteemporiove@gmail.com
                     </a>
                   </div>
                 </div>
@@ -148,7 +141,7 @@ export default function ContactoPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Teléfono</h3>
-                    <p className="text-muted-foreground">+56 9 1234 5678</p>
+                    <p className="text-muted-foreground">+58 (424) 225-85-05</p>
                   </div>
                 </div>
 
@@ -180,7 +173,7 @@ export default function ContactoPage() {
             </div>
 
             <div className="bg-gradient-to-br from-secondary/20 to-accent/20 backdrop-blur-sm border border-secondary/30 rounded-2xl p-8 text-center">
-              <CloverIcon className="w-16 h-16 text-secondary mx-auto mb-4 animate-pulse-slow" />
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-16 h-16 text-secondary mx-auto mb-4 animate-pulse-slow" />
               <h3 className="font-display font-bold text-xl mb-2 text-foreground">¡Estamos para ayudarte!</h3>
               <p className="text-sm text-muted-foreground">
                 Tu satisfacción es nuestra prioridad. Responderemos tu mensaje en menos de 24 horas.

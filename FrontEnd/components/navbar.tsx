@@ -4,7 +4,7 @@ import Link from "next/link"
 import { useState } from "react"
 import { Menu, X, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { CloverIcon } from "@/components/clover-icon"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { useAuth } from "@/lib/auth-context"
 import { AuthModal } from "@/components/auth-modal"
 import {
@@ -35,10 +35,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <CloverIcon className="w-8 h-8 text-[#6A8E23] group-hover:text-[#F4A622] transition-colors animate-float" />
-              <span className="font-display font-extrabold text-xl bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
-                CHAIN OF LUCKY
-              </span>
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-02.png" height={100} width={100}/>
             </Link>
 
             {/* Desktop Navigation */}

@@ -1,6 +1,6 @@
 "use client"
 
-import { CloverIcon } from "@/components/clover-icon"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { Button } from "@/components/ui/button"
 import Link from "next/link"
 
@@ -24,7 +24,7 @@ export default function ComoFuncionaPage() {
             zIndex: 0,
           }}
         >
-          <CloverIcon className="w-8 h-8 text-secondary" />
+            <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-8 h-8 text-secondary" />
         </div>
       ))}
 
@@ -32,11 +32,11 @@ export default function ComoFuncionaPage() {
         {/* Header */}
         <div className="text-center mb-16 animate-fade-up">
           <div className="inline-flex items-center gap-3 mb-6">
-            <CloverIcon className="w-12 h-12 text-secondary animate-float" />
-            <h1 className="font-display text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent">
+            <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-secondary animate-float" />
+            <h1 className="font-display text-5xl md:text-6xl font-extrabold text-foreground">
               ¿Cómo Funciona?
             </h1>
-            <CloverIcon className="w-12 h-12 text-accent animate-float-delayed" />
+            <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-accent animate-float-delayed" />
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
             Participa en nuestras rifas digitales de forma simple, segura y transparente
@@ -91,8 +91,7 @@ export default function ComoFuncionaPage() {
           ].map((item, index) => (
             <div
               key={index}
-              className="group bg-card/50 backdrop-blur-sm border border-secondary/20 rounded-2xl p-8 hover:border-secondary/50 transition-all duration-300 hover:shadow-lg hover:shadow-secondary/20 animate-fade-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
+              className="border-s border-accent/100 border-black rounded-2xl p-8 animate-fade-up"
             >
               <div className="flex items-start gap-6">
                 <div className="flex-shrink-0">
@@ -117,7 +116,7 @@ export default function ComoFuncionaPage() {
 
         {/* Features */}
         <div className="max-w-4xl mx-auto mb-16">
-          <h2 className="text-3xl font-display font-bold text-center mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+          <h2 className="text-3xl font-display font-bold text-center mb-8 bg-gradient-to-r from-primary to-secondary bg-clip-text ">
             ¿Por qué elegir Chain of Lucky?
           </h2>
           <div className="grid md:grid-cols-3 gap-6">
@@ -156,9 +155,9 @@ export default function ComoFuncionaPage() {
           <Link href="/comprar">
             <Button
               size="lg"
-              className="bg-gradient-to-r from-primary via-secondary to-accent text-background font-bold px-8 py-6 text-lg rounded-full hover:shadow-lg hover:shadow-secondary/50 transition-all duration-300 hover:scale-105"
+              className="bg-gradient-to-r from-secondary to-primary text-foreground font-bold px-8 py-6 text-lg rounded-full transition-all duration-300 hover:scale-105 cursor-pointer"
             >
-              <CloverIcon className="w-5 h-5 mr-2" />
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-5 h-5 mr-2" />
               Comprar Tickets Ahora
             </Button>
           </Link>

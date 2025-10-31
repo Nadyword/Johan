@@ -3,12 +3,11 @@
 import { ProtectedRoute } from "@/components/protected-route"
 import { useAuth } from "@/lib/auth-context"
 import { CreditCard, Calendar, CheckCircle2, Clock } from "lucide-react"
-import { CloverIcon } from "@/components/clover-icon"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 
 export default function PaymentsPage() {
   const { user } = useAuth()
 
-  // Mock payments data
   const payments = [
     {
       id: "1",
@@ -44,14 +43,13 @@ export default function PaymentsPage() {
   return (
     <ProtectedRoute>
       <div className="min-h-screen relative overflow-hidden">
-        {/* Animated Background */}
+
         <div className="fixed inset-0 -z-10">
           <div className="absolute inset-0 bg-gradient-to-br from-[#F4A622]/20 via-background to-[#6A8E23]/20 animate-gradient" />
           <div className="absolute top-20 left-10 w-80 h-80 bg-[#F4A622]/10 rounded-full blur-3xl animate-float" />
           <div className="absolute bottom-20 right-10 w-96 h-96 bg-[#6A8E23]/10 rounded-full blur-3xl animate-float-delayed" />
         </div>
 
-        {/* Floating Clovers */}
         <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
           {[...Array(6)].map((_, i) => (
             <div
@@ -70,7 +68,6 @@ export default function PaymentsPage() {
         </div>
 
         <div className="container mx-auto px-4 py-12">
-          {/* Header */}
           <div className="text-center mb-12 animate-fade-up">
             <div className="inline-flex items-center gap-3 mb-4 bg-gradient-to-r from-[#F4A622] to-[#6A8E23] p-1 rounded-2xl">
               <div className="bg-background rounded-xl px-6 py-3 flex items-center gap-3">
@@ -85,7 +82,6 @@ export default function PaymentsPage() {
             </p>
           </div>
 
-          {/* Summary Card */}
           <div
             className="bg-gradient-to-br from-[#6A8E23] via-[#4F6D1F] to-[#F4A622] rounded-2xl p-8 mb-8 animate-fade-up shadow-2xl shadow-[#6A8E23]/30 border-2 border-[#F4A622]/30"
             style={{ animationDelay: "0.1s" }}
@@ -96,7 +92,7 @@ export default function PaymentsPage() {
                 <p className="text-4xl font-display font-bold text-background">${totalSpent.toLocaleString("es-CO")}</p>
                 <p className="text-background/70 text-sm mt-1">En {payments.length} transacciones</p>
               </div>
-              <CloverIcon className="w-20 h-20 text-background/20 animate-float" />
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={150} width={150}/>
             </div>
           </div>
 

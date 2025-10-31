@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation"
 import { useAuth } from "@/lib/auth-context"
 import { mockActiveRaffle } from "@/lib/mock-data"
 import { Button } from "@/components/ui/button"
-import { CloverIcon } from "@/components/clover-icon"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { Minus, Plus, ShoppingCart, Sparkles, Tag, Ticket, TrendingUp } from "lucide-react"
 import confetti from "canvas-confetti"
 
@@ -317,7 +317,7 @@ export default function BuyTicketsPage() {
               style={{ animationDelay: "0.4s" }}
             >
               <div className="flex items-start gap-4">
-                <CloverIcon className="w-10 h-10 text-[#6A8E23] flex-shrink-0 animate-float" />
+                <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={150} width={150}/>
                 <div>
                   <h4 className="font-bold text-foreground mb-2 text-lg">Compra Segura</h4>
                   <p className="text-sm text-muted-foreground">

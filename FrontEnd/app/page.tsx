@@ -1,21 +1,33 @@
 "use client"
 
-import { useState, useEffect } from "react"
-import Link from "next/link"
-import Image from "next/image"
-import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { Badge } from "@/components/ui/badge"
-import { CloverIcon } from "@/components/clover-icon"
-import { useAuth } from "@/lib/auth-context"
 import { mockRaffles, mockPreviousRaffles } from "@/lib/mock-data"
 import { Sparkles, Trophy, Users, Clock } from "lucide-react"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { AuthModal } from "@/components/auth-modal"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { useAuth } from "@/lib/auth-context"
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import Link from "next/link"
 
 export default function HomePage() {
-  const { user } = useAuth()
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [revealed, setRevealed] = useState(false)
+  const { user } = useAuth()
+
+  // Generar posiciones y animaciones aleatorias una sola vez
+  const [floatingClovers] = useState(() =>
+    Array.from({ length: 15 }, () => ({
+      width: Math.floor(Math.random() * 61) + 20,
+      height: Math.floor(Math.random() * 61) + 20,
+      left: Math.floor(Math.random() * 101),
+      top: Math.floor(Math.random() * 101),
+      animationDelay: Math.floor(Math.random() * 4),
+      animationDuration: Math.floor(Math.random() * 3) + 3,
+    }))
+  )
 
   useEffect(() => {
     setRevealed(true)
@@ -33,21 +45,22 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen">
-      {/* Hero Banner */}
       <section className="relative min-h-[600px] flex items-center justify-center overflow-hidden bg-gradient-to-br from-[#6A8E23] via-[#4F6D1F] to-[#F4A622]">
-        {/* Animated background particles */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          {[...Array(15)].map((_, i) => (
-            <CloverIcon
+          {floatingClovers.map((clover, i) => (
+            <CloverIconImage
+              src="/CHAIN OF LUCKY_CURVAS-03.svg"
+              height={clover.height}
+              width={clover.width}
               key={i}
               className="absolute text-white/10 animate-float"
               style={{
-                width: `${Math.random() * 60 + 20}px`,
-                height: `${Math.random() * 60 + 20}px`,
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${Math.random() * 3}s`,
-                animationDuration: `${Math.random() * 2 + 3}s`,
+                width: `${clover.width}px`,
+                height: `${clover.height}px`,
+                left: `${clover.left}%`,
+                top: `${clover.top}%`,
+                animationDelay: `${clover.animationDelay}s`,
+                animationDuration: `${clover.animationDuration}s`,
               }}
             />
           ))}
@@ -57,16 +70,31 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Left content */}
             <div className={`text-white space-y-6 ${revealed ? "animate-fade-up" : "opacity-0"}`}>
-              <Badge className="bg-[#F4A622] text-black border-0 text-sm px-4 py-1 hover:bg-[#F4A622]/90">
-                <Sparkles className="w-4 h-4 mr-2" />
-                Rifa Digital Online
-              </Badge>
 
-              <h1 className="text-5xl md:text-7xl font-display font-extrabold leading-tight">FORTUNE DIGITAL ONLINE</h1>
-
-              <div className="flex items-center gap-3">
-                <CloverIcon className="w-12 h-12 text-[#F4A622] animate-float" />
-                <p className="text-3xl font-display font-bold text-[#F4A622]">Chain of Lucky</p>
+              <div className="flex justify-center relative">
+                <div
+                  className="absolute inset-0 flex justify-center items-center pointer-events-none"
+                  aria-hidden="true"
+                >
+                  <div
+                    className="rounded-full"
+                    style={{
+                      width: 520,
+                      height: 520,
+                      filter: "blur(60px)",
+                      background: "radial-gradient(circle, #F4A62299 0%, #6A8E2333 80%, transparent 100%)",
+                    }}
+                  ></div>
+                </div>
+                <CloverIconImage
+                  src="/CHAIN OF LUCKY_CURVAS-02.png"
+                  height={500}
+                  width={500}
+                  className="relative animate-float"
+                  style={{
+                    marginLeft: "0px",
+                  }}
+                />
               </div>
 
               <p className="text-xl md:text-2xl font-semibold text-white/90">Participa hoy. Gana en grande.</p>
@@ -174,9 +202,8 @@ export default function HomePage() {
             {mockRaffles.map((raffle, index) => (
               <Card
                 key={raffle.id}
-                className={`bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#F4A622]/20 overflow-hidden ${
-                  revealed ? "animate-fade-up" : "opacity-0"
-                }`}
+                className={`bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#F4A622]/20 overflow-hidden ${revealed ? "animate-fade-up" : "opacity-0"
+                  }`}
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
                 <div className="relative h-56">
@@ -228,9 +255,8 @@ export default function HomePage() {
             {mockPreviousRaffles.slice(0, 4).map((raffle, index) => (
               <Card
                 key={raffle.id}
-                className={`bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] border-2 border-[#F4A622]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F4A622]/30 overflow-hidden ${
-                  revealed ? "animate-fade-up" : "opacity-0"
-                }`}
+                className={`bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] border-2 border-[#F4A622]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F4A622]/30 overflow-hidden ${revealed ? "animate-fade-up" : "opacity-0"
+                  }`}
                 style={{ animationDelay: `${index * 0.1 + 0.3}s` }}
               >
                 <div className="relative h-48">
