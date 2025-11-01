@@ -88,8 +88,8 @@ export default function HomePage() {
                 </div>
                 <CloverIconImage
                   src="/CHAIN OF LUCKY_CURVAS-02.png"
-                  height={500}
-                  width={500}
+                  height={275}
+                  width={450}
                   className="relative animate-float"
                   style={{
                     marginLeft: "0px",

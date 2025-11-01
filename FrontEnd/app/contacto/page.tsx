@@ -48,7 +48,7 @@ export default function ContactoPage() {
         <div className="text-center mb-16 animate-fade-up">
           <div className="inline-flex items-center gap-3 mb-6">
             <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-accent animate-float" />
-            <h1 className="font-display text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-secondary via-accent to-primary bg-clip-text text-transparent">
+            <h1 className="font-display text-5xl md:text-6xl font-extrabold bg-gradient-to-r from-secondary via-accent to-primary bg-clip-text">
               Contáctanos
             </h1>
             <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-secondary animate-float-delayed" />

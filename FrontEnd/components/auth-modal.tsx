@@ -107,7 +107,7 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
           <DialogHeader>
             <DialogTitle className="sr-only">Chain of Lucky - Autenticación</DialogTitle>
             <div className="flex items-center justify-center">
-              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-02.png" height={150} width={150} className="text-[#6A8E23]" />
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-02.png" height={175} width={275} className="text-[#6A8E23]" />
             </div>
             <DialogDescription className="text-center text-white/70">
               Tu oportunidad está a un clic de distancia

@@ -9,14 +9,19 @@ export function CloverIcon({ className = "w-6 h-6", style }: { className?: strin
 }
 
 export function CloverIconImage({ height, width, src, className, style}: { height?: number; width?: number; src?: string; className?: string; style?: React.CSSProperties }) {
+  // Merge height and width into style to avoid hydration errors
+  const mergedStyle: React.CSSProperties = {
+    ...style,
+    ...(height && { height: `${height}px` }),
+    ...(width && { width: `${width}px` }),
+  }
+
   return (
     <img
       src={src}
       alt="Clover icon"
-      height={height}
-      width={width}
       className={className}
-      style={style}
+      style={mergedStyle}
     />
   )
 }

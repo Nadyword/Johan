@@ -35,7 +35,7 @@ export function Navbar() {
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <Link href="/" className="flex items-center gap-2 group">
-              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-02.png" height={100} width={100}/>
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-02.png" height={50} width={80}/>
             </Link>
 
             {/* Desktop Navigation */}
