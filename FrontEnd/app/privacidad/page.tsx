@@ -43,13 +43,11 @@ export default function PrivacidadPage() {
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
               2. Finalidades del Tratamiento
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-3">
-              <ul className="list-disc list-inside space-y-1 text-muted-foreground">
-                <li> Gestionar y responder las consultas, comentarios y solicitudes de información que realice a través de nuestro sitio web, formularios de contacto o correo electrónico.</li>
-                <li>Prestar los servicios inmobiliarios que nos solicite (evaluación de propiedades, visitas, procesos de compra-venta-alquiler, concursos, promociones y eventos).</li>
-                <li> Enviarle comunicaciones comerciales sobre nuestros servicios, promociones, concurso, eventos o novedades, siempre que haya prestado su consentimiento para ello.</li>
-              </ul>
-            </p>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-3">
+              <li> Gestionar y responder las consultas, comentarios y solicitudes de información que realice a través de nuestro sitio web, formularios de contacto o correo electrónico.</li>
+              <li>Prestar los servicios inmobiliarios que nos solicite (evaluación de propiedades, visitas, procesos de compra-venta-alquiler, concursos, promociones y eventos).</li>
+              <li> Enviarle comunicaciones comerciales sobre nuestros servicios, promociones, concurso, eventos o novedades, siempre que haya prestado su consentimiento para ello.</li>
+            </ul>
           </section>
 
           <section>

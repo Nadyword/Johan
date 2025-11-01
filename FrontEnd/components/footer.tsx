@@ -29,11 +29,6 @@ export function Footer() {
                   Política de Privacidad
                 </Link>
               </li>
-              <li>
-                <Link href="/Aviso-lega" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Aviso Legal
-                </Link>
-              </li>
             </ul>
           </div>
 
@@ -80,11 +75,6 @@ export function Footer() {
               <li>
                 <Link href="/preguntas-frecuentes" className="text-sm text-muted-foreground hover:text-primary transition-colors">
                   Preguntas Frecuentes
-                </Link>
-              </li>
-              <li>
-                <Link href="/sobre-nosotros" className="text-sm text-muted-foreground hover:text-primary transition-colors">
-                  Sobre Nosotros
                 </Link>
               </li>
             </ul>

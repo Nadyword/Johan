@@ -39,7 +39,7 @@ export default function ComoFuncionaPage() {
             <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-12 h-12 text-accent animate-float-delayed" />
           </div>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Participa en nuestras rifas digitales de forma simple, segura y transparente
+            Participa en nuestros sorteos digitales de forma simple, segura y transparente
           </p>
         </div>
 
@@ -55,16 +55,16 @@ export default function ComoFuncionaPage() {
             },
             {
               step: "2",
-              title: "Elige tu Rifa",
+              title: "Elige tu Sorteo",
               description:
-                "Explora nuestras rifas activas y selecciona la que más te guste. Cada rifa muestra el premio, precio del ticket y fecha del sorteo.",
+                "Explora nuestros sorteos activos y selecciona el que más te guste. Cada sorteo muestra el premio, precio del boleto y fecha del sorteo.",
               icon: "🎯",
             },
             {
               step: "3",
-              title: "Compra tus Tickets",
+              title: "Compra tus Boletos",
               description:
-                "Selecciona la cantidad de tickets que deseas. ¡Mientras más tickets compres, más descuento obtienes! Los descuentos van desde 5% hasta 20%.",
+                "Selecciona la cantidad de boletos que deseas. ¡Mientras más boletos compres, más descuento obtienes! Los descuentos van desde 5% hasta 20%.",
               icon: "🎫",
             },
             {
@@ -76,7 +76,7 @@ export default function ComoFuncionaPage() {
             },
             {
               step: "5",
-              title: "Recibe tus Números",
+              title: "Recibe tus Boletos",
               description:
                 "Inmediatamente después del pago, recibirás tus números de la suerte por correo electrónico y en tu panel de usuario.",
               icon: "🔢",
@@ -158,7 +158,7 @@ export default function ComoFuncionaPage() {
               className="bg-gradient-to-r from-secondary to-primary text-foreground font-bold px-8 py-6 text-lg rounded-full transition-all duration-300 hover:scale-105 cursor-pointer"
             >
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-5 h-5 mr-2" />
-              Comprar Tickets Ahora
+              Comprar Boletos Ahora
             </Button>
           </Link>
         </div>

@@ -37,7 +37,7 @@ export default function PreviousRafflesPage() {
             <div className="bg-background rounded-xl px-6 py-3 flex items-center gap-3">
               <Trophy className="w-10 h-10 text-[#F4A622] animate-float" />
               <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-[#F4A622] to-[#6A8E23] bg-clip-text text-transparent">
-                Rifas Anteriores
+                Sorteos Anteriores
               </h1>
             </div>
           </div>

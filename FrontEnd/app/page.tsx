@@ -100,7 +100,7 @@ export default function HomePage() {
               <p className="text-xl md:text-2xl font-semibold text-white/90">Participa hoy. Gana en grande.</p>
 
               <p className="text-lg text-white/80 max-w-xl">
-                Tu oportunidad está a un clic de distancia. Compra tus tickets y participa en rifas increíbles con
+                Tu oportunidad está a un clic de distancia. Compra tus boletos y participa en sorteos increíbles con
                 premios que cambiarán tu vida.
               </p>
 
@@ -111,7 +111,7 @@ export default function HomePage() {
                   className="bg-gradient-to-r from-[#F4A622] to-[#ff8c00] hover:from-[#ff8c00] hover:to-[#F4A622] text-black font-bold text-lg px-8 py-6 shadow-2xl hover:shadow-[#F4A622]/50 transition-all duration-300 hover:scale-105 border-2 border-white/20"
                 >
                   <Sparkles className="w-5 h-5 mr-2" />
-                  Comprar Ticket Ahora
+                  Comprar Boletos Ahora
                 </Button>
 
                 <Button
@@ -164,11 +164,11 @@ export default function HomePage() {
                 <CardContent>
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground">Precio por ticket</p>
+                      <p className="text-sm text-muted-foreground">Precio por boletos</p>
                       <p className="text-3xl font-bold text-[#6A8E23]">${activeRaffle.ticketPrice}</p>
                     </div>
                     <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Tickets disponibles</p>
+                      <p className="text-sm text-muted-foreground">Boletos disponibles</p>
                       <p className="text-2xl font-bold text-[#F4A622]">
                         {activeRaffle.totalTickets - activeRaffle.soldTickets}
                       </p>
@@ -194,7 +194,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-[#121212] to-[#1a1a1a]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">Rifas Activas</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">Sorteos Activas</h2>
             <p className="text-xl text-white/70">Elige tu premio favorito y participa</p>
           </div>
 
@@ -247,7 +247,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-[#1a1a1a] to-[#121212]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">Rifas Anteriores</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">Sorteos Anteriores</h2>
             <p className="text-xl text-white/70">Conoce a nuestros ganadores</p>
           </div>
 
@@ -287,7 +287,7 @@ export default function HomePage() {
               size="lg"
               className="bg-gradient-to-r from-[#F4A622] to-[#ff8c00] hover:from-[#ff8c00] hover:to-[#F4A622] text-black font-bold shadow-xl hover:shadow-[#F4A622]/50 transition-all duration-300"
             >
-              <Link href="/rifas-anteriores">Ver Todas las Rifas Anteriores</Link>
+              <Link href="/rifas-anteriores">Ver Todas las Sorteos Anteriores</Link>
             </Button>
           </div>
         </div>

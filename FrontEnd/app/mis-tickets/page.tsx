@@ -61,7 +61,7 @@ export default function MyTicketsPage() {
               <div className="bg-background rounded-xl px-6 py-3 flex items-center gap-3">
                 <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} />
                 <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
-                  Mis Tickets
+                  Mis Boletos
                 </h1>
               </div>
             </div>
@@ -96,7 +96,7 @@ export default function MyTicketsPage() {
                       </h3>
                       <div className="flex items-center gap-2 text-muted-foreground text-sm">
                         <Ticket className="w-4 h-4 text-[#F4A622]" />
-                        <span className="font-semibold">Ticket #{ticket.ticketNumber}</span>
+                        <span className="font-semibold">Boleto #{ticket.ticketNumber}</span>
                       </div>
                     </div>
 
@@ -117,14 +117,14 @@ export default function MyTicketsPage() {
           ) : (
             <div className="text-center py-16 animate-fade-up">
               <CloverIcon className="w-24 h-24 text-muted-foreground/30 mx-auto mb-4 animate-float" />
-              <h3 className="text-xl font-semibold text-foreground mb-2">No tienes tickets aún</h3>
-              <p className="text-muted-foreground mb-6">Compra tu primer ticket y comienza a ganar</p>
+              <h3 className="text-xl font-semibold text-foreground mb-2">No tienes boletos aún</h3>
+              <p className="text-muted-foreground mb-6">Compra tu primer boleto y comienza a ganar</p>
               <a
                 href="/comprar"
                 className="inline-flex items-center gap-2 bg-gradient-to-r from-[#6A8E23] to-[#F4A622] text-background px-8 py-4 rounded-xl font-bold hover:from-[#4F6D1F] hover:to-[#F4A622] transition-all shadow-xl shadow-[#6A8E23]/30"
               >
                 <Ticket className="w-5 h-5" />
-                Comprar Tickets
+                Comprar Boletos
               </a>
             </div>
           )}

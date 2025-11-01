@@ -2,15 +2,17 @@
 
 import type React from "react"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
+import Link from "next/link"
 import { useAuth } from "@/lib/auth-context"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { Checkbox } from "@/components/ui/checkbox"
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog"
-import { CloverIcon } from "@/components/clover-icon"
-import { Eye, EyeOff, Sparkles } from "lucide-react"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
+import { Eye, EyeOff, Sparkles, XIcon } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
 interface AuthModalProps {
@@ -35,8 +37,17 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
     password: "",
   })
 
+  const [acceptedTerms, setAcceptedTerms] = useState(false)
+
   const { login, register } = useAuth()
   const router = useRouter()
+
+  // Resetear el checkbox cuando se cambia de tab o se cierra el modal
+  useEffect(() => {
+    if (activeTab === "login" || !open) {
+      setAcceptedTerms(false)
+    }
+  }, [activeTab, open])
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -65,6 +76,11 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
         setIsLoading(false)
         return
       }
+      if (!acceptedTerms) {
+        setError("Debes aceptar los términos y condiciones para registrarte")
+        setIsLoading(false)
+        return
+      }
       await register(registerData.name, registerData.email, registerData.password)
       onOpenChange(false)
       router.push("/comprar")
@@ -77,28 +93,38 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
 
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
-      <DialogContent className="sm:max-w-md bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]">
-        <DialogHeader>
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <CloverIcon className="w-8 h-8 text-[#6A8E23]" />
-            <DialogTitle className="text-2xl font-display font-bold text-[#F4A622]">Chain of Lucky</DialogTitle>
-          </div>
-          <DialogDescription className="text-center text-white/70">
-            Tu oportunidad está a un clic de distancia
-          </DialogDescription>
-        </DialogHeader>
+        <DialogContent 
+          className="sm:max-w-md bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]"
+          showCloseButton={false}
+        >
+          <button
+            onClick={() => onOpenChange(false)}
+            className="absolute top-4 right-4 z-50 bg-[#F4A622] hover:bg-[#ff8c00] text-black rounded-md p-2 transition-colors shadow-lg hover:shadow-[#F4A622]/50"
+            aria-label="Cerrar"
+          >
+            <XIcon className="w-6 h-6" />
+          </button>
+          <DialogHeader>
+            <DialogTitle className="sr-only">Chain of Lucky - Autenticación</DialogTitle>
+            <div className="flex items-center justify-center">
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-02.png" height={150} width={150} className="text-[#6A8E23]" />
+            </div>
+            <DialogDescription className="text-center text-white/70">
+              Tu oportunidad está a un clic de distancia
+            </DialogDescription>
+          </DialogHeader>
 
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
           <TabsList className="grid w-full grid-cols-2 bg-[#121212]">
             <TabsTrigger
               value="login"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#6A8E23] data-[state=active]:to-[#4F6D1F] data-[state=active]:text-white"
+              className="text-white data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#6A8E23] data-[state=active]:to-[#4F6D1F] data-[state=active]:text-white"
             >
               Ingresar
             </TabsTrigger>
             <TabsTrigger
               value="register"
-              className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#6A8E23] data-[state=active]:to-[#4F6D1F] data-[state=active]:text-white"
+              className="text-white data-[state=active]:bg-gradient-to-r data-[state=active]:from-[#6A8E23] data-[state=active]:to-[#4F6D1F] data-[state=active]:text-white"
             >
               Registrarse
             </TabsTrigger>
@@ -224,6 +250,30 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
                 </div>
               </div>
 
+              <div className="flex items-start space-x-2">
+                <Checkbox
+                  id="terms"
+                  checked={acceptedTerms}
+                  onCheckedChange={(checked) => setAcceptedTerms(checked === true)}
+                  className="mt-1 data-[state=checked]:bg-[#F4A622] data-[state=checked]:border-[#F4A622] data-[state=checked]:text-black"
+                />
+                <Label
+                  htmlFor="terms"
+                  className="text-sm text-white/80 leading-tight cursor-pointer"
+                >
+                  Acepto los{" "}
+                  <Link
+                    href="/terminos"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#F4A622] hover:text-[#ff8c00] underline transition-colors"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    términos y condiciones
+                  </Link>
+                </Label>
+              </div>
+
               {error && (
                 <div className="bg-red-500/10 border border-red-500/20 rounded-md p-3 text-sm text-red-400">
                   {error}
@@ -233,7 +283,7 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
               <Button
                 type="submit"
                 className="w-full bg-gradient-to-r from-[#F4A622] to-[#ff8c00] hover:from-[#ff8c00] hover:to-[#F4A622] text-black font-bold shadow-lg hover:shadow-[#F4A622]/50 transition-all duration-300"
-                disabled={isLoading}
+                disabled={isLoading || !acceptedTerms}
               >
                 {isLoading ? (
                   "Cargando..."

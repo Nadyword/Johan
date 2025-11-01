@@ -19,7 +19,7 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Chain of Lucky - Rifas Digitales Online",
+  title: "Chain of Lucky - Sorteos Digitales Online",
   description: "Participa hoy. Gana en grande. Dios te abre camino.",
     generator: 'v0.app'
 }

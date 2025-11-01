@@ -23,9 +23,9 @@ export function Navbar() {
   const navLinks = [
     { href: "/", label: "Inicio" },
     { href: "/comprar", label: "Comprar" },
-    { href: "/mis-tickets", label: "Mis Tickets" },
+    { href: "/mis-tickets", label: "Mis Boletos" },
     { href: "/pagos", label: "Pagos" },
-    { href: "/rifas-anteriores", label: "Rifas Anteriores" },
+    { href: "/rifas-anteriores", label: "Sorteos Anteriores" },
   ]
 
   return (
@@ -68,7 +68,7 @@ export function Navbar() {
                   </DropdownMenuTrigger>
                   <DropdownMenuContent align="end" className="bg-[#1a1a1a] border-[#6A8E23]/30">
                     <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
-                      <Link href="/mis-tickets">Mis Tickets</Link>
+                      <Link href="/mis-tickets">Mis boletos</Link>
                     </DropdownMenuItem>
                     <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
                       <Link href="/pagos">Historial de Pagos</Link>

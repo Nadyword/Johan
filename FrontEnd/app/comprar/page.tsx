@@ -96,7 +96,7 @@ export default function BuyTicketsPage() {
             <div className="bg-background rounded-xl px-6 py-3 flex items-center gap-3">
               <ShoppingCart className="w-10 h-10 text-secondary" />
               <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
-                Comprar Tickets
+                Comprar Boletos
               </h1>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function BuyTicketsPage() {
                 {/* Stock Progress */}
                 <div className="space-y-2">
                   <div className="flex items-center justify-between text-sm">
-                    <span className="text-muted-foreground">Tickets Disponibles</span>
+                    <span className="text-muted-foreground">Boletos Disponibles</span>
                     <span className="font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
                       {ticketsRemaining.toLocaleString()} / {raffle.totalTickets.toLocaleString()}
                     </span>
@@ -147,9 +147,8 @@ export default function BuyTicketsPage() {
                   </p>
                 </div>
 
-                {/* Price per ticket */}
                 <div className="flex items-center justify-between p-4 bg-gradient-to-r from-[#6A8E23]/10 to-[#F4A622]/10 rounded-xl border border-[#6A8E23]/20">
-                  <span className="text-muted-foreground font-semibold">Precio por ticket</span>
+                  <span className="text-muted-foreground font-semibold">Precio por boleto</span>
                   <span className="text-2xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
                     ${raffle.price.toLocaleString("es-CO")}
                   </span>
@@ -180,7 +179,7 @@ export default function BuyTicketsPage() {
                   >
                     <div className="flex items-center gap-3">
                       <Ticket className="w-5 h-5 text-[#6A8E23]" />
-                      <span className="font-semibold">{disc.quantity}+ tickets</span>
+                      <span className="font-semibold">{disc.quantity}+ boletos</span>
                     </div>
                     <span className="font-bold text-[#F4A622] text-lg">{disc.percentage}% OFF</span>
                   </div>
@@ -213,7 +212,7 @@ export default function BuyTicketsPage() {
                   <div className="text-6xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent animate-pulse-glow">
                     {quantity}
                   </div>
-                  <div className="text-sm text-muted-foreground font-semibold">tickets</div>
+                  <div className="text-sm text-muted-foreground font-semibold">boletos</div>
                 </div>
 
                 <Button
@@ -256,7 +255,7 @@ export default function BuyTicketsPage() {
 
               <div className="space-y-3">
                 <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Subtotal ({quantity} tickets)</span>
+                  <span>Subtotal ({quantity} boletos)</span>
                   <span className="font-semibold">${subtotal.toLocaleString("es-CO")}</span>
                 </div>
 
@@ -321,7 +320,7 @@ export default function BuyTicketsPage() {
                 <div>
                   <h4 className="font-bold text-foreground mb-2 text-lg">Compra Segura</h4>
                   <p className="text-sm text-muted-foreground">
-                    Tus tickets son generados instantáneamente y guardados de forma segura. Recibirás confirmación por
+                    Tus boletos son generados instantáneamente y guardados de forma segura. Recibirás confirmación por
                     email.
                   </p>
                 </div>
