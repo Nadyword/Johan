@@ -3,14 +3,14 @@
 import { Eye, EyeOff, Sparkles, Lock, AlertCircle } from "lucide-react"
 import { useSearchParams, useRouter } from "next/navigation"
 import { CloverIconImage } from "@/components/clover-icon"
+import { useState, useEffect, Suspense } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { useState, useEffect } from "react"
 import { authApi } from "@/lib/api/auth"
 import Link from "next/link"
 
-export default function ResetPasswordPage() {
+function ResetPasswordForm() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const token = searchParams.get("token")
@@ -71,22 +71,24 @@ export default function ResetPasswordPage() {
 
     try {
       const response = await authApi.resetPassword(
-        token,
-        formData.newPassword,
-        formData.confirmPassword
+        token as string,
+        formData.newPassword
       )
+
+      if (!response) {
+        setError("Ocurrió un error al restablecer la contraseña. Por favor intenta de nuevo.")
+        return
+      }
 
       setSuccessMessage(
         response.message || "Tu contraseña ha sido restablecida exitosamente"
       )
 
-      // Limpiar el formulario
       setFormData({
         newPassword: "",
         confirmPassword: "",
       })
 
-      // Redirigir al login después de 3 segundos
       setTimeout(() => {
         router.push("/")
       }, 3000)
@@ -265,3 +267,21 @@ export default function ResetPasswordPage() {
   )
 }
 
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] px-4">
+        <div className="w-full max-w-md">
+          <div className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23] rounded-lg p-8 shadow-2xl">
+            <div className="flex flex-col items-center text-center space-y-4">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6A8E23]"></div>
+              <p className="text-white/70">Cargando...</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    }>
+      <ResetPasswordForm />
+    </Suspense>
+  )
+}

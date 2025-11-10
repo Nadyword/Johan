@@ -230,10 +230,62 @@ export async function forgotPassword(email: string): Promise<ForgotPasswordRespo
   }
 }
 
+export async function resetPassword(Codigo: string, NewPass: string): Promise<{ message: string }> {
+  try {
+    const response = await fetch(`${API_URL}/RecoveryPass`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        Codigo,
+        NewPass
+      }),
+      // "redirect" should be a RequestRedirect value, but default is fine for most APIs
+    });
+
+    const contentType = response.headers.get("content-type");
+    const text = await response.text();
+
+    if (!response.ok) {
+      let errorMessage = `Error: ${response.status} ${response.statusText}`;
+      if (contentType && contentType.includes("application/json")) {
+        try {
+          const data = JSON.parse(text);
+          if (data.message) {
+            errorMessage = data.message;
+          } else if (typeof data === "string") {
+            errorMessage = data;
+          }
+        } catch {
+          errorMessage = text || errorMessage;
+        }
+      } else {
+        errorMessage = text || errorMessage;
+      }
+      throw new Error(errorMessage);
+    }
+
+    // Expected: { "message": "Contraseña actualizada." }
+    if (contentType && contentType.includes("application/json")) {
+      return JSON.parse(text);
+    } else {
+      // Fallback if API sends plain text instead (unusual)
+      return { message: text };
+    }
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error("Error desconocido al restablecer la contraseña.");
+  }
+}
+
 export const authApi = {
   login,
   register,
-  forgotPassword
+  forgotPassword,
+  resetPassword
 }
 
 export default authApi
