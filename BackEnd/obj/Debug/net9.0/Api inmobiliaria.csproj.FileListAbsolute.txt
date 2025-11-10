@@ -63,3 +63,4 @@ C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Debug\net9.0\staticwebasset
 C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Debug\net9.0\Api inmo.9F61859C.Up2Date
 C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Debug\net9.0\Api inmobiliaria.genruntimeconfig.cache
 C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Debug\net9.0\ref\Api inmobiliaria.dll
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Debug\net9.0\staticwebassets.upToDateCheck.txt

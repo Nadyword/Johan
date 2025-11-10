@@ -81,7 +81,7 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
         return
       }
 
-      if (response.name === "User no encontrado") {
+      if (response.name === "Usuario no encontrado") {
         setError("Usuario no encontrado. Por favor verifica tus credenciales.")
         return
       } else if (response.name === "Contraseña incorrecta") {
