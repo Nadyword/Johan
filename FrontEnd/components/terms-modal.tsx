@@ -4,7 +4,7 @@ import { useState, useEffect } from "react"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { XIcon } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { TermsContent } from "./terms-content"
+import { TermsContentPopUp } from "./terms-content-popUp"
 
 export function TermsModal() {
   const [open, setOpen] = useState(false)
@@ -32,9 +32,9 @@ export function TermsModal() {
           <DialogTitle className="sr-only">Términos y Condiciones</DialogTitle>
         </DialogHeader>
 
-        <TermsContent />
+        <TermsContentPopUp />
 
-        <div className="flex justify-center mt-6">
+        <div className="flex justify-center mt-1">
           <Button
             onClick={() => setOpen(false)}
             className="bg-gradient-to-r from-[#F4A622] to-[#ff8c00] hover:from-[#ff8c00] hover:to-[#F4A622] text-black font-bold shadow-lg hover:shadow-[#F4A622]/50 transition-all duration-300"

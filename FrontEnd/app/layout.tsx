@@ -1,12 +1,12 @@
-import type React from "react"
-import type { Metadata } from "next"
+import { TermsModalWrapper } from "@/components/terms-modal-wrapper"
+import { AuthProvider } from "@/lib/auth-context"
 import { Inter, Poppins } from "next/font/google"
-import "./globals.css"
+import { Toaster } from "@/components/ui/toaster"
 import { Navbar } from "@/components/navbar"
 import { Footer } from "@/components/footer"
-import { Toaster } from "@/components/ui/toaster"
-import { AuthProvider } from "@/lib/auth-context"
-import { TermsModalWrapper } from "@/components/terms-modal-wrapper"
+import type { Metadata } from "next"
+import type React from "react"
+import "./globals.css"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -20,9 +20,17 @@ const poppins = Poppins({
 })
 
 export const metadata: Metadata = {
-  title: "Chain of Lucky - Sorteos Digitales Online",
+  title: "Chain of Lucky",
   description: "Participa hoy. Gana en grande. Dios te abre camino.",
-    generator: 'v0.app'
+  generator: 'v0.app',
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/favicon.ico", type: "image/x-icon" },
+    ],
+    shortcut: "/favicon.ico",
+    apple: "/favicon.ico",
+  },
 }
 
 export default function RootLayout({

@@ -17,7 +17,7 @@ export default function MyTicketsPage() {
       purchaseDate: "2025-01-15",
       drawDate: "2025-02-01",
       status: "active",
-      image: "/iphone-15-pro-max-titanium-on-dark-background-with.jpg",
+      image: "/sorteo-1.jpg",
     },
     {
       id: "2",
@@ -44,10 +44,10 @@ export default function MyTicketsPage() {
               key={i}
               className="absolute animate-float opacity-10"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
-                animationDelay: `${i * 0.7}s`,
-                animationDuration: `${10 + Math.random() * 5}s`,
+              left: `${Math.floor(Math.random() * 100)}%`,
+              top: `${Math.floor(Math.random() * 100)}%`,
+              animationDelay: `${i * 0.7}s`,
+              animationDuration: `${Math.floor(8 + Math.random() * 5)}s`,
               }}
             >
               <CloverIcon className="w-16 h-16 text-secondary" />

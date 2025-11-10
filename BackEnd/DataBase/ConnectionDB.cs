@@ -1,5 +1,6 @@
 ﻿using Npgsql;
 using System.Data;
+using System.Threading.Tasks;
 
 namespace Api_inmobiliaria.DataBase;
 
@@ -33,19 +34,19 @@ public static class ConnectionDB
         }
     }
 
-    public static DataTable ExecuteFunction<TResult>(string functionName, List<string>? parameters = null)
+    public static async Task<DataTable> ExecuteFunction<TResult>(string functionName, List<string>? parameters = null)
     {
         try
         {
-            using var connection = new NpgsqlConnection(_connectionString);
-            connection.Open();
+            using NpgsqlConnection connection = new(_connectionString);
+            await connection.OpenAsync();
 
-            var commandText = $"SELECT {functionName}(" + (parameters != null ? string.Join(",", parameters) : "") + ")";
-            using var command = new NpgsqlCommand(commandText, connection);
+            string commandText = $"SELECT  * FROM {functionName}(" + (parameters != null ? string.Join(",", parameters) : "") + ")";
+            using NpgsqlCommand command = new(commandText, connection);
 
-            using var adapter = new NpgsqlDataAdapter(command);
-            var dataTable = new DataTable();
-            adapter.Fill(dataTable);
+            using NpgsqlDataAdapter adapter = new(command);
+            DataTable dataTable = new();
+            await Task.Run(() => adapter.Fill(dataTable));
 
             return dataTable;
         }

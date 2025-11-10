@@ -1,0 +1,40 @@
+CREATE OR REPLACE FUNCTION registrar_recovery_pass(
+    p_email            TEXT,
+    p_codigo           TEXT,
+    p_fecha_solicitud  TIMESTAMPTZ DEFAULT NOW(),
+    p_fecha_expiracion TIMESTAMPTZ DEFAULT (NOW() + INTERVAL '1 hour')
+)
+RETURNS TEXT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_usuario_id INTEGER;
+    v_registro_existente INTEGER;
+BEGIN
+  
+    SELECT id INTO v_usuario_id FROM usuarios WHERE email = p_email LIMIT 1;
+
+    IF NOT FOUND THEN
+        RETURN 'Usuario no encontrado.';
+    END IF;
+
+    SELECT COUNT(*) INTO v_registro_existente FROM RecoveryPass WHERE usuario_id = v_usuario_id AND usado = FALSE AND fecha_expiracion > NOW();
+
+    IF v_registro_existente > 0 THEN
+
+        UPDATE RecoveryPass
+        SET codigo = p_codigo,
+            fecha_solicitud = p_fecha_solicitud,
+            fecha_expiracion = p_fecha_expiracion
+        WHERE usuario_id = v_usuario_id AND usado = FALSE AND fecha_expiracion > NOW();
+
+        RETURN 'Código actualizado';
+    ELSE
+
+        INSERT INTO RecoveryPass (usuario_id, codigo, fecha_solicitud, fecha_expiracion)
+        VALUES (v_usuario_id, p_codigo, p_fecha_solicitud, p_fecha_expiracion);
+
+        RETURN 'Registro creado';
+    END IF;
+END;
+$$;

@@ -1,66 +1,50 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\",
+  "WorkspaceRootPath": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\sentencias de base de datos\\function usuario_recuperar_clave.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:sentencias de base de datos\\function usuario_recuperar_clave.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\controllers\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:controllers\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\database\\functionsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:database\\functionsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\controllers\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:controllers\\register.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\controllers\\recoveripass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\controllers\\recoveripass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:controllers\\recoveripass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\services\\sendmails\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\models\\request\\requestupdatepass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\request\\requestupdatepass.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\database\\functionsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:database\\functionsdb.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\services\\sendmails\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:services\\sendmails\\sendmail.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\api inmobiliaria.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:api inmobiliaria.csproj||{FA3CD31E-987B-443A-9B81-186104E8DAC1}|"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\models\\htmlmails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\htmlmails.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\models\\request\\requestregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\request\\requestregister.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\models\\htmlmails\\recoveriypass.html||{40D31677-CBC0-4297-A9EF-89D907823A98}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\htmlmails\\recoveriypass.html||{40D31677-CBC0-4297-A9EF-89D907823A98}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\models\\requestjwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\requestjwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\controllers\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:controllers\\login.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\models\\request\\requestlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\request\\requestlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\models\\response\\responsemessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:models\\response\\responsemessage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\security\\tokenjwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:security\\tokenjwt.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:appsettings.development.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\miweb2.0\\api inmobiliaria\\properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:properties\\launchsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+      "AbsoluteMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|c:\\users\\samue\\documents\\proyectos\\johan\\backend\\appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{B6C4B838-2595-478A-912D-DFFE2C785910}|Api inmobiliaria.csproj|solutionrelative:appsettings.production.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
     }
   ],
   "DocumentGroupContainers": [
@@ -70,221 +54,152 @@
       "DocumentGroups": [
         {
           "DockedHeight": 252,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 4,
               "Title": "SendMail.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Services\\SendMails\\SendMail.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Services\\SendMails\\SendMail.cs",
               "RelativeDocumentMoniker": "Services\\SendMails\\SendMail.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Services\\SendMails\\SendMail.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Services\\SendMails\\SendMail.cs",
               "RelativeToolTip": "Services\\SendMails\\SendMail.cs",
-              "ViewState": "AgIAAAkAAAAAAAAAAAAYwBwAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAABoAAAAAAAAAAAAAADYAAAAvAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-28T23:25:59.704Z",
-              "IsPinned": true
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "appsettings.Development.json",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\appsettings.Development.json",
-              "RelativeDocumentMoniker": "appsettings.Development.json",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\appsettings.Development.json",
-              "RelativeToolTip": "appsettings.Development.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAIAAAAyAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-24T14:50:17.372Z",
+              "WhenOpened": "2025-11-09T12:33:32.359Z",
               "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d84ee353-0bef-5a41-a649-8f89aca5d84d}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:128:0:{75188d03-9892-4ae2-abf1-207126247ce5}"
-            },
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "appsettings.json",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\appsettings.json",
-              "RelativeDocumentMoniker": "appsettings.json",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\appsettings.json",
-              "RelativeToolTip": "appsettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-14T15:20:27.374Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "appsettings.Production.json",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\appsettings.Production.json",
-              "RelativeDocumentMoniker": "appsettings.Production.json",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\appsettings.Production.json",
-              "RelativeToolTip": "appsettings.Production.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAApAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-10-14T14:41:21.039Z",
+              "Title": "RecoveriPass.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Controllers\\RecoveriPass.cs",
+              "RelativeDocumentMoniker": "Controllers\\RecoveriPass.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Controllers\\RecoveriPass.cs",
+              "RelativeToolTip": "Controllers\\RecoveriPass.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABcAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T10:40:40.054Z",
+              "IsPinned": true,
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Login.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Controllers\\Login.cs",
-              "RelativeDocumentMoniker": "Controllers\\Login.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Controllers\\Login.cs",
-              "RelativeToolTip": "Controllers\\Login.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T21:48:32.065Z",
+              "DocumentIndex": 0,
+              "Title": "FUNCTION usuario_recuperar_clave.txt",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Sentencias de base de datos\\FUNCTION usuario_recuperar_clave.txt",
+              "RelativeDocumentMoniker": "Sentencias de base de datos\\FUNCTION usuario_recuperar_clave.txt",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Sentencias de base de datos\\FUNCTION usuario_recuperar_clave.txt",
+              "RelativeToolTip": "Sentencias de base de datos\\FUNCTION usuario_recuperar_clave.txt",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAACUAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
+              "WhenOpened": "2025-11-09T20:04:10.588Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "Register.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Controllers\\Register.cs",
-              "RelativeDocumentMoniker": "Controllers\\Register.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Controllers\\Register.cs",
-              "RelativeToolTip": "Controllers\\Register.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAEAAAAAAAAAA==",
+              "DocumentIndex": 2,
+              "Title": "RequestUpdatePass.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\Request\\RequestUpdatePass.cs",
+              "RelativeDocumentMoniker": "Models\\Request\\RequestUpdatePass.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\Request\\RequestUpdatePass.cs",
+              "RelativeToolTip": "Models\\Request\\RequestUpdatePass.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T21:48:20.981Z",
+              "WhenOpened": "2025-11-09T17:40:22.288Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 13,
-              "Title": "TokenJwt.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Security\\TokenJwt.cs",
-              "RelativeDocumentMoniker": "Security\\TokenJwt.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Security\\TokenJwt.cs",
-              "RelativeToolTip": "Security\\TokenJwt.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T15:01:00.757Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "RequestLogin.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Models\\Request\\RequestLogin.cs",
-              "RelativeDocumentMoniker": "Models\\Request\\RequestLogin.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Models\\Request\\RequestLogin.cs",
-              "RelativeToolTip": "Models\\Request\\RequestLogin.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAARAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T14:53:21.098Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 14,
-              "Title": "launchSettings.json",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Properties\\launchSettings.json",
-              "RelativeDocumentMoniker": "Properties\\launchSettings.json",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Properties\\launchSettings.json",
-              "RelativeToolTip": "Properties\\launchSettings.json",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2025-09-14T22:38:19.053Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAkAAAAAAAAAA==",
+              "Title": "FunctionsDB.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\DataBase\\FunctionsDB.cs",
+              "RelativeDocumentMoniker": "DataBase\\FunctionsDB.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\DataBase\\FunctionsDB.cs",
+              "RelativeToolTip": "DataBase\\FunctionsDB.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAA2AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-14T22:37:53.305Z",
+              "WhenOpened": "2025-11-09T14:58:18.47Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.Development.json",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\appsettings.Development.json",
+              "RelativeDocumentMoniker": "appsettings.Development.json",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\appsettings.Development.json",
+              "RelativeToolTip": "appsettings.Development.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:50:46.062Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "HtmlMails.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\HtmlMails.cs",
+              "RelativeDocumentMoniker": "Models\\HtmlMails.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\HtmlMails.cs",
+              "RelativeToolTip": "Models\\HtmlMails.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-11-09T14:33:46.654Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 7,
-              "Title": "RecoveriPass.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Controllers\\RecoveriPass.cs",
-              "RelativeDocumentMoniker": "Controllers\\RecoveriPass.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Controllers\\RecoveriPass.cs",
-              "RelativeToolTip": "Controllers\\RecoveriPass.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA4AAAAlAAAAAAAAAA==",
+              "Title": "Login.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Controllers\\Login.cs",
+              "RelativeDocumentMoniker": "Controllers\\Login.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Controllers\\Login.cs",
+              "RelativeToolTip": "Controllers\\Login.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA8AAAAEAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-12T21:48:59.875Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "FunctionsDB.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\DataBase\\FunctionsDB.cs",
-              "RelativeDocumentMoniker": "DataBase\\FunctionsDB.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\DataBase\\FunctionsDB.cs",
-              "RelativeToolTip": "DataBase\\FunctionsDB.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAACIAAAAVAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T15:41:52.937Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "Api inmobiliaria.csproj",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Api inmobiliaria.csproj",
-              "RelativeDocumentMoniker": "Api inmobiliaria.csproj",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Api inmobiliaria.csproj",
-              "RelativeToolTip": "Api inmobiliaria.csproj",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000758|",
-              "WhenOpened": "2025-10-12T21:31:45.088Z"
+              "WhenOpened": "2025-11-09T12:16:41.512Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 10,
-              "Title": "RequestRegister.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Models\\Request\\RequestRegister.cs",
-              "RelativeDocumentMoniker": "Models\\Request\\RequestRegister.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Models\\Request\\RequestRegister.cs",
-              "RelativeToolTip": "Models\\Request\\RequestRegister.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T14:53:56.739Z"
+              "Title": "appsettings.Production.json",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\appsettings.Production.json",
+              "RelativeDocumentMoniker": "appsettings.Production.json",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\appsettings.Production.json",
+              "RelativeToolTip": "appsettings.Production.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAEAAAAOAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2025-11-09T14:51:04.371Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "RequestJwt.cs",
-              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Models\\RequestJwt.cs",
-              "RelativeDocumentMoniker": "Models\\RequestJwt.cs",
-              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Models\\RequestJwt.cs",
-              "RelativeToolTip": "Models\\RequestJwt.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAA==",
+              "DocumentIndex": 8,
+              "Title": "ResponseMessage.cs",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\Response\\ResponseMessage.cs",
+              "RelativeDocumentMoniker": "Models\\Response\\ResponseMessage.cs",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\Response\\ResponseMessage.cs",
+              "RelativeToolTip": "Models\\Response\\ResponseMessage.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAQAAAAPAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-09-24T15:01:54.262Z"
-            }
-          ]
-        },
-        {
-          "DockedHeight": 148,
-          "SelectedChildIndex": -1,
-          "Children": [
-            {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{eefa5220-e298-11d0-8f78-00a0c9110057}"
+              "WhenOpened": "2025-11-09T15:12:50.521Z",
+              "EditorCaption": ""
             },
             {
-              "$type": "Bookmark",
-              "Name": "ST:0:0:{d78612c7-9962-4b83-95d9-268046dad23a}"
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "RecoveriyPass.html",
+              "DocumentMoniker": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\HtmlMails\\RecoveriyPass.html",
+              "RelativeDocumentMoniker": "Models\\HtmlMails\\RecoveriyPass.html",
+              "ToolTip": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Models\\HtmlMails\\RecoveriyPass.html",
+              "RelativeToolTip": "Models\\HtmlMails\\RecoveriyPass.html",
+              "ViewState": "AgIAADgAAAAAAAAAAAAYwFYAAAAwAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001512|",
+              "WhenOpened": "2025-11-09T12:52:53.201Z",
+              "EditorCaption": ""
             }
           ]
         }

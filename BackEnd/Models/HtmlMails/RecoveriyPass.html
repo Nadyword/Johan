@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recuperar Contraseña - Chain of Lucky</title>
+</head>
+<body style="margin: 0; padding: 0; font-family: Arial, sans-serif; background-color: #f4f4f4;">
+    <!-- Container principal -->
+    <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #f4f4f4;">
+        <tr>
+            <td style="padding: 20px 0;">
+                <!-- Email content wrapper -->
+                <table role="presentation" style="width: 600px; margin: 0 auto; border-collapse: collapse; background-color: #ffffff; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    
+                    <!-- Header -->
+                    <tr>
+                        <td style="background-color: #1a1a1a; padding: 20px 30px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td>
+                                        <span style="color: #9ACD32; font-size: 24px; font-weight: bold;">🍀 CHAIN OF LUCKY</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Hero section -->
+                    <tr>
+                        <td style="background: linear-gradient(135deg, #6B8E23 0%, #9ACD32 100%); padding: 40px 30px; text-align: center;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                                <tr>
+                                    <td>
+                                        <h1 style="margin: 0; color: #ffffff; font-size: 36px; font-weight: bold; line-height: 1.3;">
+                                            Recupera tu Contraseña
+                                        </h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="padding-top: 15px;">
+                                        <p style="margin: 0; color: #ffffff; font-size: 16px; line-height: 1.5;">
+                                            Recibimos una solicitud para restablecer la contraseña de tu cuenta
+                                        </p>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Content -->
+                    <tr>
+                        <td style="padding: 40px 30px;">
+                            <table role="presentation" style="width: 100%; border-collapse: collapse;">
+                                <!-- Greeting and message -->
+                                <tr>
+                                    <td>
+                                        <p style="margin: 0 0 20px 0; color: #333; font-size: 16px; line-height: 1.6;">
+                                            Hola,
+                                        </p>
+                                        <p style="margin: 0 0 20px 0; color: #333; font-size: 16px; line-height: 1.6;">
+                                            Recibimos una solicitud para restablecer la contraseña de tu cuenta en Chain of Lucky. Si no realizaste esta solicitud, puedes ignorar este correo de forma segura.
+                                        </p>
+                                        <p style="margin: 0 0 30px 0; color: #333; font-size: 16px; line-height: 1.6;">
+                                            Para restablecer tu contraseña, haz clic en el siguiente botón:
+                                        </p>
+                                    </td>
+                                </tr>
+                                
+                                <!-- CTA Button -->
+                                <tr>
+                                    <td style="text-align: center; padding: 20px 0;">
+                                        <a href="https://{{Domain}}/reset-password?token={{Codigo}}" style="display: inline-block; background-color: #9ACD32; color: #1a1a1a; text-decoration: none; padding: 18px 50px; border-radius: 8px; font-size: 18px; font-weight: bold; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                                            Restablecer Contraseña
+                                        </a>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Alternative link -->
+                                <tr>
+                                    <td style="padding-top: 30px; border-top: 1px solid #e0e0e0;">
+                                        <p style="margin: 20px 0 15px 0; color: #666; font-size: 14px; line-height: 1.6;">
+                                            Si el botón no funciona, copia y pega el siguiente enlace en tu navegador:
+                                        </p>
+                                        <p style="margin: 0; word-break: break-all;">
+                                            <a href="#" style="color: #6B8E23; text-decoration: underline; font-size: 14px;">
+                                                https://{{Domain}}/reset-password?token={{Codigo}}
+                                            </a>
+                                        </p>
+                                    </td>
+                                </tr>
+                                
+                                <!-- Security notice -->
+                                <tr>
+                                    <td style="padding-top: 30px;">
+                                        <table role="presentation" style="width: 100%; border-collapse: collapse; background-color: #fff9e6; border-left: 4px solid #FFA500; border-radius: 4px;">
+                                            <tr>
+                                                <td style="padding: 20px;">
+                                                    <p style="margin: 0 0 10px 0; color: #856404; font-size: 14px; font-weight: bold;">
+                                                        Aviso de Seguridad
+                                                    </p>
+                                                    <p style="margin: 0; color: #856404; font-size: 14px; line-height: 1.5;">
+                                                        Este enlace es válido por 24 horas. Si no solicitaste este cambio, te recomendamos cambiar tu contraseña inmediatamente.
+                                                    </p>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                </tr>
+                            </table>
+                        </td>
+                    </tr>
+
+                    <!-- Footer -->
+                    <tr>
+                        <td style="background-color: #1a1a1a; padding: 30px; text-align: center;">
+                            <p style="margin: 0 0 10px 0; color: #9ACD32; font-size: 20px; font-weight: bold;">🍀 CHAIN OF LUCKY</p>
+                            <p style="margin: 0 0 15px 0; color: #888; font-size: 14px;">Tu oportunidad está a un clic de distancia</p>
+                            
+                            <p style="margin: 0; color: #666; font-size: 12px;">
+                                © 2025 Chain of Lucky. Todos los derechos reservados.
+                            </p>
+                            <p style="margin: 10px 0 0 0; color: #666; font-size: 11px;">
+                                Este correo fue enviado a tu cuenta porque solicitaste recuperar tu contraseña.
+                            </p>
+                        </td>
+                    </tr>
+
+                </table>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>

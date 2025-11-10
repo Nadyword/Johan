@@ -1,0 +1,37 @@
+﻿CREATE OR REPLACE FUNCTION usuario_recuperar_clave(
+    p_codigo TEXT,
+    p_nueva_clave TEXT
+)
+RETURNS VARCHAR(200)
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_usuario_id INTEGER;
+BEGIN
+    SELECT usuario_id INTO v_usuario_id
+    FROM RecoveryPass
+    WHERE codigo = p_codigo
+      AND usado = FALSE
+      AND fecha_expiracion > RecoveryPass.fecha_solicitud
+    LIMIT 1;
+
+    -- Validar si el código existe y es válido
+    IF NOT FOUND THEN
+        RETURN 'Código inválido, expirado o ya utilizado.';
+    END IF;
+
+    -- Actualizar la clave del usuario en la tabla usuarios
+    UPDATE usuarios
+    SET clave = crypt(p_nueva_clave, gen_salt('bf')),
+        last_update = NOW()
+    WHERE id = v_usuario_id;
+
+    -- Marcar el código como usado
+    UPDATE RecoveryPass
+    SET usado = TRUE,
+        fecha_expiracion = NOW()
+    WHERE codigo = p_codigo;
+
+    RETURN 'Contraseña actualizada.';
+END;
+$$;

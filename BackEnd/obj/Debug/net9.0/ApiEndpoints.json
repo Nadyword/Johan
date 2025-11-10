@@ -2,7 +2,7 @@
   {
     "ContainingType": "Api_inmobiliaria.Controllers.Login",
     "Method": "Logeo",
-    "RelativePath": "Inmo/api/Login",
+    "RelativePath": "Sorteo/api/Login",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
@@ -15,7 +15,7 @@
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Int32",
+        "Type": "Api_inmobiliaria.Models.Response.ResponseLogin",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -26,16 +26,48 @@
     ]
   },
   {
-    "ContainingType": "Api_inmobiliaria.Controllers.RecoveriPass",
+    "ContainingType": "Api_inmobiliaria.Controllers.RecoveryPass",
     "Method": "SendMail",
-    "RelativePath": "Inmo/api/RecoveriPass",
+    "RelativePath": "Sorteo/api/RecoveryPass",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
-    "Parameters": [],
+    "Parameters": [
+      {
+        "Name": "requestSendMail",
+        "Type": "Api_inmobiliaria.Models.Request.RequestSendMail",
+        "IsRequired": true
+      }
+    ],
     "ReturnTypes": [
       {
-        "Type": "System.Boolean",
+        "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.RecoveryPass",
+    "Method": "RestorePass",
+    "RelativePath": "Sorteo/api/RecoveryPass",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestUpdatePass",
+        "Type": "Api_inmobiliaria.Models.Request.RequestUpdatePass",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
         "MediaTypes": [
           "text/plain",
           "application/json",
@@ -48,20 +80,20 @@
   {
     "ContainingType": "Api_inmobiliaria.Controllers.Register",
     "Method": "Post",
-    "RelativePath": "Inmo/api/Register",
+    "RelativePath": "Sorteo/api/Register",
     "HttpMethod": "POST",
     "IsController": true,
     "Order": 0,
     "Parameters": [
       {
         "Name": "request",
-        "Type": "Api_inmobiliaria.Models.Request.RequestRegister",
+        "Type": "Api_inmobiliaria.Models.DTOs.Tablas.Usuarios",
         "IsRequired": true
       }
     ],
     "ReturnTypes": [
       {
-        "Type": "System.Int32",
+        "Type": "Api_inmobiliaria.Models.Response.ResponseRegister",
         "MediaTypes": [
           "text/plain",
           "application/json",

@@ -20,10 +20,10 @@ export default function PreviousRafflesPage() {
             key={i}
             className="absolute animate-float opacity-10"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
+              left: `${Math.floor(Math.random() * 100)}%`,
+              top: `${Math.floor(Math.random() * 100)}%`,
               animationDelay: `${i * 0.6}s`,
-              animationDuration: `${8 + Math.random() * 6}s`,
+              animationDuration: `${Math.floor(8 + Math.random() * 6)}s`,
             }}
           >
             <Trophy className="w-12 h-12 text-[#F4A622]" />
@@ -44,67 +44,76 @@ export default function PreviousRafflesPage() {
           <p className="text-muted-foreground text-lg">Conoce a nuestros ganadores y sus increíbles premios</p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
-          {mockPreviousRaffles.map((raffle, index) => (
-            <div
-              key={raffle.id}
-              className="bg-card/80 backdrop-blur-sm border-2 border-[#F4A622]/30 rounded-2xl overflow-hidden hover:border-[#F4A622] transition-all hover:shadow-2xl hover:shadow-[#F4A622]/20 hover:scale-105 animate-fade-up"
-              style={{ animationDelay: `${index * 0.1}s` }}
-            >
-              <div className="relative h-56 bg-muted overflow-hidden group">
-                <img
-                  src={raffle.image || "/placeholder.svg"}
-                  alt={raffle.title}
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
-                <div className="absolute top-3 right-3 bg-gradient-to-r from-[#F4A622] to-[#F4A622]/80 text-background px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg">
-                  <Trophy className="w-3.5 h-3.5" />
-                  FINALIZADO
-                </div>
-              </div>
-              <div className="p-5 space-y-4">
-                <div>
-                  <h3 className="font-display font-bold text-xl bg-gradient-to-r from-[#F4A622] to-[#6A8E23] bg-clip-text text-transparent mb-2">
-                    {raffle.title}
-                  </h3>
-                  <p className="text-sm text-muted-foreground line-clamp-2">{raffle.description}</p>
-                </div>
-
-                <div className="grid grid-cols-2 gap-3 text-sm">
-                  <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-lg">
-                    <Ticket className="w-4 h-4 text-[#6A8E23]" />
-                    <span className="text-muted-foreground font-medium">
-                      {raffle.totalTickets.toLocaleString()} tickets
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-lg">
-                    <Calendar className="w-4 h-4 text-[#F4A622]" />
-                    <span className="text-muted-foreground font-medium">
-                      {new Date(raffle.endsAt).toLocaleDateString("es-ES", { month: "short", year: "numeric" })}
-                    </span>
+        {!mockPreviousRaffles || mockPreviousRaffles.length === 0 ? (
+          <div className="text-center py-16 animate-fade-up">
+            <div className="bg-card/80 backdrop-blur-sm border-2 border-[#F4A622]/30 rounded-2xl p-12 max-w-2xl mx-auto">
+              <Trophy className="w-16 h-16 text-[#F4A622]/50 mx-auto mb-4" />
+              <p className="text-xl text-muted-foreground">No existe registro por el momento</p>
+            </div>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-7xl mx-auto">
+            {mockPreviousRaffles.map((raffle, index) => (
+              <div
+                key={raffle.id}
+                className="bg-card/80 backdrop-blur-sm border-2 border-[#F4A622]/30 rounded-2xl overflow-hidden hover:border-[#F4A622] transition-all hover:shadow-2xl hover:shadow-[#F4A622]/20 hover:scale-105 animate-fade-up"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="relative h-56 bg-muted overflow-hidden group">
+                  <img
+                    src={raffle.image || "/placeholder.svg"}
+                    alt={raffle.title}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-background/90 to-transparent" />
+                  <div className="absolute top-3 right-3 bg-gradient-to-r from-[#F4A622] to-[#F4A622]/80 text-background px-4 py-2 rounded-full text-xs font-bold flex items-center gap-1.5 shadow-lg">
+                    <Trophy className="w-3.5 h-3.5" />
+                    FINALIZADO
                   </div>
                 </div>
+                <div className="p-5 space-y-4">
+                  <div>
+                    <h3 className="font-display font-bold text-xl bg-gradient-to-r from-[#F4A622] to-[#6A8E23] bg-clip-text text-transparent mb-2">
+                      {raffle.title}
+                    </h3>
+                    <p className="text-sm text-muted-foreground line-clamp-2">{raffle.description}</p>
+                  </div>
 
-                {raffle.winner && (
-                  <div className="bg-gradient-to-br from-[#F4A622]/10 via-[#6A8E23]/10 to-[#F4A622]/10 border-2 border-[#F4A622]/30 rounded-xl p-4">
-                    <div className="flex items-start gap-3">
-                      <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F4A622] to-[#6A8E23] flex items-center justify-center flex-shrink-0 shadow-lg">
-                        <User className="w-6 h-6 text-background" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">
-                          Ganador
-                        </p>
-                        <p className="font-bold text-foreground truncate text-lg">{raffle.winner}</p>
-                      </div>
+                  <div className="grid grid-cols-2 gap-3 text-sm">
+                    <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-lg">
+                      <Ticket className="w-4 h-4 text-[#6A8E23]" />
+                      <span className="text-muted-foreground font-medium">
+                        {raffle.totalTickets.toLocaleString()} tickets
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2 bg-muted/50 p-2 rounded-lg">
+                      <Calendar className="w-4 h-4 text-[#F4A622]" />
+                      <span className="text-muted-foreground font-medium">
+                        {new Date(raffle.endsAt).toLocaleDateString("es-ES", { month: "short", year: "numeric" })}
+                      </span>
                     </div>
                   </div>
-                )}
+
+                  {raffle.winner && (
+                    <div className="bg-gradient-to-br from-[#F4A622]/10 via-[#6A8E23]/10 to-[#F4A622]/10 border-2 border-[#F4A622]/30 rounded-xl p-4">
+                      <div className="flex items-start gap-3">
+                        <div className="w-12 h-12 rounded-full bg-gradient-to-br from-[#F4A622] to-[#6A8E23] flex items-center justify-center flex-shrink-0 shadow-lg">
+                          <User className="w-6 h-6 text-background" />
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs text-muted-foreground mb-1 font-semibold uppercase tracking-wide">
+                            Ganador
+                          </p>
+                          <p className="font-bold text-foreground truncate text-lg">{raffle.winner}</p>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
+        )}
 
         <div className="mt-16 max-w-3xl mx-auto text-center animate-fade-up" style={{ animationDelay: "0.4s" }}>
           <div className="bg-card/80 backdrop-blur-sm border-2 border-[#6A8E23]/30 rounded-2xl p-8">

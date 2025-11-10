@@ -1,19 +1,39 @@
 "use client"
 
-import { useState } from "react"
-import { useRouter } from "next/navigation"
-import { useAuth } from "@/lib/auth-context"
+import { Minus, Plus, ShoppingCart, Sparkles, Tag, Ticket, TrendingUp } from "lucide-react"
+import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { mockActiveRaffle } from "@/lib/mock-data"
 import { Button } from "@/components/ui/button"
-import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
-import { Minus, Plus, ShoppingCart, Sparkles, Tag, Ticket, TrendingUp } from "lucide-react"
+import { useState, useEffect } from "react"
+import { useAuth } from "@/lib/auth-context"
+import { useRouter } from "next/navigation"
 import confetti from "canvas-confetti"
+
+interface FloatingClover {
+  left: number
+  top: number
+  animationDelay: number
+  animationDuration: number
+}
 
 export default function BuyTicketsPage() {
   const [quantity, setQuantity] = useState(1)
   const [isProcessing, setIsProcessing] = useState(false)
+  const [floatingClovers, setFloatingClovers] = useState<FloatingClover[]>([])
   const { user } = useAuth()
   const router = useRouter()
+
+  // Generar posiciones aleatorias solo en el cliente para evitar errores de hidratación
+  useEffect(() => {
+    setFloatingClovers(
+      Array.from({ length: 8 }, (_, i) => ({
+        left: Math.floor(Math.random() * 100),
+        top: Math.floor(Math.random() * 100),
+        animationDelay: i * 0.5,
+        animationDuration: Math.floor(8 + Math.random() * 4),
+      }))
+    )
+  }, [])
 
   const raffle = mockActiveRaffle
 
@@ -73,15 +93,15 @@ export default function BuyTicketsPage() {
 
       {/* Floating Clovers */}
       <div className="fixed inset-0 -z-10 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+        {floatingClovers.map((clover, i) => (
           <div
             key={i}
             className="absolute animate-float opacity-10"
             style={{
-              left: `${Math.random() * 100}%`,
-              top: `${Math.random() * 100}%`,
-              animationDelay: `${i * 0.5}s`,
-              animationDuration: `${8 + Math.random() * 4}s`,
+              left: `${clover.left}%`,
+              top: `${clover.top}%`,
+              animationDelay: `${clover.animationDelay}s`,
+              animationDuration: `${clover.animationDuration}s`,
             }}
           >
             <CloverIcon className="w-12 h-12 text-secondary" />
@@ -156,36 +176,6 @@ export default function BuyTicketsPage() {
               </div>
             </div>
 
-            {/* Discount Tiers */}
-            <div
-              className="bg-card/80 backdrop-blur-sm border-2 border-[#F4A622]/30 rounded-2xl p-6 animate-fade-up hover:border-[#F4A622] transition-all"
-              style={{ animationDelay: "0.1s" }}
-            >
-              <div className="flex items-center gap-2 mb-4">
-                <Tag className="w-6 h-6 text-[#F4A622]" />
-                <h3 className="font-display font-bold text-xl bg-gradient-to-r from-[#F4A622] to-[#6A8E23] bg-clip-text text-transparent">
-                  Descuentos por Cantidad
-                </h3>
-              </div>
-              <div className="space-y-3">
-                {raffle.discounts.map((disc, index) => (
-                  <div
-                    key={index}
-                    className={`flex items-center justify-between p-4 rounded-xl transition-all ${
-                      quantity >= disc.quantity
-                        ? "bg-gradient-to-r from-[#6A8E23]/20 to-[#F4A622]/20 border-2 border-[#6A8E23] shadow-lg shadow-[#6A8E23]/20 scale-105"
-                        : "bg-muted/50 border-2 border-transparent hover:border-[#6A8E23]/30"
-                    }`}
-                  >
-                    <div className="flex items-center gap-3">
-                      <Ticket className="w-5 h-5 text-[#6A8E23]" />
-                      <span className="font-semibold">{disc.quantity}+ boletos</span>
-                    </div>
-                    <span className="font-bold text-[#F4A622] text-lg">{disc.percentage}% OFF</span>
-                  </div>
-                ))}
-              </div>
-            </div>
           </div>
 
           {/* Right Column - Purchase Form */}

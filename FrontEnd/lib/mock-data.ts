@@ -3,93 +3,26 @@ import type { Raffle, Ticket, Payment } from "./types"
 export const mockRaffles: Raffle[] = [
   {
     id: "r1",
-    title: "iPhone 15 Pro Max 256GB",
+    title: "Premiación de Chain of Lucky",
     description:
-      "Participa por el último iPhone 15 Pro Max en color Titanio Natural. Incluye cargador y audífonos originales.",
-    image: "/iphone-15-pro-max-titanium-on-dark-background-with.jpg",
-    price: 2500,
-    ticketPrice: 5,
+      "Primer lugar: 100.000$\n Segundo lugar: 50.000$\n Tercer lugar: 25.000$\n Cuarto lugar: 10.000$\n Quinto lugar: 5.000$\n y premios especial al usuario que haya comprado más tickets de 1.000$",
+    image: "/sorteo-1.jpg",
+    price: 2,
+    ticketPrice: 2,
     stock: 3247,
     totalTickets: 5000,
     soldTickets: 1753,
     endsAt: "2025-12-31T23:59:59Z",
     status: "active",
-    discounts: [
-      { quantity: 5, percentage: 5 },
-      { quantity: 10, percentage: 10 },
-      { quantity: 20, percentage: 15 },
-    ],
-  },
-  {
-    id: "r5",
-    title: "PlayStation 5 Digital Edition",
-    description: "Consola PS5 Digital con 2 controles DualSense y 3 juegos digitales incluidos.",
-    image: "/playstation-5-console.png",
-    price: 1800,
-    ticketPrice: 3,
-    stock: 2100,
-    totalTickets: 3000,
-    soldTickets: 900,
-    endsAt: "2025-11-30T23:59:59Z",
-    status: "active",
-    discounts: [
-      { quantity: 5, percentage: 5 },
-      { quantity: 10, percentage: 10 },
-    ],
-  },
-  {
-    id: "r6",
-    title: "MacBook Air M3",
-    description: 'MacBook Air 13" con chip M3, 16GB RAM y 512GB SSD. Color Medianoche.',
-    image: "/macbook-pro-on-dark-surface.jpg",
-    price: 2800,
-    ticketPrice: 7,
-    stock: 1500,
-    totalTickets: 2000,
-    soldTickets: 500,
-    endsAt: "2025-12-15T23:59:59Z",
-    status: "active",
-    discounts: [
-      { quantity: 5, percentage: 5 },
-      { quantity: 10, percentage: 10 },
-      { quantity: 20, percentage: 15 },
-    ],
-  },
+    discounts: [],
+  }
 ]
 
 export const mockActiveRaffle: Raffle = mockRaffles[0]
 
+export const mockPreviousRaffles: null = null;
+/*
 export const mockPreviousRaffles: Raffle[] = [
-  {
-    id: "r2",
-    title: "MacBook Pro M3",
-    description: 'MacBook Pro 14" con chip M3 Pro',
-    image: "/macbook-pro-on-dark-surface.jpg",
-    price: 3000,
-    ticketPrice: 8,
-    stock: 0,
-    totalTickets: 4000,
-    soldTickets: 4000,
-    endsAt: "2025-10-15T23:59:59Z",
-    status: "ended",
-    winner: "Juan P. – Santiago, CL",
-    discounts: [],
-  },
-  {
-    id: "r3",
-    title: "PlayStation 5 + 3 Juegos",
-    description: "PS5 edición estándar con 3 juegos AAA",
-    image: "/playstation-5-console-with-games.jpg",
-    price: 1500,
-    ticketPrice: 4,
-    stock: 0,
-    totalTickets: 3000,
-    soldTickets: 3000,
-    endsAt: "2025-09-20T23:59:59Z",
-    status: "ended",
-    winner: "María G. – Valparaíso, CL",
-    discounts: [],
-  },
   {
     id: "r4",
     title: "Apple Watch Ultra 2",
@@ -104,8 +37,9 @@ export const mockPreviousRaffles: Raffle[] = [
     status: "ended",
     winner: "Carlos R. – Concepción, CL",
     discounts: [],
-  },
+  }
 ]
+*/
 
 export const mockTickets: Ticket[] = [
   {

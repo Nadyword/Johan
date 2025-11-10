@@ -3,7 +3,7 @@
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
 import { mockRaffles, mockPreviousRaffles } from "@/lib/mock-data"
 import { Sparkles, Trophy, Users, Clock } from "lucide-react"
-import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
+import { CloverIconImage } from "@/components/clover-icon"
 import { AuthModal } from "@/components/auth-modal"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -15,21 +15,28 @@ import Link from "next/link"
 export default function HomePage() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [revealed, setRevealed] = useState(false)
+  const [floatingClovers, setFloatingClovers] = useState<Array<{
+    width: number
+    height: number
+    left: number
+    top: number
+    animationDelay: number
+    animationDuration: number
+  }>>([])
   const { user } = useAuth()
 
-  // Generar posiciones y animaciones aleatorias una sola vez
-  const [floatingClovers] = useState(() =>
-    Array.from({ length: 15 }, () => ({
-      width: Math.floor(Math.random() * 61) + 20,
-      height: Math.floor(Math.random() * 61) + 20,
-      left: Math.floor(Math.random() * 101),
-      top: Math.floor(Math.random() * 101),
-      animationDelay: Math.floor(Math.random() * 4),
-      animationDuration: Math.floor(Math.random() * 3) + 3,
-    }))
-  )
-
+  // Generar posiciones y animaciones aleatorias solo en el cliente para evitar errores de hidratación
   useEffect(() => {
+    setFloatingClovers(
+      Array.from({ length: 15 }, () => ({
+        width: Math.floor(Math.random() * 61) + 20,
+        height: Math.floor(Math.random() * 61) + 20,
+        left: Math.floor(Math.random() * 101),
+        top: Math.floor(Math.random() * 101),
+        animationDelay: Math.floor(Math.random() * 4),
+        animationDuration: Math.floor(Math.random() * 3) + 3,
+      }))
+    )
     setRevealed(true)
   }, [])
 
@@ -251,35 +258,41 @@ export default function HomePage() {
             <p className="text-xl text-white/70">Conoce a nuestros ganadores</p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {mockPreviousRaffles.slice(0, 4).map((raffle, index) => (
-              <Card
-                key={raffle.id}
-                className={`bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] border-2 border-[#F4A622]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F4A622]/30 overflow-hidden ${revealed ? "animate-fade-up" : "opacity-0"
-                  }`}
-                style={{ animationDelay: `${index * 0.1 + 0.3}s` }}
-              >
-                <div className="relative h-48">
-                  <Image src={raffle.image || "/placeholder.svg"} alt={raffle.title} fill className="object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                  <Trophy className="absolute top-4 right-4 w-8 h-8 text-[#F4A622]" />
-                </div>
-                <CardHeader>
-                  <CardTitle className="text-lg font-display font-bold text-white">{raffle.title}</CardTitle>
-                  <p className="text-white/60 text-sm">Ganador: {raffle.winner}</p>
-                </CardHeader>
-                <CardFooter>
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="w-full border-[#F4A622] text-[#F4A622] hover:bg-[#F4A622] hover:text-black transition-all duration-300 bg-transparent"
-                  >
-                    <Link href="/rifas-anteriores">Ver Resultado</Link>
-                  </Button>
-                </CardFooter>
-              </Card>
-            ))}
-          </div>
+          {!mockPreviousRaffles || mockPreviousRaffles.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-white/70 text-lg">No existe registro por el momento</p>
+            </div>
+          ) : (
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {mockPreviousRaffles.slice(0, 4).map((raffle, index) => (
+                <Card
+                  key={raffle.id}
+                  className={`bg-gradient-to-br from-[#2a2a2a] to-[#1a1a1a] border-2 border-[#F4A622]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-[#F4A622]/30 overflow-hidden ${revealed ? "animate-fade-up" : "opacity-0"
+                    }`}
+                  style={{ animationDelay: `${index * 0.1 + 0.3}s` }}
+                >
+                  <div className="relative h-48">
+                    <Image src={raffle.image || "/placeholder.svg"} alt={raffle.title} fill className="object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
+                    <Trophy className="absolute top-4 right-4 w-8 h-8 text-[#F4A622]" />
+                  </div>
+                  <CardHeader>
+                    <CardTitle className="text-lg font-display font-bold text-white">{raffle.title}</CardTitle>
+                    <p className="text-white/60 text-sm">Ganador: {raffle.winner}</p>
+                  </CardHeader>
+                  <CardFooter>
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="w-full border-[#F4A622] text-[#F4A622] hover:bg-[#F4A622] hover:text-black transition-all duration-300 bg-transparent"
+                    >
+                      <Link href="/rifas-anteriores">Ver Resultado</Link>
+                    </Button>
+                  </CardFooter>
+                </Card>
+              ))}
+            </div>
+          )}
 
           <div className="text-center mt-12">
             <Button

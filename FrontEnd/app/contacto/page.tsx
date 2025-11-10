@@ -127,10 +127,10 @@ export default function ContactoPage() {
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Email</h3>
                     <a
-                      href="mailto:eliteemporiove@gmail.com"
+                      href="mailto:Chainoflucky@gmail.com"
                       className="text-muted-foreground hover:text-secondary transition-colors"
                     >
-                      eliteemporiove@gmail.com
+                      Chainoflucky@gmail.com
                     </a>
                   </div>
                 </div>

@@ -3,6 +3,7 @@ using Api_inmobiliaria.DataBase;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -16,9 +17,8 @@ builder.Services.AddCors(options =>
 builder.Services.AddTransient<SendMail>();
 
 ConnectionDB.Initialize(builder.Configuration);
-
 builder.Services.AddControllers();
-builder.WebHost.UseUrls("http://localhost:3001");
+builder.WebHost.UseUrls("http://localhost:" + builder.Configuration["Port"]);
 
 var app = builder.Build();
 

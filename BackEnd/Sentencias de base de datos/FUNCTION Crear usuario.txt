@@ -1,28 +1,46 @@
+DROP FUNCTION usuario_crear(text,text,text,text,text,text,character,character,date);
 CREATE OR REPLACE FUNCTION usuario_crear(
-    p_nombre           text,
-    p_email            text,
-    p_password_plano   text,
-    p_telefono         text DEFAULT NULL,
-    p_fecha_nacimiento date DEFAULT NULL
+    p_identifi    		text,
+    p_nombre           	text,
+    p_apellidos        	text,
+    p_email            	text,
+    p_clave   			text,
+    p_telefono         	text DEFAULT NULL,
+    p_genero           	char(2) DEFAULT NULL,
+    p_pais             	char(2) DEFAULT NULL,
+    p_fec_naci 			date DEFAULT NULL
 )
-RETURNS integer
+RETURNS VARCHAR(100)
 LANGUAGE plpgsql
 AS $$
 DECLARE
   v_id integer;
 BEGIN
-  -- si ya existe por nombre o email, devolvemos NULL
-  IF EXISTS (SELECT 1 FROM usuarios WHERE nombre = p_nombre OR email = p_email) THEN
-    RETURN NULL;
+  -- Validar existencia previa por identificador o email
+  IF EXISTS (
+    SELECT 1 FROM usuarios 
+    WHERE identifi = p_identifi OR email = p_email
+  ) THEN
+    RETURN 'Correo o documento ya existe';
   END IF;
 
-  INSERT INTO usuarios (nombre, email, password, telefono, fecha_nacimiento)
+  -- Insertar nuevo registro con contraseña encriptada
+  INSERT INTO usuarios (
+    identifi, nombre, apellidos, email, clave, 
+    telefono, genero, pais, fec_naci, creado_en, last_update
+  )
   VALUES (
+    p_identifi,
     p_nombre,
+    p_apellidos,
     p_email,
-    crypt(p_password_plano, gen_salt('bf')), -- bcrypt
+    crypt(p_clave, gen_salt('bf')), -- Cifrado con bcrypt
     p_telefono,
-    p_fecha_nacimiento
+    p_genero,
+    p_pais,
+    p_fec_naci,
+    NOW(),
+    NOW()
   )
   RETURNING id INTO v_id;
 
@@ -30,9 +48,5 @@ BEGIN
 END;
 $$;
 
-CREATE EXTENSION IF NOT EXISTS pgcrypto; -- para crypt()/gen_salt('bf')
-
-
-SELECT usuario_crear('pepe', 'pepe@acme.com', 'MiSecreta123', '5551234', '1990-06-01');
--- devuelve el id o NULL si ya existe nombre/email
-
+-- Requerido para el uso de crypt() y gen_salt()
+CREATE EXTENSION IF NOT EXISTS pgcrypto;

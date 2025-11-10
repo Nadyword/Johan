@@ -9,7 +9,7 @@ namespace Api_inmobiliaria.Models.Request
         public required string Email { get; set; }
 
         [Required]
-        [RegularExpression(@"^(?=.*.{6,})(?!.*['\-]).*$", ErrorMessage = "La contraseña debe tener al menos 6 caracteres y no puede contener los signos ' o -.")]
+        [RegularExpression(@"^(?=.*.{6,})(?!.*['\-]).*$", ErrorMessage = "La contraseña debe tener al menos 6 caracteres y no puede contener los signos (') y (-).")]
         public required string Password { get; set; }
     }
 }

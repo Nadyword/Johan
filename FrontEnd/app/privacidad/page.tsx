@@ -31,116 +31,82 @@ export default function PrivacidadPage() {
           <section>
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              1. Responsable del Tratamiento
+              1. Recopilación de Información
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Los datos personales recabados a través de este sitio web serán tratados por Élite Emporium Properties, C.A., con domicilio en Caracas- Venezuela, Registro de Información Fiscal J-50756511-4, y dirección de correo electrónico de contacto: eliteemporiove@gmail.com.
-            </p>
-          </section>
+            Recopilamos información personal necesaria para nuestros servicios de sorteos, incluyendo:
 
-          <section>
-            <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
-              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              2. Finalidades del Tratamiento
-            </h2>
             <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-3">
-              <li> Gestionar y responder las consultas, comentarios y solicitudes de información que realice a través de nuestro sitio web, formularios de contacto o correo electrónico.</li>
-              <li>Prestar los servicios inmobiliarios que nos solicite (evaluación de propiedades, visitas, procesos de compra-venta-alquiler, concursos, promociones y eventos).</li>
-              <li> Enviarle comunicaciones comerciales sobre nuestros servicios, promociones, concurso, eventos o novedades, siempre que haya prestado su consentimiento para ello.</li>
+              <li>Información de identificación (nombre completo, número de identificación)</li>
+              <li>Datos de contacto (dirección, correo electrónico, teléfono)</li>
+              <li>Información financiera (detalles de pago, historial de transacciones)</li>
+              <li>Documentación de verificación de edad e identidad</li>
             </ul>
-          </section>
 
-          <section>
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              3. Base Legal y Consentimiento
+              2. Uso de la Información
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-3">
-              El tratamiento de sus datos para atender sus consultas y prestar nuestros servicios se basa en su consentimiento, que se entiende prestado al facilitarnos su información y aceptar esta política. Puede retirar su consentimiento en cualquier momento.
-            </p>
+            Utilizamos su información para:
 
-          </section>
-
-          <section>
-            <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
-              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              4. Principios Aplicables
-            </h2>
-            <p className="text-muted-foreground leading-relaxed mb-3">
-            Nos comprometemos a tratar sus datos de acuerdo con los principios constitucionales desarrollados por la jurisprudencia Venezolana, que incluyen:
-            </p>
-            <ul className="list-disc list-inside space-y-2 text-muted-foreground ml-4">
-              <li>Calidad y Finalidad: Los datos serán adecuados, pertinentes y no excesivos en relación con las finalidades para las que se recaban.</li>
-              <li>Temporalidad: Los datos serán conservados solo hasta que se cumplan las finalidades que justificaron su recogida.</li>
-              <li>Seguridad y Confidencialidad: Implementamos medidas técnicas y organizativas para proteger sus datos contra alteración, pérdida o acceso no autorizado.</li>
-              <li>Autodeterminación informativa: Usted tiene derecho a acceder, rectificar o suprimir sus datos, así como a oponerse a su tratamiento.</li>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-3">
+              <li>Procesar compras de boletos y participación en sorteos</li>
+              <li>Verificar su identidad y elegibilidad</li>
+              <li>Distribuir premios y gestionar reclamos</li>
+              <li>Cumplir con regulaciones y prevención de fraude</li>
+              <li>Enviar notificaciones importantes sobre sorteos y premios</li>
             </ul>
-          </section>
 
-          <section>
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              5. Destinatarios y Transferencias
+              3. Compartir Información
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-            Los datos personales no serán cedidos a terceros, salvo cuando sea necesario para la ejecución de un contrato por algún ente del Estado Venezolano competente o por obligación legal y/o judicial.
-            </p>
-          </section>
+            Podemos compartir su información con:
 
-          <section>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-3">
+              <li>Autoridades reguladoras</li>
+              <li>Proveedores de servicios de pago</li>
+              <li>Entidades legales cuando sea requerido por ley</li>
+            </ul>
+
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              6. Derechos de los Usuarios
+              4. Protección de Datos
             </h2>
-            <p className="text-muted-foreground leading-relaxed mb-3">
-            Puede ejercer sus derechos de acceso, rectificación, supresión y oposición al tratamiento de sus datos, dirigiendo una comunicación escrita, acompañada de una copia de su documento de identidad, a la dirección de correo electrónico: atencion.eliteemporiove@gmail.com.
-            </p>
+            Implementamos rigurosas medidas de seguridad, incluyendo:
 
-          </section>
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-3">
+              <li>Encriptación de datos sensibles</li>
+              <li>Sistemas de seguridad monitoreados</li>
+              <li>Acceso restringido a información personal</li>
+              <li>Protocolos de respuesta ante incidentes</li>
+            </ul>
 
-          <section>
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              7. Política sobre Menores de Edad
+              5. Sus Derechos
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-            Quien facilite datos a través de este sitio web declara ser mayor de 18 años. Élite Emporium Properties C.A., no recaba conscientemente información de menores de esa edad.
-            </p>
-          </section>
+            Usted tiene derecho a:
+            <ul className="list-disc list-inside space-y-1 text-muted-foreground mb-3">
+              <li>Acceder a su información personal</li>
+              <li>Solicitar correcciones de datos inexactos</li>
+              <li>Retirar su consentimiento para comunicaciones promocionales</li>
+              <li>Solicitar la eliminación de sus datos (sujeto a requisitos legales)</li>
+              <li>Obtener una copia de sus datos personales</li>
+            </ul>
 
-          <section>
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              8. Retención de Datos
+              6. Retención de Datos
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Conservamos su información personal solo durante el tiempo necesario para cumplir con los propósitos
-              descritos en esta política, a menos que la ley requiera o permita un período de retención más largo.
-            </p>
-          </section>
+            Mantenemos su información personal mientras su cuenta esté activa o según lo requiera la ley. Para transacciones de sorteos, conservamos los registros según los períodos establecidos por las regulaciones y leyes fiscales aplicables.
 
-          <section>
             <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
               <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              9. Cambios a esta Política
+              7. Contacto
             </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Podemos actualizar esta Política de Privacidad periódicamente. Le notificaremos sobre cambios
-              significativos publicando la nueva política en esta página y actualizando la fecha de "última
-              actualización".
-            </p>
+            Para ejercer sus derechos o realizar consultas sobre privacidad, contáctenos a través de nuestros canales oficiales.
           </section>
 
-          <section>
-            <h2 className="text-2xl font-bold text-accent mb-4 flex items-center gap-2 text-foreground">
-              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={64} width={64} />
-              10. Contacto
-            </h2>
-            <p className="text-muted-foreground leading-relaxed">
-              Si tiene preguntas sobre esta Política de Privacidad o desea ejercer sus derechos, contáctenos en:
-            </p>
-            <p className="text-accent font-semibold mt-2">info@chainoflucky.cl</p>
-          </section>
         </div>
 
         {/* Bottom decoration */}
@@ -150,6 +116,6 @@ export default function PrivacidadPage() {
           <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={100} width={100} className="w-8 h-8 text-accent/50 animate-float-delayed" />
         </div>
       </div>
-    </div>
+    </div >
   )
 }

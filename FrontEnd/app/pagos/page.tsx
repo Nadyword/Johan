@@ -56,10 +56,10 @@ export default function PaymentsPage() {
               key={i}
               className="absolute animate-float opacity-10"
               style={{
-                left: `${Math.random() * 100}%`,
-                top: `${Math.random() * 100}%`,
+                left: `${Math.floor(Math.random() * 100)}%`,
+                top: `${Math.floor(Math.random() * 100)}%`,
                 animationDelay: `${i * 0.8}s`,
-                animationDuration: `${9 + Math.random() * 4}s`,
+                animationDuration: `${Math.floor(8 + Math.random() * 4)}s`,
               }}
             >
               <CloverIcon className="w-14 h-14 text-[#F4A622]" />

@@ -1,38 +1,51 @@
+DROP FUNCTION IF EXISTS auth_login(text, text);
+
 CREATE OR REPLACE FUNCTION auth_login(
-    p_login    text,   -- Puede ser nombre o email
+    p_login    text,
     p_password text
 )
-RETURNS integer  -- Cambiamos el tipo de retorno a integer (el ID del usuario)
+RETURNS TABLE(
+    id_usuario integer,
+    nombre_usuario text
+)
 LANGUAGE plpgsql
 AS $$
 DECLARE
-  v_id   integer;
-  v_hash text;
+    v_hash text;
+    v_nombre text;
+    v_id integer;
 BEGIN
-  -- Buscar usuario por nombre o email
-  SELECT id, password
-    INTO v_id, v_hash
-  FROM usuarios
-  WHERE (nombre = p_login OR email = p_login)
-  LIMIT 1;
+    -- Buscar usuario por email normalizado
+    SELECT id, nombre, clave
+    INTO v_id, v_nombre, v_hash
+    FROM usuarios
+    WHERE lower(trim(email)) = lower(trim(p_login))
+    LIMIT 1;
 
-  -- Si no se encuentra el usuario
-  IF NOT FOUND THEN
-    RETURN NULL;
-  END IF;
+    -- Si no se encuentra el usuario
+    IF NOT FOUND THEN
+        id_usuario := 0;
+        nombre_usuario := 'Usuario no encontrado';
+        RETURN NEXT;
+        RETURN;
+    END IF;
 
-  -- Validar contraseña
-  IF v_hash = crypt(p_password, v_hash) THEN
-    UPDATE usuarios
-       SET actualizado_en = NOW()
-     WHERE id = v_id;
+    -- Validar contraseña con crypt()
+    IF v_hash = crypt(p_password, v_hash) THEN
+        UPDATE usuarios
+        SET last_update = NOW()
+        WHERE id = v_id;
 
-    -- Retornar el ID del usuario autenticado
-    RETURN v_id;
-  ELSE
-    RETURN NULL; -- Contraseña incorrecta
-  END IF;
+        -- Retornar datos reales del usuario autenticado
+        id_usuario := v_id;
+        nombre_usuario := v_nombre;
+        RETURN NEXT;
+    ELSE
+        id_usuario := 0;
+        nombre_usuario := 'Contraseña incorrecta';
+        RETURN NEXT;
+    END IF;
+
+    RETURN;
 END;
 $$;
-
-SELECT auth_login('pepe@acme.com', 'MiSecreta123'); -- por email

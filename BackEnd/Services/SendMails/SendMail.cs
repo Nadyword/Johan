@@ -1,4 +1,7 @@
-﻿using System.Net.Mail;
+﻿using Api_inmobiliaria.Models.Response;
+using Api_inmobiliaria.DataBase;
+using Api_inmobiliaria.Models;
+using System.Net.Mail;
 using System.Net;
 
 namespace Api_inmobiliaria.Services.SendMails
@@ -6,9 +9,19 @@ namespace Api_inmobiliaria.Services.SendMails
     public class SendMail(IConfiguration configuration)
     {
         private readonly IConfiguration _configuration = configuration;
+        private readonly FuncionesDB _funcionesDB = new();
 
-        public async Task<bool> SendAsync(string to, string subject, string body, bool isHtml = true)
+        public async Task<ResponseMessage> SendAsync(string to)
         {
+            Random generar = new();
+            int codigo  = generar.Next(100000, 1000000);
+            ResponseMessage response = await _funcionesDB.RecorRecoveryPass(to,codigo);
+
+            if (response.Message == "Usuario no encontrado." || response.Message == "Error")
+            {
+                return response;
+            }
+
             var mailSettings = _configuration.GetSection("MailSettings");
             string smtpServer = mailSettings.GetValue<string>("SmtpServer")!;
             int smtpPort = mailSettings.GetValue<int>("SmtpPort");
@@ -22,19 +35,25 @@ namespace Api_inmobiliaria.Services.SendMails
                 EnableSsl = enableSsl
             };
 
-            var mail = new MailMessage(smtpUser, to, subject, body)
+            HtmlMails CorreoHTML = new();
+            string body = CorreoHTML.RecoveryPass.Replace("{{Domain}}", _configuration.GetValue<string>("Domain")!).Replace("{{Codigo}}", codigo.ToString());
+
+            var mail = new MailMessage(smtpUser, to, "RECUPERACIÓN DE CLAVE", body)
             {
-                IsBodyHtml = isHtml
+                IsBodyHtml = true
             };
 
             try
             {
                 await client.SendMailAsync(mail);
-                return true;
+                return new ResponseMessage { Message = "¡Correo envido!" };
             }
             catch
             {
-                return false;
+                return new ResponseMessage
+                {
+                    Message = "Error en el Try"
+                };
             }
         }
     }

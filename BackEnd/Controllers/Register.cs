@@ -1,18 +1,19 @@
-﻿using Api_inmobiliaria.Models.Request;
+﻿using Api_inmobiliaria.Models.DTOs.Tablas;
 using Microsoft.AspNetCore.Mvc;
 using Api_inmobiliaria.DataBase;
+using Api_inmobiliaria.Models.Response;
 
 namespace Api_inmobiliaria.Controllers;
 
-[Route("Inmo/api/[controller]")]
+[Route("Sorteo/api/[controller]")]
 [ApiController]
 public class Register : ControllerBase
 {
     private readonly FuncionesDB _funcionesDB = new();
 
     [HttpPost]
-    public int Post([FromBody] RequestRegister request)
+    async public Task<ResponseRegister> Post([FromBody] Usuarios request)
     {
-       return _funcionesDB.Register(request.Name, request.Email.ToLower(), request.Password, request.Telefono, request.FechaNacimiento);
+       return await _funcionesDB.Register(request.Identifi, request.Nombre, request.Apellido, request.Email, request.Clave, request.Telefono, request.Genero, request.Pais, request.Fec_naci);
     }
 }
