@@ -1,4 +1,4 @@
-const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.RUTA_API || 'http://localhost:1607/Sorteo/api'
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.RUTA_API || 'https://chainoflucky/Sorteo/api'
 
 export interface LoginRequest {
   Email: string
