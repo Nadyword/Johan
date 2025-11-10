@@ -244,11 +244,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Api inmobiliaria.csproj",
+      "projectUniqueName": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Api inmobiliaria.csproj",
       "projectName": "Api inmobiliaria",
-      "projectPath": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\Api inmobiliaria.csproj",
+      "projectPath": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\Api inmobiliaria.csproj",
       "packagesPath": "C:\\Users\\samue\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\samue\\Documents\\Proyectos\\MiWeb2.0\\Api inmobiliaria\\obj\\publish\\linux-x64\\",
+      "outputPath": "C:\\Users\\samue\\Documents\\Proyectos\\Johan\\BackEnd\\obj\\publish\\linux-x64\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -263,7 +263,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -307,15 +306,15 @@
         "downloadDependencies": [
           {
             "name": "Microsoft.AspNetCore.App.Runtime.linux-x64",
-            "version": "[9.0.8, 9.0.8]"
+            "version": "[9.0.10, 9.0.10]"
           },
           {
             "name": "Microsoft.NETCore.App.Host.linux-x64",
-            "version": "[9.0.8, 9.0.8]"
+            "version": "[9.0.10, 9.0.10]"
           },
           {
             "name": "Microsoft.NETCore.App.Runtime.linux-x64",
-            "version": "[9.0.8, 9.0.8]"
+            "version": "[9.0.10, 9.0.10]"
           }
         ],
         "frameworkReferences": {
@@ -326,7 +325,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.304/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.306/PortableRuntimeIdentifierGraph.json"
       }
     },
     "runtimes": {

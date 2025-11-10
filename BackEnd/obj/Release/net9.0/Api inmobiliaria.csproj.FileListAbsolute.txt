@@ -31,3 +31,36 @@ C:\Users\samue\Documents\Proyectos\MiWeb2.0\Api inmobiliaria\obj\Release\net9.0\
 C:\Users\samue\Documents\Proyectos\MiWeb2.0\Api inmobiliaria\obj\Release\net9.0\Api inmobiliaria.pdb
 C:\Users\samue\Documents\Proyectos\MiWeb2.0\Api inmobiliaria\obj\Release\net9.0\Api inmobiliaria.genruntimeconfig.cache
 C:\Users\samue\Documents\Proyectos\MiWeb2.0\Api inmobiliaria\obj\Release\net9.0\ref\Api inmobiliaria.dll
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\appsettings.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Api inmobiliaria.staticwebassets.endpoints.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\appsettings.Development.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\appsettings.Production.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Api inmobiliaria.exe
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Api inmobiliaria.deps.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Api inmobiliaria.runtimeconfig.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Api inmobiliaria.dll
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Api inmobiliaria.pdb
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\Npgsql.dll
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.csproj.AssemblyReference.cache
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\rpswa.dswa.cache.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.AssemblyInfoInputs.cache
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.AssemblyInfo.cs
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.csproj.CoreCompileInputs.cache
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.sourcelink.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\rjimswa.dswa.cache.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\rjsmrazor.dswa.cache.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\rjsmcshtml.dswa.cache.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\scopedcss\bundle\Api inmobiliaria.styles.css
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\staticwebassets.build.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\staticwebassets.build.json.cache
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\staticwebassets.development.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\staticwebassets.build.endpoints.json
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\staticwebassets.upToDateCheck.txt
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmo.9F61859C.Up2Date
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.dll
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\refint\Api inmobiliaria.dll
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.pdb
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\Api inmobiliaria.genruntimeconfig.cache
+C:\Users\samue\Documents\Proyectos\Johan\BackEnd\obj\Release\net9.0\ref\Api inmobiliaria.dll
