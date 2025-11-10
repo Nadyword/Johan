@@ -2,7 +2,7 @@
  * Cliente HTTP configurado para todas las llamadas a la API
  */
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || process.env.RUTA_API || 'http://localhost:1607/Sorteo/api'
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || process.env.RUTA_API || 'http://localhost:1607/Sorteo/api11'
 
 export interface ApiError {
   message: string
