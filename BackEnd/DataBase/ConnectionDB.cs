@@ -1,6 +1,5 @@
-﻿using Npgsql;
-using System.Data;
-using System.Threading.Tasks;
+﻿using System.Data;
+using Npgsql;
 
 namespace Api_inmobiliaria.DataBase;
 
@@ -8,30 +7,10 @@ public static class ConnectionDB
 {
     private static string? _connectionString;
 
- 
+
     public static void Initialize(IConfiguration configuration)
     {
         _connectionString = configuration.GetSection("ConnectionStrings")["DefaultConnection"];
-    }
-
-    public static string TestConnection()
-    {
-        try
-        {
-            using var connection = new NpgsqlConnection(_connectionString);
-            connection.Open();
-
-            using var command = new NpgsqlCommand("SELECT 1", connection);
-            var result = command.ExecuteScalar();
-
-            return result != null && result.ToString() == "1"
-                ? "Connection successful"
-                : "Connection failed";
-        }
-        catch (Exception ex)
-        {
-            return $"Connection error: {ex.Message}";
-        }
     }
 
     public static async Task<DataTable> ExecuteFunction<TResult>(string functionName, List<string>? parameters = null)
@@ -42,6 +21,28 @@ public static class ConnectionDB
             await connection.OpenAsync();
 
             string commandText = $"SELECT  * FROM {functionName}(" + (parameters != null ? string.Join(",", parameters) : "") + ")";
+            using NpgsqlCommand command = new(commandText, connection);
+
+            using NpgsqlDataAdapter adapter = new(command);
+            DataTable dataTable = new();
+            await Task.Run(() => adapter.Fill(dataTable));
+
+            return dataTable;
+        }
+        catch
+        {
+            return new DataTable();
+        }
+    }
+
+    public static async Task<DataTable> ExecuteQueries<TResult>(string functionName, string where = "")
+    {
+        try
+        {
+            using NpgsqlConnection connection = new(_connectionString);
+            await connection.OpenAsync();
+            string commandText = where == "" ? $"SELECT * FROM {functionName};" : $"SELECT  * FROM {functionName} WHERE {where};";
+
             using NpgsqlCommand command = new(commandText, connection);
 
             using NpgsqlDataAdapter adapter = new(command);

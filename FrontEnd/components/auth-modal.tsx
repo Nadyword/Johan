@@ -858,7 +858,7 @@ export function AuthModal({ open, onOpenChange }: AuthModalProps) {
                     <Input
                       id="register-telefono"
                       type="tel"
-                      placeholder="+58 04123456789"
+                      placeholder="+34643907132"
                       value={registerData.Telefono}
                       onChange={(e) => setRegisterData({ ...registerData, Telefono: e.target.value })}
                       required

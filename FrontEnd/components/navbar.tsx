@@ -15,18 +15,29 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 
+interface NavLink {
+  href: string
+  label: string
+  adminOnly?: boolean
+}
+
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [showAuthModal, setShowAuthModal] = useState(false)
   const { user, logout } = useAuth()
 
-  const navLinks = [
+  // Filtrar enlaces según el usuario
+  const allNavLinks: NavLink[] = [
     { href: "/", label: "Inicio" },
     { href: "/comprar", label: "Comprar" },
     { href: "/mis-tickets", label: "Mis Boletos" },
-    { href: "/pagos", label: "Pagos" },
+    { href: "/pagos", label: "Pagos", adminOnly: true },
     { href: "/rifas-anteriores", label: "Sorteos Anteriores" },
   ]
+
+  const navLinks = allNavLinks.filter(
+    (link) => !link.adminOnly || (user && user.name?.toLowerCase() === "admin")
+  )
 
   return (
     <>
@@ -70,9 +81,11 @@ export function Navbar() {
                     <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
                       <Link href="/mis-tickets">Mis boletos</Link>
                     </DropdownMenuItem>
-                    <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
-                      <Link href="/pagos">Historial de Pagos</Link>
-                    </DropdownMenuItem>
+                    {user && user.name?.toLowerCase() === "admin" && (
+                      <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
+                        <Link href="/pagos">Historial de Pagos</Link>
+                      </DropdownMenuItem>
+                    )}
                     <DropdownMenuSeparator className="bg-[#6A8E23]/30" />
                     <DropdownMenuItem onClick={logout} className="text-red-400 hover:bg-red-500/20 hover:text-red-300">
                       Cerrar Sesión

@@ -1,0 +1,17 @@
+﻿CREATE OR REPLACE VIEW public.vista_historial_tickets
+ AS
+ SELECT r.id AS id_sorteo,
+    t.id_usuario,
+    t.codigo_ticket,
+    r.title,
+    t.estado_pago,
+    t.monto_total,
+    t.metodo_pago,
+    t.fecha_compra,
+	t.imagen_comprobante
+   FROM tickets_sorteos t
+     LEFT JOIN raffles r ON r.id::text = t.id_sorteo::text
+  WHERE t.estado_pago::text = 'pendiente'::text;
+
+ALTER TABLE public.vista_historial_tickets
+    OWNER TO postgres;

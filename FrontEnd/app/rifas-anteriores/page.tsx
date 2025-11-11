@@ -1,10 +1,29 @@
 "use client"
 
-import { mockPreviousRaffles } from "@/lib/mock-data"
-import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { Trophy, Calendar, User, Ticket } from "lucide-react"
+import { CloverIconImage } from "@/components/clover-icon"
+import { loadMockRafflesDeactive } from "@/lib/mock-data"
+import { useState, useEffect } from "react"
+import type { Raffle } from "@/lib/types"
 
 export default function PreviousRafflesPage() {
+  const [mockPreviousRaffles, setMockPreviousRaffles] = useState<Raffle[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+
+  // Cargar rifas anteriores desde la API (solo en el cliente)
+  useEffect(() => {
+    loadMockRafflesDeactive()
+      .then((data) => {
+        console.log('Rifas anteriores cargadas:', data)
+        setMockPreviousRaffles(data)
+        setIsLoading(false)
+      })
+      .catch((error) => {
+        console.error('Error cargando rifas anteriores:', error)
+        setIsLoading(false)
+      })
+  }, [])
+
   return (
     <div className="min-h-screen relative overflow-hidden">
       <div className="fixed inset-0 -z-10">
@@ -44,7 +63,14 @@ export default function PreviousRafflesPage() {
           <p className="text-muted-foreground text-lg">Conoce a nuestros ganadores y sus increíbles premios</p>
         </div>
 
-        {!mockPreviousRaffles || mockPreviousRaffles.length === 0 ? (
+        {isLoading ? (
+          <div className="text-center py-16 animate-fade-up">
+            <div className="bg-card/80 backdrop-blur-sm border-2 border-[#F4A622]/30 rounded-2xl p-12 max-w-2xl mx-auto">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#F4A622] mx-auto mb-4"></div>
+              <p className="text-xl text-muted-foreground">Cargando sorteos anteriores...</p>
+            </div>
+          </div>
+        ) : mockPreviousRaffles.length === 0 ? (
           <div className="text-center py-16 animate-fade-up">
             <div className="bg-card/80 backdrop-blur-sm border-2 border-[#F4A622]/30 rounded-2xl p-12 max-w-2xl mx-auto">
               <Trophy className="w-16 h-16 text-[#F4A622]/50 mx-auto mb-4" />

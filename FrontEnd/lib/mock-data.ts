@@ -1,45 +1,24 @@
 import type { Raffle, Ticket, Payment } from "./types"
+import { rafflesApi } from "./api/raffles"
 
-export const mockRaffles: Raffle[] = [
-  {
-    id: "r1",
-    title: "Premiación de Chain of Lucky",
-    description:
-      "Primer lugar: 100.000$\n Segundo lugar: 50.000$\n Tercer lugar: 25.000$\n Cuarto lugar: 10.000$\n Quinto lugar: 5.000$\n y premios especial al usuario que haya comprado más tickets de 1.000$",
-    image: "/sorteo-1.jpg",
-    price: 2,
-    ticketPrice: 2,
-    stock: 3247,
-    totalTickets: 5000,
-    soldTickets: 1753,
-    endsAt: "2025-12-31T23:59:59Z",
-    status: "active",
-    discounts: [],
-  }
-]
+// Inicializar como arrays vacíos para evitar problemas de hidratación
+// Los datos se cargarán en el cliente usando las funciones async
+export const mockRafflesActive: Raffle[] = []
+export const mockActiveRaffle: Raffle | undefined = undefined
+export const mockPreviousRaffles: Raffle[] = []
 
-export const mockActiveRaffle: Raffle = mockRaffles[0]
+// Función para cargar las rifas activas (usar en el cliente)
+export async function loadMockRafflesActive(): Promise<Raffle[]> {
+  return await rafflesApi.getRafflesActive()
+}
 
-export const mockPreviousRaffles: null = null;
-/*
-export const mockPreviousRaffles: Raffle[] = [
-  {
-    id: "r4",
-    title: "Apple Watch Ultra 2",
-    description: "Apple Watch Ultra 2 con correa Alpine",
-    image: "/apple-watch-ultra-on-wrist.jpg",
-    price: 1800,
-    ticketPrice: 6,
-    stock: 0,
-    totalTickets: 2500,
-    soldTickets: 2500,
-    endsAt: "2025-08-10T23:59:59Z",
-    status: "ended",
-    winner: "Carlos R. – Concepción, CL",
-    discounts: [],
-  }
-]
-*/
+// Función para cargar las rifas desactivadas (usar en el cliente)
+export async function loadMockRafflesDeactive(): Promise<Raffle[]> {
+  return await rafflesApi.getRafflesDeactive()
+}
+
+
+
 
 export const mockTickets: Ticket[] = [
   {

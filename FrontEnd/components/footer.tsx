@@ -51,10 +51,10 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="https://wa.me/584242258505"
+                  href="https://wa.me/34643907132"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                +58 (424) 225-85-05
+                +34643907132
                 </a>
               </li>
             </ul>

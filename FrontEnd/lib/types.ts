@@ -9,9 +9,9 @@ export interface Raffle {
   stock: number
   totalTickets: number
   endsAt: string
-  status: "active" | "ended"
+  status: boolean
   winner?: string
-  discounts: {
+  discounts?: {
     quantity: number
     percentage: number
   }[]

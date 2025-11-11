@@ -1,0 +1,106 @@
+﻿CREATE OR REPLACE FUNCTION comprar_ticket_sorteo(
+    p_id_sorteo VARCHAR,
+    p_id_usuario INT,
+    p_monto_unitario NUMERIC(12,2),
+    p_metodo_pago VARCHAR,
+    p_cantidad_tickets INT DEFAULT 1,
+    p_estado_pago VARCHAR DEFAULT 'pendiente',
+    p_imagen_comprobante TEXT DEFAULT NULL,
+    p_observaciones TEXT DEFAULT NULL,
+	p_imagen_sorteo  VARCHAR DEFAULT ''
+)
+RETURNS TEXT
+LANGUAGE plpgsql
+AS $$
+DECLARE
+    v_exists INT;
+    v_activo BOOLEAN;
+    v_codigo_ticket TEXT;
+    v_intentos INT := 0;
+BEGIN
+    -- Validaciones básicas de parámetros
+    IF p_id_sorteo IS NULL OR length(trim(p_id_sorteo)) = 0
+       OR p_id_usuario IS NULL
+       OR p_monto_unitario IS NULL OR p_monto_unitario <= 0
+       OR p_cantidad_tickets IS NULL OR p_cantidad_tickets <= 0
+       OR p_metodo_pago IS NULL OR length(trim(p_metodo_pago)) = 0
+    THEN
+        RETURN 'Parámetros inválidos';
+    END IF;
+
+    -- Usuario existe
+    SELECT 1 INTO v_exists FROM usuarios u WHERE u.id = p_id_usuario;
+    IF v_exists IS NULL THEN
+        RETURN 'Usuario no encontrado';
+    END IF;
+
+    -- Sorteo existe
+    v_exists := NULL;
+    SELECT 1 INTO v_exists FROM raffles r WHERE r.id = p_id_sorteo;
+    IF v_exists IS NULL THEN
+        RETURN 'Sorteo no encontrado';
+    END IF;
+
+    -- Sorteo activo/caducado (status boolean o ends_at futura)
+    SELECT COALESCE(r.status, (r.ends_at IS NULL) OR (r.ends_at > NOW()), TRUE)
+    INTO v_activo
+    FROM raffles r
+    WHERE r.id = p_id_sorteo;
+
+    IF NOT v_activo THEN
+        RETURN 'Sorteo caducado';
+    END IF;
+
+    -- Generar codigo_ticket = segundos desde 2025-01-01 00:00:00
+    v_codigo_ticket := (EXTRACT(EPOCH FROM (NOW() - TIMESTAMP '2025-01-01 00:00:00'))::BIGINT)::TEXT;
+
+    -- Bucle de inserción con reintento por colisión UNIQUE (mismo segundo)
+    <<reintentar>>
+    LOOP
+        BEGIN
+            INSERT INTO tickets_sorteos (
+                id_sorteo,
+                id_usuario,
+                codigo_ticket,
+                cantidad_tickets,
+                monto_unitario,
+                metodo_pago,
+                estado_pago,
+                imagen_comprobante,
+                observaciones,
+				imagen_sorteo
+            )
+            VALUES (
+                p_id_sorteo,
+                p_id_usuario,
+                v_codigo_ticket,
+                p_cantidad_tickets,
+                p_monto_unitario,
+                p_metodo_pago,
+                p_estado_pago,
+                p_imagen_comprobante,
+                p_observaciones,
+				p_imagen_sorteo
+            );
+
+            RETURN 'Compra efectuada';
+        EXCEPTION
+            WHEN unique_violation THEN
+                -- Si se generó el mismo segundo para otra compra, esperar y regenerar
+                v_intentos := v_intentos + 1;
+                IF v_intentos >= 3 THEN
+                    RETURN 'Código de ticket duplicado';
+                END IF;
+                PERFORM pg_sleep(1);
+                v_codigo_ticket := (EXTRACT(EPOCH FROM (NOW() - TIMESTAMP '2025-01-01 00:00:00'))::BIGINT)::TEXT;
+                CONTINUE reintentar;
+
+            WHEN foreign_key_violation THEN
+                RETURN 'Sorteo o usuario inválido';
+
+            WHEN others THEN
+                RETURN 'Error interno';
+        END;
+    END LOOP;
+END;
+$$;

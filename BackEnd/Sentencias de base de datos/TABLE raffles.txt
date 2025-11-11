@@ -1,0 +1,15 @@
+CREATE TABLE raffles (
+    id VARCHAR(50) PRIMARY KEY,
+    title VARCHAR(500) NOT NULL,
+    description TEXT NOT NULL,
+    image VARCHAR(255),
+    price NUMERIC(10,2) NOT NULL DEFAULT 0,
+    ticket_price NUMERIC(10,2) NOT NULL DEFAULT 0,
+    stock INT NOT NULL DEFAULT 0,
+    total_tickets INT NOT NULL DEFAULT 0,
+    sold_tickets INT NOT NULL DEFAULT 0,
+    ends_at TIMESTAMP WITH TIME ZONE NOT NULL,
+    status boolean NOT NULL DEFAULT true,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+    updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+);

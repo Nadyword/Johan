@@ -61,15 +61,17 @@ export interface RaffleResponse {
   }[]
 }
 
-// Respuestas de tickets
+// Respuestas de tickets (adaptado al nuevo formato)
 export interface TicketResponse {
-  id: string
-  raffleId: string
-  number: string
-  qr: string
-  status: 'pending' | 'drawn' | 'winner'
-  purchasedAt: string
-  raffleName: string
+  tituloSorteo: string
+  codigoTicket: string
+  fechaCompra: string
+  fechaFinalizacion: string
+  sorteoActivo: boolean
+  estadoPago: 'pendiente' | 'pagado' | 'cancelado'
+  idSorteo: string
+  idUsuario: string
+  imagenSorteo: string
 }
 
 export interface BuyTicketsRequest {

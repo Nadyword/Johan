@@ -1,34 +1,51 @@
 "use client"
 
-import { ProtectedRoute } from "@/components/protected-route"
-import { useAuth } from "@/lib/auth-context"
-import { Ticket, Calendar, Trophy } from "lucide-react"
 import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
+import { ProtectedRoute } from "@/components/protected-route"
+import { Ticket, Calendar, Trophy } from "lucide-react"
+import type { TicketResponse } from "@/lib/api/types"
+import { useAuth } from "@/lib/auth-context"
+import { rafflesApi } from "@/lib/api/raffles"
+import { useState, useEffect } from "react"
 
 export default function MyTicketsPage() {
   const { user } = useAuth()
+  const [tickets, setTickets] = useState<TicketResponse[]>([])
+  const [isLoading, setIsLoading] = useState(true)
+  const [error, setError] = useState<string | null>(null)
 
-  // Mock tickets data
-  const tickets = [
-    {
-      id: "1",
-      raffleTitle: "iPhone 15 Pro Max",
-      ticketNumber: "00042",
-      purchaseDate: "2025-01-15",
-      drawDate: "2025-02-01",
-      status: "active",
-      image: "/sorteo-1.jpg",
-    },
-    {
-      id: "2",
-      raffleTitle: "PlayStation 5",
-      ticketNumber: "00156",
-      purchaseDate: "2025-01-10",
-      drawDate: "2025-01-25",
-      status: "active",
-      image: "/playstation-5-console.png",
-    },
-  ]
+  // Cargar tickets del usuario desde la API
+  useEffect(() => {
+    const loadTickets = async () => {
+      if (!user) {
+        setIsLoading(false)
+        return
+      }
+
+      try {
+        setIsLoading(true)
+        setError(null)
+        
+        // Convertir userId a número
+        const userId = parseInt(user.id, 10)
+        if (isNaN(userId)) {
+          throw new Error("ID de usuario inválido")
+        }
+
+        const userTickets = await rafflesApi.getTickets(userId)
+        console.log("Tickets cargados:", userTickets)
+        console.log("Primer ticket imagenSorteo:", userTickets[0]?.imagenSorteo)
+        setTickets(userTickets)
+      } catch (err) {
+        console.error("Error cargando tickets:", err)
+        setError(err instanceof Error ? err.message : "Error al cargar los boletos")
+      } finally {
+        setIsLoading(false)
+      }
+    }
+
+    loadTickets()
+  }, [user])
 
   return (
     <ProtectedRoute>
@@ -69,45 +86,93 @@ export default function MyTicketsPage() {
               Bienvenido, <span className="text-[#F4A622] font-bold">{user?.name}</span>
             </p>
           </div>
-          {tickets.length > 0 ? (
+          {isLoading ? (
+            <div className="text-center py-16 animate-fade-up">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-[#6A8E23] mx-auto mb-4"></div>
+              <p className="text-muted-foreground text-lg">Cargando tus boletos...</p>
+            </div>
+          ) : error ? (
+            <div className="text-center py-16 animate-fade-up">
+              <div className="bg-red-500/10 border-2 border-red-500/30 rounded-2xl p-8 max-w-md mx-auto">
+                <p className="text-red-500 font-semibold mb-4">Error al cargar boletos</p>
+                <p className="text-muted-foreground text-sm">{error}</p>
+              </div>
+            </div>
+          ) : tickets.length > 0 ? (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               {tickets.map((ticket, index) => (
                 <div
-                  key={ticket.id}
+                  key={`${ticket.idSorteo}-${ticket.codigoTicket}-${index}`}
                   className="bg-card/80 backdrop-blur-sm border-2 border-[#6A8E23]/30 rounded-2xl overflow-hidden hover:border-[#6A8E23] transition-all hover:shadow-2xl hover:shadow-[#6A8E23]/20 hover:scale-105 animate-fade-up"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="relative h-48 bg-muted overflow-hidden group">
-                    <img
-                      src={ticket.image || "/placeholder.svg"}
-                      alt={ticket.raffleTitle}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
-                    <div className="absolute top-3 right-3 bg-gradient-to-r from-[#6A8E23] to-[#4F6D1F] text-background px-4 py-1.5 rounded-full text-xs font-bold shadow-lg animate-pulse-glow">
-                      ACTIVO
+                    {ticket.imagenSorteo ? (
+                      <img
+                        src={ticket.imagenSorteo}
+                        alt={ticket.tituloSorteo}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={(e) => {
+                          console.error("Error cargando imagen:", ticket.imagenSorteo);
+                          const target = e.target as HTMLImageElement
+                          target.style.display = 'none'
+                          const parent = target.parentElement
+                          if (parent) {
+                            const placeholder = parent.querySelector('.image-placeholder') as HTMLElement
+                            if (placeholder) placeholder.style.display = 'flex'
+                          }
+                        }}
+                        onLoad={() => {
+                          console.log("Imagen cargada exitosamente:", ticket.imagenSorteo);
+                        }}
+                      />
+                    ) : null}
+                    <div className={`w-full h-full bg-gradient-to-br from-[#6A8E23]/20 to-[#F4A622]/20 flex items-center justify-center image-placeholder ${ticket.imagenSorteo ? 'hidden' : ''}`}>
+                      <CloverIcon className="w-24 h-24 text-[#6A8E23]/30" />
                     </div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                    <div className={`absolute top-3 right-3 text-background px-4 py-1.5 rounded-full text-xs font-bold shadow-lg ${
+                      ticket.sorteoActivo 
+                        ? "bg-gradient-to-r from-[#6A8E23] to-[#4F6D1F] animate-pulse-glow"
+                        : "bg-gradient-to-r from-gray-600 to-gray-700"
+                    }`}>
+                      {ticket.sorteoActivo ? "ACTIVO" : "FINALIZADO"}
+                    </div>
+                    {ticket.estadoPago === "pendiente" && (
+                      <div className="absolute top-3 left-3 bg-yellow-500 text-background px-3 py-1 rounded-full text-xs font-bold shadow-lg">
+                        PENDIENTE
+                      </div>
+                    )}
                   </div>
 
                   <div className="p-5 space-y-4">
                     <div>
                       <h3 className="font-display font-bold text-xl bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent mb-2">
-                        {ticket.raffleTitle}
+                        {ticket.tituloSorteo}
                       </h3>
                       <div className="flex items-center gap-2 text-muted-foreground text-sm">
                         <Ticket className="w-4 h-4 text-[#F4A622]" />
-                        <span className="font-semibold">Boleto #{ticket.ticketNumber}</span>
+                        <span className="font-semibold">Boleto #{ticket.codigoTicket}</span>
                       </div>
                     </div>
 
                     <div className="space-y-2 text-sm">
                       <div className="flex items-center gap-2 text-muted-foreground bg-muted/50 p-2 rounded-lg">
                         <Calendar className="w-4 h-4 text-[#6A8E23]" />
-                        <span>Comprado: {new Date(ticket.purchaseDate).toLocaleDateString("es-ES")}</span>
+                        <span>Comprado: {new Date(ticket.fechaCompra).toLocaleDateString("es-ES")}</span>
                       </div>
                       <div className="flex items-center gap-2 text-foreground font-semibold bg-gradient-to-r from-[#6A8E23]/10 to-[#F4A622]/10 p-2 rounded-lg border border-[#F4A622]/30">
                         <Trophy className="w-4 h-4 text-[#F4A622]" />
-                        <span>Sorteo: {new Date(ticket.drawDate).toLocaleDateString("es-ES")}</span>
+                        <span>Sorteo: {new Date(ticket.fechaFinalizacion).toLocaleDateString("es-ES")}</span>
+                      </div>
+                      <div className={`flex items-center gap-2 text-sm p-2 rounded-lg ${
+                        ticket.estadoPago === "pagado" 
+                          ? "bg-green-500/10 text-green-600 border border-green-500/30"
+                          : ticket.estadoPago === "pendiente"
+                          ? "bg-yellow-500/10 text-yellow-600 border border-yellow-500/30"
+                          : "bg-red-500/10 text-red-600 border border-red-500/30"
+                      }`}>
+                        <span className="font-semibold capitalize">Estado: {ticket.estadoPago}</span>
                       </div>
                     </div>
                   </div>

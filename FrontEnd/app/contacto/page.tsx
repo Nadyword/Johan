@@ -141,7 +141,7 @@ export default function ContactoPage() {
                   </div>
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Teléfono</h3>
-                    <p className="text-muted-foreground">+58 (424) 225-85-05</p>
+                    <p className="text-muted-foreground">+34643907132</p>
                   </div>
                 </div>
 

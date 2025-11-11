@@ -1,4 +1,5 @@
-﻿using Api_inmobiliaria.Models.Response;
+﻿using Api_inmobiliaria.Models.Request;
+using Api_inmobiliaria.Models.Response;
 using System.Data;
 
 namespace Api_inmobiliaria.DataBase;
@@ -109,5 +110,27 @@ public class FuncionesDB
             return errorResul;
         }
     }
-}
 
+    async public Task<ResponseMessage> BuyTicket(RequestBuyTicket request)
+    {
+        ResponseMessage resul;
+        List<string> parametros = [$"'{request.RaffleId}'", $"'{request.UserId}'", $"'{request.PricevoTicket}'", $"'{request.ModePay}'", $"'{request.TicketQuantity}'", "'pendiente'", $"'{request.Image}'", $"'{request.Note}'", $"'{request.ImagenSorteo}'"];
+        try
+        {
+            resul = new()
+            {
+                Message = (await ConnectionDB.ExecuteFunction<string>("comprar_ticket_sorteo", parametros)).Rows[0][0].ToString() ?? "Error"
+            };
+
+            return resul;
+        }
+        catch
+        {
+            ResponseMessage errorResul = new()
+            {
+                Message = "Error"
+            };
+            return errorResul;
+        }
+    }
+}

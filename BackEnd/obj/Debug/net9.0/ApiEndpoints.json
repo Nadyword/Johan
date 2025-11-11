@@ -1,5 +1,83 @@
 [
   {
+    "ContainingType": "Api_inmobiliaria.Controllers.Buytickets",
+    "Method": "BuyTicket",
+    "RelativePath": "Sorteo/api/Buytickets",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Api_inmobiliaria.Models.Request.RequestBuyTicket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Buytickets",
+    "Method": "GetTicksByCodigo",
+    "RelativePath": "Sorteo/api/Buytickets/Ticks/{ticks}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "ticks",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseTicketsByUser[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Buytickets",
+    "Method": "GetTicksByUser",
+    "RelativePath": "Sorteo/api/Buytickets/User/{userId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "userId",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseTicketsByUser[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
     "ContainingType": "Api_inmobiliaria.Controllers.Login",
     "Method": "Logeo",
     "RelativePath": "Sorteo/api/Login",
@@ -16,6 +94,72 @@
     "ReturnTypes": [
       {
         "Type": "Api_inmobiliaria.Models.Response.ResponseLogin",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.MangerPayments",
+    "Method": "BuyTicket",
+    "RelativePath": "Sorteo/api/MangerPayments/{Tokken}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "Tokken",
+        "Type": "System.String",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponsePaymentHistory[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.RaffleActive",
+    "Method": "ConsulRaffle",
+    "RelativePath": "Sorteo/api/RaffleActive",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.DTOs.Tablas.Raffles[]",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.RaffleDeactive",
+    "Method": "ConsulRaffle",
+    "RelativePath": "Sorteo/api/RaffleDeactive",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.DTOs.Tablas.Raffles[]",
         "MediaTypes": [
           "text/plain",
           "application/json",

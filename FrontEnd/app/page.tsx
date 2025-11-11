@@ -1,7 +1,7 @@
 "use client"
 
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
-import { mockRaffles, mockPreviousRaffles } from "@/lib/mock-data"
+import { loadMockRafflesActive, loadMockRafflesDeactive } from "@/lib/mock-data"
 import { Sparkles, Trophy, Users, Clock } from "lucide-react"
 import { CloverIconImage } from "@/components/clover-icon"
 import { AuthModal } from "@/components/auth-modal"
@@ -11,10 +11,13 @@ import { useAuth } from "@/lib/auth-context"
 import { useState, useEffect } from "react"
 import Image from "next/image"
 import Link from "next/link"
+import type { Raffle } from "@/lib/types"
 
 export default function HomePage() {
   const [showAuthModal, setShowAuthModal] = useState(false)
   const [revealed, setRevealed] = useState(false)
+  const [mockRafflesActive, setMockRafflesActive] = useState<Raffle[]>([])
+  const [mockPreviousRaffles, setMockPreviousRaffles] = useState<Raffle[]>([])
   const [floatingClovers, setFloatingClovers] = useState<Array<{
     width: number
     height: number
@@ -24,6 +27,27 @@ export default function HomePage() {
     animationDuration: number
   }>>([])
   const { user } = useAuth()
+
+  // Cargar rifas desde la API (solo en el cliente)
+  useEffect(() => {
+    loadMockRafflesActive()
+      .then((data) => {
+        console.log('Rifas activas cargadas:', data)
+        setMockRafflesActive(data)
+      })
+      .catch((error) => {
+        console.error('Error cargando rifas activas:', error)
+      })
+    
+    loadMockRafflesDeactive()
+      .then((data) => {
+        console.log('Rifas anteriores cargadas:', data)
+        setMockPreviousRaffles(data)
+      })
+      .catch((error) => {
+        console.error('Error cargando rifas anteriores:', error)
+      })
+  }, [])
 
   // Generar posiciones y animaciones aleatorias solo en el cliente para evitar errores de hidratación
   useEffect(() => {
@@ -48,7 +72,19 @@ export default function HomePage() {
     }
   }
 
-  const activeRaffle = mockRaffles[0]
+  const activeRaffle = mockRafflesActive[0]
+
+  // Mostrar loading si no hay datos cargados
+  if (!activeRaffle) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#6A8E23] via-[#4F6D1F] to-[#F4A622]">
+        <div className="text-center">
+          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
+          <p className="text-white font-semibold">Cargando...</p>
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="min-h-screen">
@@ -174,12 +210,14 @@ export default function HomePage() {
                       <p className="text-sm text-muted-foreground">Precio por boletos</p>
                       <p className="text-3xl font-bold text-[#6A8E23]">${activeRaffle.ticketPrice}</p>
                     </div>
-                    <div className="text-right">
-                      <p className="text-sm text-muted-foreground">Boletos disponibles</p>
-                      <p className="text-2xl font-bold text-[#F4A622]">
-                        {activeRaffle.totalTickets - activeRaffle.soldTickets}
-                      </p>
-                    </div>
+                    {(activeRaffle.totalTickets - activeRaffle.soldTickets) > 0 && (
+                      <div className="text-right">
+                        <p className="text-sm text-muted-foreground">Boletos disponibles</p>
+                        <p className="text-2xl font-bold text-[#F4A622]">
+                          {activeRaffle.totalTickets - activeRaffle.soldTickets}
+                        </p>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
                 <CardFooter>
@@ -206,7 +244,7 @@ export default function HomePage() {
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {mockRaffles.map((raffle, index) => (
+            {mockRafflesActive.map((raffle, index) => (
               <Card
                 key={raffle.id}
                 className={`bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]/30 hover:border-[#F4A622] transition-all duration-300 hover:scale-105 hover:shadow-2xl hover:shadow-[#F4A622]/20 overflow-hidden ${revealed ? "animate-fade-up" : "opacity-0"
@@ -217,7 +255,7 @@ export default function HomePage() {
                   <Image src={raffle.image || "/placeholder.svg"} alt={raffle.title} fill className="object-cover" />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                   <Badge className="absolute top-4 right-4 bg-gradient-to-r from-[#F4A622] to-[#ff8c00] text-black border-0 font-bold">
-                    {raffle.status === "active" ? "Activa" : "Próximamente"}
+                    {raffle.status ? "Activa" : "Próximamente"}
                   </Badge>
                 </div>
                 <CardHeader>
@@ -230,10 +268,12 @@ export default function HomePage() {
                       <span className="text-white/70 text-sm">Precio</span>
                       <span className="text-[#F4A622] font-bold text-lg">${raffle.ticketPrice}</span>
                     </div>
-                    <div className="flex justify-between items-center">
-                      <span className="text-white/70 text-sm">Disponibles</span>
-                      <span className="text-[#6A8E23] font-bold">{raffle.totalTickets - raffle.soldTickets}</span>
-                    </div>
+                    {(raffle.totalTickets - raffle.soldTickets) > 0 && (
+                      <div className="flex justify-between items-center">
+                        <span className="text-white/70 text-sm">Disponibles</span>
+                        <span className="text-[#6A8E23] font-bold">{raffle.totalTickets - raffle.soldTickets}</span>
+                      </div>
+                    )}
                   </div>
                 </CardContent>
                 <CardFooter>
@@ -258,9 +298,10 @@ export default function HomePage() {
             <p className="text-xl text-white/70">Conoce a nuestros ganadores</p>
           </div>
 
-          {!mockPreviousRaffles || mockPreviousRaffles.length === 0 ? (
+          {mockPreviousRaffles.length === 0 ? (
             <div className="text-center py-12">
-              <p className="text-white/70 text-lg">No existe registro por el momento</p>
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[#F4A622] mx-auto mb-4"></div>
+              <p className="text-white/70 text-lg">Cargando sorteos anteriores...</p>
             </div>
           ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -278,7 +319,6 @@ export default function HomePage() {
                   </div>
                   <CardHeader>
                     <CardTitle className="text-lg font-display font-bold text-white">{raffle.title}</CardTitle>
-                    <p className="text-white/60 text-sm">Ganador: {raffle.winner}</p>
                   </CardHeader>
                   <CardFooter>
                     <Button

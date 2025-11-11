@@ -1,0 +1,14 @@
+﻿CREATE OR REPLACE VIEW vista_tickets_sorteos AS
+SELECT
+    r.title AS titulo_sorteo,
+    t.codigo_ticket,
+    t.fecha_compra,
+    r.ends_at AS fecha_finalizacion,
+    r.status AS sorteo_activo,
+    t.estado_pago,
+	t.id_sorteo,
+	t.id_usuario,
+	t.imagen_sorteo
+	
+FROM tickets_sorteos t
+LEFT JOIN raffles r ON t.id_sorteo = r.id ORDER BY r.status DESC
