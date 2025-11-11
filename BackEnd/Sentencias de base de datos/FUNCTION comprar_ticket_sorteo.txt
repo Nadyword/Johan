@@ -82,7 +82,7 @@ BEGIN
                 p_observaciones,
 				p_imagen_sorteo
             );
-
+			SELECT asignar_id_ticket_en_numeros_aleatorios(codigo_ticket, p_cantidad_tickets);
             RETURN 'Compra efectuada';
         EXCEPTION
             WHEN unique_violation THEN

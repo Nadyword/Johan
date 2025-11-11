@@ -77,7 +77,7 @@ public class QueriesDB
                 CodigoTicket = consul.Rows[i][1].ToString() ?? "",
                 FechaCompra = Convert.ToDateTime(consul.Rows[i][2]),
                 FechaFinalizacion = consul.Rows[i][3] == DBNull.Value ? null : Convert.ToDateTime(consul.Rows[i][3]),
-                SorteoActivo = consul.Rows[i][4] == DBNull.Value ? null : Convert.ToBoolean(consul.Rows[i][4]),
+                SorteoActivo = Convert.ToBoolean(consul.Rows[i][4]),
                 EstadoPago = consul.Rows[i][5].ToString() ?? "",
                 IdSorteo = consul.Rows[i][6].ToString() ?? "",
                 IdUsuario = consul.Rows[i][7].ToString() ?? "",

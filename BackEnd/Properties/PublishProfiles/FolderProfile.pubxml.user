@@ -3,7 +3,7 @@
 <Project>
   <PropertyGroup>
     <_PublishTargetUrl>C:\Users\samue\Documents\Proyectos\Johan\BackEnd\bin\Release\net9.0\publish\</_PublishTargetUrl>
-    <History>True|2025-11-11T15:26:14.0633884Z||;True|2025-11-10T16:31:38.7548080-03:00||;True|2025-11-10T16:31:21.4272501-03:00||;True|2025-11-10T16:31:15.5527422-03:00||;True|2025-11-10T16:23:08.7677875-03:00||;True|2025-10-14T11:49:42.4416880-03:00||;</History>
+    <History>True|2025-11-11T20:40:40.1945131Z||;True|2025-11-11T12:26:14.0633884-03:00||;True|2025-11-10T16:31:38.7548080-03:00||;True|2025-11-10T16:31:21.4272501-03:00||;True|2025-11-10T16:31:15.5527422-03:00||;True|2025-11-10T16:23:08.7677875-03:00||;True|2025-10-14T11:49:42.4416880-03:00||;</History>
     <LastFailureDetails />
   </PropertyGroup>
 </Project>

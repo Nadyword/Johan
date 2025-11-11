@@ -242,7 +242,7 @@ export default function PaymentsPage() {
                           <h3 className="font-display font-bold text-xl bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
                             {payment.title}
                           </h3>
-                          <p className="text-sm text-muted-foreground font-semibold">Boleto #{payment.idTicket}</p>
+                          <p className="text-sm text-muted-foreground font-semibold">Compra #{payment.idTicket}</p>
                         </div>
                         <div
                           className={`px-4 py-2 rounded-full text-xs font-bold shadow-lg ${
@@ -321,7 +321,7 @@ export default function PaymentsPage() {
             </DialogTitle>
             {selectedPayment && (
               <p className="text-muted-foreground text-sm mt-2">
-                {selectedPayment.title} - Boleto #{selectedPayment.idTicket}
+                {selectedPayment.title} - Compra #{selectedPayment.idTicket}
               </p>
             )}
           </DialogHeader>

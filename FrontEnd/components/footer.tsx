@@ -8,7 +8,7 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-5 gap-8">
           <div className="col-span-1 md:col-span-2">
             <div className="flex items-center gap-2 mb-4">
-              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={250} width={250}/>
+              <CloverIconImage src="/CHAIN OF LUCKY_CURVAS-03.svg" height={250} width={250} />
             </div>
             <p className="text-sm text-muted-foreground max-w-md">
               Participa hoy. Gana en grande. Dios te abre camino.
@@ -43,10 +43,10 @@ export function Footer() {
               </li>
               <li>
                 <a
-                  href="mailto:Chainoflucky@gmail.com"
+                  href="mailto:contacto@chainoflucky.com"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                  Chainoflucky@gmail.com
+                  contacto@chainoflucky.com
                 </a>
               </li>
               <li>
@@ -54,7 +54,7 @@ export function Footer() {
                   href="https://wa.me/34643907132"
                   className="text-sm text-muted-foreground hover:text-primary transition-colors"
                 >
-                +34643907132
+                  +34643907132
                 </a>
               </li>
             </ul>

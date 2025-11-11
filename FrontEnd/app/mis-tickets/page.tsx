@@ -152,7 +152,7 @@ export default function MyTicketsPage() {
                       </h3>
                       <div className="flex items-center gap-2 text-muted-foreground text-sm">
                         <Ticket className="w-4 h-4 text-[#F4A622]" />
-                        <span className="font-semibold">Boleto #{ticket.codigoTicket}</span>
+                        <span className="font-semibold">Compra #{ticket.codigoTicket}</span>
                       </div>
                     </div>
 

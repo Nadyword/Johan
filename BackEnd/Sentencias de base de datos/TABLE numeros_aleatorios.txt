@@ -1,0 +1,10 @@
+CREATE TABLE numeros_aleatorios (
+    id SERIAL PRIMARY KEY,
+    numero_aleatorio VARCHAR(6) UNIQUE NOT NULL,
+	id_ticket INT
+);
+
+INSERT INTO numeros_aleatorios (numero_aleatorio)
+SELECT LPAD(g::TEXT, 6, '0')
+FROM generate_series(0, 999999) AS g
+ORDER BY random();

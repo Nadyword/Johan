@@ -24,7 +24,7 @@ export default function ContactoPage() {
 
   return (
     <div className="min-h-screen relative overflow-hidden">
- 
+
       <div className="fixed inset-0 bg-gradient-to-br from-background via-secondary/5 to-accent/10 animate-gradient -z-10" />
 
       {[...Array(25)].map((_, i) => (
@@ -127,10 +127,10 @@ export default function ContactoPage() {
                   <div>
                     <h3 className="font-bold text-foreground mb-1">Email</h3>
                     <a
-                      href="mailto:Chainoflucky@gmail.com"
+                      href="mailto:contacto@chainoflucky.com"
                       className="text-muted-foreground hover:text-secondary transition-colors"
                     >
-                      Chainoflucky@gmail.com
+                      contacto@chainoflucky.com
                     </a>
                   </div>
                 </div>

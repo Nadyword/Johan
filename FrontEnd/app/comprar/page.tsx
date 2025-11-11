@@ -265,7 +265,7 @@ export default function BuyTicketsPage() {
                         </div>
                         <div className="p-4 bg-yellow-500/10 rounded-xl border border-yellow-500/30">
                           <p className="text-sm text-yellow-600 dark:text-yellow-400">
-                            <strong>Importante:</strong> 
+                            <strong>Importante:</strong>
                           </p>
                         </div>
                       </div>
@@ -277,13 +277,13 @@ export default function BuyTicketsPage() {
                           <Label className="text-sm text-muted-foreground mb-2 block">Email de PayPal</Label>
                           <div className="flex items-center gap-2">
                             <code className="flex-1 p-2 bg-background rounded-md text-sm font-mono">
-                              Chainoflucky@gmail.com
+                              contacto@chainoflucky.com
                             </code>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => {
-                                navigator.clipboard.writeText("Chainoflucky@gmail.com")
+                                navigator.clipboard.writeText("contacto@chainoflucky.com ")
                               }}
                               className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
                             >
@@ -311,13 +311,13 @@ export default function BuyTicketsPage() {
                           <Label className="text-sm text-muted-foreground mb-2 block">Usuario Zinli</Label>
                           <div className="flex items-center gap-2">
                             <code className="flex-1 p-2 bg-background rounded-md text-sm font-mono">
-                              Chainoflucky@gmail.com
+                              contacto@chainoflucky.com
                             </code>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => {
-                                navigator.clipboard.writeText("Chainoflucky@gmail.com")
+                                navigator.clipboard.writeText("contacto@chainoflucky.com ")
                               }}
                               className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
                             >
