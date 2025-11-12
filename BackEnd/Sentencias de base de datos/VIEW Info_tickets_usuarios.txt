@@ -1,0 +1,12 @@
+﻿CREATE OR REPLACE VIEW Info_tickets_usuarios AS
+SELECT
+    u.nombre,
+    u.apellidos,
+    t.codigo_ticket,
+    t.cantidad_tickets,
+    t.monto_total,
+	t.metodo_pago,
+	t.fecha_compra,
+	u.email
+FROM tickets_sorteos t
+LEFT JOIN usuarios u ON t.id_usuario = u.id

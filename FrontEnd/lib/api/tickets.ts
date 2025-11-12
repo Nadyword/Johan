@@ -1,109 +1,79 @@
-/**
- * API de Tickets
- * Maneja todas las operaciones relacionadas con tickets de rifas
- */
+const API_URL = process.env.NEXT_PUBLIC_API_URL || process.env.RUTA_API || 'https://chainoflucky/Sorteo/api'
 
-import { apiClient } from './client'
-import type { Ticket } from '../types'
+export async function AprobarTicket(IdCompra: string, Motivo: string, tokken: string): Promise<{ message: string }> {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
 
-export interface TicketResponse extends Ticket {}
+  const raw = JSON.stringify({
+    "IdCompra": IdCompra,
+    "Motivo": Motivo,
+    "Tokken": tokken
+  });
 
-export interface BuyTicketsRequest {
-  raffleId: string
-  quantity: number
-  paymentMethod?: string
-}
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow" as RequestRedirect,
+  };
 
-export interface BuyTicketsResponse {
-  tickets: TicketResponse[]
-  payment: {
-    id: string
-    amount: number
-    method: string
-    status: 'approved' | 'failed' | 'refunded'
-    reference: string
-    createdAt: string
+  try {
+    const response = await fetch(`${API_URL}/Tickets/Aprobado`, requestOptions);
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error al aprobar ticket: ${errorText}`);
+    }
+
+    const result = await response.text();
+    console.log(result);
+
+    try {
+      return JSON.parse(result) as { message: string };
+    } catch (parseError) {
+      return { message: result };
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
 
-export interface GetTicketsQuery {
-  raffleId?: string
-  status?: 'pending' | 'drawn' | 'winner'
-  page?: number
-  limit?: number
-}
+export async function CamceladoTicket(IdCompra: string, Motivo: string, tokken: string): Promise<{ message: string }> {
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
 
-class TicketsApi {
-  /**
-   * Obtiene todos los tickets del usuario autenticado
-   * @param query - Parámetros de búsqueda opcionales
-   * @returns Lista de tickets del usuario
-   */
-  async getUserTickets(query?: GetTicketsQuery): Promise<TicketResponse[]> {
-    const params = new URLSearchParams()
-    
-    if (query?.raffleId) params.append('raffleId', query.raffleId)
-    if (query?.status) params.append('status', query.status)
-    if (query?.page) params.append('page', query.page.toString())
-    if (query?.limit) params.append('limit', query.limit.toString())
+  const raw = JSON.stringify({
+    "IdCompra": IdCompra,
+    "Motivo": Motivo,
+    "Tokken": tokken
+  });
 
-    const queryString = params.toString()
-    const endpoint = queryString ? `/tickets?${queryString}` : '/tickets'
-    
-    return apiClient.get<TicketResponse[]>(endpoint)
-  }
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow" as RequestRedirect,
+  };
 
-  /**
-   * Obtiene un ticket por su ID
-   * @param id - ID del ticket
-   * @returns Datos del ticket
-   */
-  async getTicketById(id: string): Promise<TicketResponse> {
-    return apiClient.get<TicketResponse>(`/tickets/${id}`)
-  }
+  try {
+    const response = await fetch(`${API_URL}/Tickets/Rechazado`, requestOptions);
 
-  /**
-   * Compra tickets para una rifa
-   * @param buyData - Datos de la compra
-   * @returns Tickets comprados y información del pago
-   */
-  async buyTickets(buyData: BuyTicketsRequest): Promise<BuyTicketsResponse> {
-    return apiClient.post<BuyTicketsResponse>('/tickets/buy', buyData)
-  }
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error al cancelar ticket: ${errorText}`);
+    }
 
-  /**
-   * Obtiene los tickets de una rifa específica
-   * @param raffleId - ID de la rifa
-   * @returns Lista de tickets de la rifa
-   */
-  async getTicketsByRaffle(raffleId: string): Promise<TicketResponse[]> {
-    return apiClient.get<TicketResponse[]>(`/tickets/raffle/${raffleId}`)
-  }
+    const result = await response.text();
+    console.log(result);
 
-  /**
-   * Obtiene el número de tickets disponibles para una rifa
-   * @param raffleId - ID de la rifa
-   * @returns Número de tickets disponibles
-   */
-  async getAvailableTicketsCount(raffleId: string): Promise<{ available: number }> {
-    return apiClient.get<{ available: number }>(`/tickets/available/${raffleId}`)
-  }
-
-  /**
-   * Valida un ticket por su número
-   * @param ticketNumber - Número del ticket
-   * @param raffleId - ID de la rifa
-   * @returns Datos del ticket si es válido
-   */
-  async validateTicket(ticketNumber: string, raffleId: string): Promise<TicketResponse> {
-    return apiClient.post<TicketResponse>('/tickets/validate', {
-      ticketNumber,
-      raffleId,
-    })
+    try {
+      return JSON.parse(result) as { message: string };
+    } catch (parseError) {
+      return { message: result };
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
   }
 }
-
-// Exportar una instancia única
-export const ticketsApi = new TicketsApi()
-export default ticketsApi
-

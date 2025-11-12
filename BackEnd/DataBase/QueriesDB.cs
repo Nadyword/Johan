@@ -1,4 +1,5 @@
-﻿using Api_inmobiliaria.Models.DTOs.Tablas;
+﻿using Api_inmobiliaria.Models.DTOs;
+using Api_inmobiliaria.Models.DTOs.Tablas;
 using Api_inmobiliaria.Models.Response;
 using System.Data;
 
@@ -112,7 +113,7 @@ public class QueriesDB
         return Tickets;
     }
 
-    async public Task<ResponsePaymentHistory[]>PaymentHistory()
+    async public Task<ResponsePaymentHistory[]> PaymentHistory()
     {
         DataTable consul = await ConnectionDB.ExecuteQueries<bool>("vista_historial_tickets");
         ResponsePaymentHistory[] Tickets = new ResponsePaymentHistory[consul.Rows.Count];
@@ -132,6 +133,36 @@ public class QueriesDB
                 Comprobante = consul.Rows[i][8].ToString() ?? ""
             };
         }
+
+        return Tickets;
+    }
+
+    async public Task<InfoTickets> InfoTicketsUsuarios(string codigo)
+    {
+        DataTable consul = await ConnectionDB.ExecuteQueries<bool>("Info_tickets_usuarios", $"codigo_ticket = '{codigo}'");
+        InfoTickets Tickets = new()
+        {
+            Nombre = consul.Rows[0][0].ToString() ?? "",
+            Apellidos = consul.Rows[0][1].ToString() ?? "",
+            CodigoTicket = consul.Rows[0][2].ToString() ?? "",
+            CantidadTickets = Convert.ToInt32(consul.Rows[0][3]),
+            MontoTotal = Convert.ToDecimal(consul.Rows[0][4]),
+            MetodoPago = consul.Rows[0][5].ToString() ?? "",
+            FechaCompra = Convert.ToDateTime(consul.Rows[0][6]),
+            Email = consul.Rows[0][7].ToString() ?? ""
+        };
+
+        return Tickets;
+    }
+
+    async public Task<TicketsNumeros> InfoTicketsNumerosUsuarios(string codigo)
+    {
+        DataTable consul = await ConnectionDB.ExecuteQueries<bool>("Info_tickets_numeros", $"id_ticket= {codigo}");
+        TicketsNumeros Tickets = new()
+        {
+            CodigoTicket = consul.Rows[0][0].ToString() ?? "",
+            NumerosTicket = consul.Rows[0][1].ToString() ?? ""
+        };
 
         return Tickets;
     }

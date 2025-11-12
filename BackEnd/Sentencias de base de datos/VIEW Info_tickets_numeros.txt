@@ -1,0 +1,6 @@
+﻿CREATE OR REPLACE VIEW Info_tickets_numeros AS
+SELECT 
+    id_ticket,
+    STRING_AGG(numero_aleatorio, ', ') AS numeros_aleatorios
+FROM numeros_aleatorios
+GROUP BY id_ticket;

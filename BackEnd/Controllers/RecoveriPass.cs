@@ -16,7 +16,7 @@ public class RecoveryPass(SendMail sendMail) : ControllerBase
     [HttpPost]
     public async Task<ResponseMessage> SendMail([FromBody] RequestSendMail requestSendMail)
     {
-       return await _sendMail.SendAsync(requestSendMail.To);
+       return await _sendMail.SendAsyncRecoveryPass(requestSendMail.To);
     }
 
     [HttpPut]

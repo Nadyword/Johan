@@ -34,6 +34,27 @@ public static class ConnectionDB
             return new DataTable();
         }
     }
+    public static async Task<DataTable> ExecuteUpdate<TResult>(string functionName, string Where, List<string>? parameters = null)
+    {
+        try
+        {
+            using NpgsqlConnection connection = new(_connectionString);
+            await connection.OpenAsync();
+
+            string commandText = $"UPDATE {functionName} SET " + (parameters != null ? string.Join(",", parameters) : "") + " WHERE " + Where ;
+            using NpgsqlCommand command = new(commandText, connection);
+
+            using NpgsqlDataAdapter adapter = new(command);
+            DataTable dataTable = new();
+            await Task.Run(() => adapter.Fill(dataTable));
+
+            return dataTable;
+        }
+        catch
+        {
+            return new DataTable();
+        }
+    }
 
     public static async Task<DataTable> ExecuteQueries<TResult>(string functionName, string where = "")
     {

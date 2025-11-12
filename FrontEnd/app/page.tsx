@@ -239,7 +239,7 @@ export default function HomePage() {
       <section className="py-20 bg-gradient-to-b from-[#121212] to-[#1a1a1a]">
         <div className="container mx-auto px-4">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">Sorteos Activas</h2>
+            <h2 className="text-4xl md:text-5xl font-display font-bold text-white mb-4">Sorteos Activos</h2>
             <p className="text-xl text-white/70">Elige tu premio favorito y participa</p>
           </div>
 

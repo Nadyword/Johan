@@ -246,5 +246,57 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Tickets",
+    "Method": "SendMailA",
+    "RelativePath": "Sorteo/api/Tickets/Aprobado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestManarTicket",
+        "Type": "Api_inmobiliaria.Models.Request.RequestManarTicket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Tickets",
+    "Method": "SendMailR",
+    "RelativePath": "Sorteo/api/Tickets/Rechazado",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "requestManarTicket",
+        "Type": "Api_inmobiliaria.Models.Request.RequestManarTicket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

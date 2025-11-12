@@ -1,0 +1,8 @@
+CREATE OR REPLACE FUNCTION limpiar_numeros_aleatorios(p_id_ticket int)
+RETURNS void AS $$
+BEGIN
+    UPDATE numeros_aleatorios
+    SET id_ticket = NULL WHERE id_ticket = p_id_ticket;
+	UPDATE tickets_sorteos SET estado_pago = 'cancelado' WHERE codigo_ticket = (id_ticket)::VARCHAR(100);
+END;
+$$ LANGUAGE plpgsql;

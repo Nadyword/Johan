@@ -1,0 +1,7 @@
+CREATE OR REPLACE FUNCTION pagado_ticket(p_id_ticket int)
+RETURNS void AS $$
+BEGIN
+
+	UPDATE tickets_sorteos SET estado_pago = 'pagado' WHERE codigo_ticket = id_ticket;
+END;
+$$ LANGUAGE plpgsql;

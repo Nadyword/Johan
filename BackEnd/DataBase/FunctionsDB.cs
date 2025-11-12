@@ -133,4 +133,31 @@ public class FuncionesDB
             return errorResul;
         }
     }
+
+    async public void ClearTicketsByIdTickets(string Id_ticket)
+    {
+        List<string> parametros = [$"{Id_ticket}"];
+        List<string> parametros2 = ["estado_pago = 'cancelado'"];
+        
+        try
+        {
+            await ConnectionDB.ExecuteFunction<string>("limpiar_numeros_aleatorios", parametros);
+            await ConnectionDB.ExecuteUpdate<string>("tickets_sorteos", $"codigo_ticket = '{Id_ticket}'", parametros2);
+        }
+        catch
+        {
+        }
+    }
+
+    async public void TicketsPagado(string Id_ticket)
+    {
+        List<string> parametros2 = ["estado_pago = 'pagado'"];
+        try
+        {
+            await ConnectionDB.ExecuteUpdate<string>("tickets_sorteos", $"codigo_ticket = '{Id_ticket}'", parametros2);
+        }
+        catch
+        {
+        }
+    }
 }

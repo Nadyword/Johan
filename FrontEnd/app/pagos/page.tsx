@@ -1,6 +1,6 @@
 "use client"
 
-import { CreditCard, Calendar, CheckCircle2, Clock, ShieldX, Ticket, X, Image as ImageIcon, RefreshCw } from "lucide-react"
+import { CreditCard, Calendar, CheckCircle2, Clock, ShieldX, Ticket, X, Image as ImageIcon, RefreshCw, XCircle } from "lucide-react"
 import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { ProtectedRoute } from "@/components/protected-route"
 import { useAuth } from "@/lib/auth-context"
@@ -10,6 +10,19 @@ import { rafflesApi } from "@/lib/api/raffles"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import type { TicketResponse } from "@/lib/api/types"
+import { AprobarTicket, CamceladoTicket } from "@/lib/api/tickets"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
+import { Textarea } from "@/components/ui/textarea"
+import { Label } from "@/components/ui/label"
 
 export default function PaymentsPage() {
   const { user } = useAuth()
@@ -23,6 +36,14 @@ export default function PaymentsPage() {
   const [ticketsError, setTicketsError] = useState<string | null>(null)
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [isApproveDialogOpen, setIsApproveDialogOpen] = useState(false)
+  const [paymentToApprove, setPaymentToApprove] = useState<Payment | null>(null)
+  const [approveMotivo, setApproveMotivo] = useState("")
+  const [isApproving, setIsApproving] = useState(false)
+  const [isCancelDialogOpen, setIsCancelDialogOpen] = useState(false)
+  const [paymentToCancel, setPaymentToCancel] = useState<Payment | null>(null)
+  const [cancelMotivo, setCancelMotivo] = useState("")
+  const [isCanceling, setIsCanceling] = useState(false)
 
   // Función para cargar historial de pagos
   const loadPayments = async (showLoading = true) => {
@@ -54,7 +75,6 @@ export default function PaymentsPage() {
       }
 
       const result = await rafflesApi.gethistorial_tickets(token)
-      console.log("Historial de pagos recibido:", result)
 
       // Parsear la respuesta JSON
       const rawPayments = JSON.parse(result) as any[]
@@ -156,6 +176,108 @@ export default function PaymentsPage() {
       setTicketsError(err instanceof Error ? err.message : "Error al cargar los tickets")
     } finally {
       setIsTicketsLoading(false)
+    }
+  }
+
+  const handleApproveClick = (payment: Payment) => {
+    setPaymentToApprove(payment)
+    setApproveMotivo("")
+    setIsApproveDialogOpen(true)
+  }
+
+  const handleConfirmApprove = async () => {
+    if (!paymentToApprove || !approveMotivo.trim()) {
+      return
+    }
+
+    try {
+      setIsApproving(true)
+      // Obtener el ID del usuario desde localStorage (mismo formato que auth-modal.tsx)
+      const storedUser = localStorage.getItem("user")
+      if (!storedUser) {
+        throw new Error("Usuario no encontrado en localStorage")
+      }
+
+      const userData = JSON.parse(storedUser)
+      // El formato es: { id: userId, email: email }
+      const token = userData.id
+      
+      if (!token) {
+        throw new Error("ID de usuario no disponible en localStorage")
+      }
+
+      console.log("Enviando aprobación con:", {
+        idTicket: paymentToApprove.idTicket,
+        motivo: approveMotivo,
+        tokken: token
+      })
+
+      const result = await AprobarTicket(paymentToApprove.idTicket, approveMotivo, token)
+      console.log("Ticket aprobado:", result)
+      
+      // Recargar la lista de pagos para reflejar los cambios
+      await loadPayments(false)
+      
+      // Cerrar el diálogo
+      setIsApproveDialogOpen(false)
+      setPaymentToApprove(null)
+      setApproveMotivo("")
+    } catch (err) {
+      console.error("Error aprobando ticket:", err)
+      alert(err instanceof Error ? err.message : "Error al aprobar el ticket")
+    } finally {
+      setIsApproving(false)
+    }
+  }
+
+  const handleCancelClick = (payment: Payment) => {
+    setPaymentToCancel(payment)
+    setCancelMotivo("")
+    setIsCancelDialogOpen(true)
+  }
+
+  const handleConfirmCancel = async () => {
+    if (!paymentToCancel || !cancelMotivo.trim()) {
+      return
+    }
+
+    try {
+      setIsCanceling(true)
+      // Obtener el ID del usuario desde localStorage (mismo formato que auth-modal.tsx)
+      const storedUser = localStorage.getItem("user")
+      if (!storedUser) {
+        throw new Error("Usuario no encontrado en localStorage")
+      }
+
+      const userData = JSON.parse(storedUser)
+      // El formato es: { id: userId, email: email }
+      const token = userData.id
+      
+      if (!token) {
+        throw new Error("ID de usuario no disponible en localStorage")
+      }
+
+      console.log("Enviando cancelación con:", {
+        idTicket: paymentToCancel.idTicket,
+        motivo: cancelMotivo,
+        tokken: token
+      })
+
+      const result = await CamceladoTicket(paymentToCancel.idTicket, cancelMotivo, token)
+      console.log("Ticket cancelado:", result)
+      
+      // Recargar la lista de pagos para reflejar los cambios
+      await loadPayments(false)
+      
+      // Cerrar el diálogo
+      setIsCancelDialogOpen(false)
+      setPaymentToCancel(null)
+      setCancelMotivo("")
+    } catch (err) {
+      console.error("Error cancelando ticket:", err)
+      alert(err instanceof Error ? err.message : "Error al cancelar el ticket")
+    } finally {
+      setIsCanceling(false)
     }
   }
 
@@ -290,13 +412,33 @@ export default function PaymentsPage() {
                       <p className="text-3xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
                         ${payment.montoTotal.toLocaleString("es-CO")}
                       </p>
-                      <Button
-                        onClick={() => handleViewTickets(payment)}
-                        className="bg-gradient-to-r from-[#6A8E23] to-[#F4A622] hover:from-[#4F6D1F] hover:to-[#F4A622] text-background gap-2 font-semibold"
-                      >
-                        <Ticket className="w-4 h-4" />
-                        Ver Tickets
-                      </Button>
+                      <div className="flex gap-2">
+                        <Button
+                          onClick={() => handleViewTickets(payment)}
+                          className="bg-gradient-to-r from-[#6A8E23] to-[#F4A622] hover:from-[#4F6D1F] hover:to-[#F4A622] text-background gap-2 font-semibold"
+                        >
+                          <Ticket className="w-4 h-4" />
+                          Ver Tickets
+                        </Button>
+                        {(payment.estadoPago === "pendiente" || (payment.estadoPago !== "pagado" && payment.estadoPago !== "completed")) && (
+                          <>
+                            <Button
+                              onClick={() => handleApproveClick(payment)}
+                              className="bg-gradient-to-r from-[#6A8E23] to-[#4F6D1F] hover:from-[#4F6D1F] hover:to-[#6A8E23] text-background gap-2 font-semibold"
+                            >
+                              <CheckCircle2 className="w-4 h-4" />
+                              Aprobar
+                            </Button>
+                            <Button
+                              onClick={() => handleCancelClick(payment)}
+                              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-background gap-2 font-semibold"
+                            >
+                              <XCircle className="w-4 h-4" />
+                              Cancelar
+                            </Button>
+                          </>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -440,6 +582,146 @@ export default function PaymentsPage() {
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* Diálogo de Confirmación para Aprobar Ticket */}
+      <AlertDialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
+        <AlertDialogContent className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
+              Confirmar Aprobación de Pago
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-muted-foreground">
+              {paymentToApprove && (
+                <div className="space-y-2 mt-4">
+                  <p>
+                    <span className="font-semibold text-white">Compra:</span> #{paymentToApprove.idTicket}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-white">Título:</span> {paymentToApprove.title}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-white">Monto:</span> ${paymentToApprove.montoTotal.toLocaleString("es-CO")}
+                  </p>
+                </div>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="motivo" className="text-white font-semibold">
+                Motivo de Aprobación <span className="text-red-500">*</span>
+              </Label>
+              <Textarea
+                id="motivo"
+                placeholder="Ingresa el motivo de la aprobación del pago..."
+                value={approveMotivo}
+                onChange={(e) => setApproveMotivo(e.target.value)}
+                rows={4}
+                className="resize-none bg-muted/50 border-[#6A8E23]/30 focus:border-[#6A8E23]"
+              />
+            </div>
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              onClick={() => {
+                setIsApproveDialogOpen(false)
+                setPaymentToApprove(null)
+                setApproveMotivo("")
+              }}
+              className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
+            >
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleConfirmApprove}
+              disabled={!approveMotivo.trim() || isApproving}
+              className="bg-gradient-to-r from-[#6A8E23] to-[#4F6D1F] hover:from-[#4F6D1F] hover:to-[#6A8E23] text-background font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isApproving ? (
+                <>
+                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                  Aprobando...
+                </>
+              ) : (
+                <>
+                  <CheckCircle2 className="w-4 h-4 mr-2" />
+                  Confirmar Aprobación
+                </>
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* Diálogo de Confirmación para Cancelar Ticket */}
+      <AlertDialog open={isCancelDialogOpen} onOpenChange={setIsCancelDialogOpen}>
+        <AlertDialogContent className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-red-600">
+          <AlertDialogHeader>
+            <AlertDialogTitle className="text-2xl font-display font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
+              Confirmar Cancelación de Pago
+            </AlertDialogTitle>
+            <AlertDialogDescription className="text-muted-foreground">
+              {paymentToCancel && (
+                <div className="space-y-2 mt-4">
+                  <p>
+                    <span className="font-semibold text-white">Compra:</span> #{paymentToCancel.idTicket}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-white">Título:</span> {paymentToCancel.title}
+                  </p>
+                  <p>
+                    <span className="font-semibold text-white">Monto:</span> ${paymentToCancel.montoTotal.toLocaleString("es-CO")}
+                  </p>
+                </div>
+              )}
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <div className="space-y-4 py-4">
+            <div className="space-y-2">
+              <Label htmlFor="cancel-motivo" className="text-white font-semibold">
+                Motivo de Cancelación <span className="text-red-500">*</span>
+              </Label>
+              <Textarea
+                id="cancel-motivo"
+                placeholder="Ingresa el motivo de la cancelación del pago..."
+                value={cancelMotivo}
+                onChange={(e) => setCancelMotivo(e.target.value)}
+                rows={4}
+                className="resize-none bg-muted/50 border-red-600/30 focus:border-red-600"
+              />
+            </div>
+          </div>
+          <AlertDialogFooter>
+            <AlertDialogCancel
+              onClick={() => {
+                setIsCancelDialogOpen(false)
+                setPaymentToCancel(null)
+                setCancelMotivo("")
+              }}
+              className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
+            >
+              Cancelar
+            </AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleConfirmCancel}
+              disabled={!cancelMotivo.trim() || isCanceling}
+              className="bg-gradient-to-r from-red-600 to-red-700 hover:from-red-700 hover:to-red-800 text-background font-semibold disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {isCanceling ? (
+                <>
+                  <RefreshCw className="w-4 h-4 mr-2 animate-spin" />
+                  Cancelando...
+                </>
+              ) : (
+                <>
+                  <XCircle className="w-4 h-4 mr-2" />
+                  Confirmar Cancelación
+                </>
+              )}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </ProtectedRoute>
   )
 }
