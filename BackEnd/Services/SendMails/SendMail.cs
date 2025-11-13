@@ -5,6 +5,7 @@ using System.Net.Mail;
 using System.Net;
 using System.Data;
 using Api_inmobiliaria.Models.DTOs;
+using Api_inmobiliaria.Models.DTOs.Tablas;
 
 namespace Api_inmobiliaria.Services.SendMails;
 
@@ -139,6 +140,43 @@ public class SendMail(IConfiguration configuration)
                                                                                Replace("[NUMERO_ASIGNADO]", TicketsN.NumerosTicket);
 
         var mail = new MailMessage(smtpUser, InfoT.Email, "Pago Aprobado", body)
+        {
+            IsBodyHtml = true
+        };
+
+        try
+        {
+            await client.SendMailAsync(mail);
+            return new ResponseMessage { Message = "¡Correo envido!" };
+        }
+        catch
+        {
+            return new ResponseMessage
+            {
+                Message = "Error en el Try"
+            };
+        }
+    }
+
+    public async Task<ResponseMessage> SendAsyncCompra(Usuarios usuarios)
+    {
+        var mailSettings = _configuration.GetSection("MailSettings");
+        string smtpServer = mailSettings.GetValue<string>("SmtpServer")!;
+        int smtpPort = mailSettings.GetValue<int>("SmtpPort");
+        string smtpUser = mailSettings.GetValue<string>("SmtpUser")!;
+        string smtpPass = mailSettings.GetValue<string>("SmtpPass")!;
+        bool enableSsl = mailSettings.GetValue<bool>("EnableSsl");
+
+        using var client = new SmtpClient(smtpServer, smtpPort)
+        {
+            Credentials = new NetworkCredential(smtpUser, smtpPass),
+            EnableSsl = enableSsl
+        };
+
+        HtmlMails CorreoHTML = new();
+        string body = CorreoHTML.CompraTicket.Replace("[NOMBRE_USUARIO]", usuarios.Nombre);
+
+        var mail = new MailMessage(smtpUser, usuarios.Email, "Compra efectuada", body)
         {
             IsBodyHtml = true
         };

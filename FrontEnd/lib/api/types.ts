@@ -72,6 +72,12 @@ export interface TicketResponse {
   idSorteo: string
   idUsuario: string
   imagenSorteo: string
+  nombre?: string
+  apellidos?: string
+  telefono?: string
+  correo?: string
+  identidad?: string
+  nota?: string
 }
 
 export interface BuyTicketsRequest {

@@ -275,6 +275,26 @@
   },
   {
     "ContainingType": "Api_inmobiliaria.Controllers.Tickets",
+    "Method": "MetricasTickets",
+    "RelativePath": "Sorteo/api/Tickets/Metricas",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.DTOs.MetricasTickets",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Tickets",
     "Method": "SendMailR",
     "RelativePath": "Sorteo/api/Tickets/Rechazado",
     "HttpMethod": "POST",

@@ -190,7 +190,16 @@ class RafflesApi {
       const tickets: TicketResponse[] = rawTickets.map((t) => {
         // Intentar diferentes posibles nombres del campo de imagen
         const imagenSorteo = t.imagenSorteo || t.ImagenSorteo || t.imagen || t.image || t.Imagen || '';
-        console.log("Ticket mapped:", { ...t, imagenSorteo });
+        
+        // Intentar diferentes posibles nombres para los campos de usuario
+        const nombre = t.nombre || t.Nombre || t.name || t.Name || '';
+        const apellidos = t.apellidos || t.Apellidos || t.apellido || t.Apellido || t.lastName || t.LastName || '';
+        const telefono = t.telefono || t.Telefono || t.telephone || t.phone || t.Phone || '';
+        const correo = t.correo || t.Correo || t.email || t.Email || t.correoElectronico || t.CorreoElectronico || '';
+        const identidad = t.identidad || t.Identidad || t.cedula || t.Cedula || t.dni || t.DNI || t.documento || t.Documento || '';
+        const nota = t.nota || t.Nota || t.note || t.Note || '';
+        console.log("Ticket raw data:", t);
+        console.log("Ticket mapped - usuario info:", { nombre, apellidos, telefono, correo, identidad });
         
         return {
           tituloSorteo: t.tituloSorteo,
@@ -202,6 +211,12 @@ class RafflesApi {
           idSorteo: t.idSorteo,
           idUsuario: t.idUsuario,
           imagenSorteo: imagenSorteo,
+          nombre: nombre || undefined,
+          apellidos: apellidos || undefined,
+          telefono: telefono || undefined,
+          correo: correo || undefined,
+          identidad: identidad || undefined,
+          nota: nota || undefined,
         };
       });
 
@@ -225,7 +240,6 @@ class RafflesApi {
     }
     
     const result = await response.text();
-    console.log(result);
     return result;
   }
 }

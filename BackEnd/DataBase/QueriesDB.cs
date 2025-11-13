@@ -130,7 +130,13 @@ public class QueriesDB
                 MontoTotal = Convert.ToDecimal(consul.Rows[i][5]),
                 MetodoPago = consul.Rows[i][6].ToString() ?? "",
                 FechaCompra = Convert.ToDateTime(consul.Rows[i][7]),
-                Comprobante = consul.Rows[i][8].ToString() ?? ""
+                Comprobante = consul.Rows[i][8].ToString() ?? "",
+                Nombre = consul.Rows[i][9].ToString() ?? "",
+                Apellidos = consul.Rows[i][10].ToString() ?? "",
+                Telefono = consul.Rows[i][11].ToString() ?? "",
+                Correo = consul.Rows[i][12].ToString() ?? "",
+                Identidad = consul.Rows[i][13].ToString() ?? "" ,
+                nota = consul.Rows[i][14].ToString() ?? ""
             };
         }
 
@@ -165,5 +171,39 @@ public class QueriesDB
         };
 
         return Tickets;
+    }
+
+    async public Task<Usuarios> InfoUsuarios(string IdUser)
+    {
+        DataTable consul = await ConnectionDB.ExecuteQueries<bool>("usuarios", $"id = {IdUser}");
+        Usuarios Usuario = new()
+        {
+            Id = Convert.ToInt32(consul.Rows[0][0]),
+            Identifi = consul.Rows[0][1].ToString() ?? "",
+            Nombre = consul.Rows[0][2].ToString() ?? "",
+            Apellido = consul.Rows[0][3].ToString() ?? "",
+            Email = consul.Rows[0][4].ToString() ?? "",
+            Genero = consul.Rows[0][5].ToString() ?? "",
+            Pais = consul.Rows[0][6].ToString() ?? "",
+            Telefono = consul.Rows[0][8].ToString() ?? "",
+            Fec_naci =  "",
+            Clave = "",
+            ConfirmClave = ""
+        };
+
+        return Usuario;
+    }
+
+    async public Task<MetricasTickets> MetricasTickets()
+    {
+        DataTable consul = await ConnectionDB.ExecuteQueries<bool>("metricas_tickets");
+        MetricasTickets metricas = new()
+        {
+            Pagado = Convert.ToInt32(consul.Rows[0][0]),
+            Cancelado = Convert.ToInt32(consul.Rows[0][1]),
+            Penditen = Convert.ToInt32(consul.Rows[0][2])
+        };
+
+        return metricas;
     }
 }

@@ -77,3 +77,39 @@ export async function CamceladoTicket(IdCompra: string, Motivo: string, tokken: 
     throw error;
   }
 }
+
+export async function MetricasTicket(): Promise<{
+  pagado: number
+  cancelado: number
+  penditen: number
+}> {
+  const requestOptions: RequestInit = {
+    method: "GET",
+    redirect: "follow" as RequestRedirect
+  };
+  
+  try {
+    const response = await fetch(`${API_URL}/Tickets/Metricas`, requestOptions);
+    
+    if (!response.ok) {
+      const errorText = await response.text();
+      throw new Error(`Error al obtener métricas: ${errorText}`);
+    }
+    
+    const result = await response.text();
+    console.log(result);
+    
+    try {
+      return JSON.parse(result) as {
+        pagado: number
+        cancelado: number
+        penditen: number
+      };
+    } catch (parseError) {
+      throw new Error(`Respuesta inválida del servidor: ${result}`);
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}

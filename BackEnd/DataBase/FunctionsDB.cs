@@ -1,5 +1,7 @@
-﻿using Api_inmobiliaria.Models.Request;
+﻿using Api_inmobiliaria.Models.DTOs.Tablas;
+using Api_inmobiliaria.Models.Request;
 using Api_inmobiliaria.Models.Response;
+using Api_inmobiliaria.Services.SendMails;
 using System.Data;
 
 namespace Api_inmobiliaria.DataBase;
@@ -111,7 +113,7 @@ public class FuncionesDB
         }
     }
 
-    async public Task<ResponseMessage> BuyTicket(RequestBuyTicket request)
+    async public Task<ResponseMessage> BuyTicket(RequestBuyTicket request, Usuarios usuarios)
     {
         ResponseMessage resul;
         List<string> parametros = [$"'{request.RaffleId}'", $"'{request.UserId}'", $"'{request.PricevoTicket}'", $"'{request.ModePay}'", $"'{request.TicketQuantity}'", "'pendiente'", $"'{request.Image}'", $"'{request.Note}'", $"'{request.ImagenSorteo}'"];

@@ -1,0 +1,6 @@
+﻿CREATE OR REPLACE VIEW public.metricas_tickets AS
+SELECT
+    COALESCE(SUM(CASE WHEN estado_pago = 'pagado' THEN cantidad_tickets END), 0)     AS pagados,
+    COALESCE(SUM(CASE WHEN estado_pago = 'cancelado' THEN cantidad_tickets END), 0)  AS cancelados,
+    COALESCE(SUM(CASE WHEN estado_pago = 'pendiente' THEN cantidad_tickets END), 0)  AS pendientes
+FROM tickets_sorteos;

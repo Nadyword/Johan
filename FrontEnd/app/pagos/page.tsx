@@ -1,6 +1,6 @@
 "use client"
 
-import { CreditCard, Calendar, CheckCircle2, Clock, ShieldX, Ticket, X, Image as ImageIcon, RefreshCw, XCircle } from "lucide-react"
+import { CreditCard, Calendar, CheckCircle2, Clock, ShieldX, Ticket, X, Image as ImageIcon, RefreshCw, XCircle, User, Phone, Mail, IdCard, FileText } from "lucide-react"
 import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
 import { ProtectedRoute } from "@/components/protected-route"
 import { useAuth } from "@/lib/auth-context"
@@ -10,7 +10,7 @@ import { rafflesApi } from "@/lib/api/raffles"
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Button } from "@/components/ui/button"
 import type { TicketResponse } from "@/lib/api/types"
-import { AprobarTicket, CamceladoTicket } from "@/lib/api/tickets"
+import { AprobarTicket, CamceladoTicket, MetricasTicket } from "@/lib/api/tickets"
 import {
   AlertDialog,
   AlertDialogAction,
@@ -23,10 +23,12 @@ import {
 } from "@/components/ui/alert-dialog"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
+import { useToast } from "@/hooks/use-toast"
 
 export default function PaymentsPage() {
   const { user } = useAuth()
   const router = useRouter()
+  const { toast } = useToast()
   const [payments, setPayments] = useState<Payment[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
@@ -44,6 +46,8 @@ export default function PaymentsPage() {
   const [paymentToCancel, setPaymentToCancel] = useState<Payment | null>(null)
   const [cancelMotivo, setCancelMotivo] = useState("")
   const [isCanceling, setIsCanceling] = useState(false)
+  const [metricas, setMetricas] = useState<{ pagado: number; cancelado: number; penditen: number } | null>(null)
+  const [isLoadingMetricas, setIsLoadingMetricas] = useState(false)
 
   // Función para cargar historial de pagos
   const loadPayments = async (showLoading = true) => {
@@ -91,6 +95,12 @@ export default function PaymentsPage() {
         metodoPago: p.metodoPago || p.MetodoPago || p.metodo || p.Metodo || "N/A",
         fechaCompra: p.fechaCompra || p.FechaCompra || p.fecha || p.Fecha || new Date().toISOString(),
         comprobante: p.comprobante  || p.Comprobante || "",
+        nombre: p.nombre || p.Nombre || "",
+        apellidos: p.apellidos || p.Apellidos || "",
+        telefono: p.telefono || p.Telefono || "",
+        correo: p.correo || p.Correo || "",
+        identidad: p.identidad || p.Identidad || "",
+        nota: p.nota || p.Nota || p.note || p.Note || "",
       }))
 
       setPayments(mappedPayments)
@@ -103,6 +113,20 @@ export default function PaymentsPage() {
     }
   }
 
+  // Función para cargar métricas
+  const loadMetricas = async () => {
+    try {
+      setIsLoadingMetricas(true)
+      const data = await MetricasTicket()
+      setMetricas(data)
+    } catch (err) {
+      console.error("Error cargando métricas:", err)
+      // No mostramos error al usuario, solo lo logueamos
+    } finally {
+      setIsLoadingMetricas(false)
+    }
+  }
+
   // Verificar si el usuario es admin y cargar pagos
   useEffect(() => {
     if (user && user.name?.toLowerCase() !== "admin") {
@@ -111,8 +135,9 @@ export default function PaymentsPage() {
       return
     }
 
-    // Cargar historial de pagos si el usuario es admin
+    // Cargar historial de pagos y métricas si el usuario es admin
     loadPayments()
+    loadMetricas()
   }, [user, router])
 
   // Si el usuario no es admin, mostrar mensaje de acceso denegado
@@ -152,6 +177,12 @@ export default function PaymentsPage() {
     metodoPago: string
     fechaCompra: string
     comprobante: string
+    nombre?: string
+    apellidos?: string
+    telefono?: string
+    correo?: string
+    identidad?: string
+    nota?: string
   }
 
   const handleViewTickets = async (payment: Payment) => {
@@ -169,7 +200,24 @@ export default function PaymentsPage() {
       }
 
       const ticketData = await rafflesApi.getTicketsByCodigo(codigo)
-      console.log("Tickets obtenidos:", ticketData)
+      
+      // Buscar información del usuario en diferentes lugares posibles
+      if (ticketData[0]) {
+        const firstTicket = ticketData[0] as any
+        console.log("Buscando información del usuario en:", {
+          'ticket.nombre': firstTicket.nombre,
+          'ticket.Nombre': firstTicket.Nombre,
+          'ticket.usuario': firstTicket.usuario,
+          'ticket.Usuario': firstTicket.Usuario,
+          'ticket.user': firstTicket.user,
+          'ticket.User': firstTicket.User,
+          'ticket.userInfo': firstTicket.userInfo,
+          'ticket.user_info': firstTicket.user_info,
+          'ticket.datosUsuario': firstTicket.datosUsuario,
+          'ticket.datos_usuario': firstTicket.datos_usuario,
+        })
+      }
+      
       setTickets(ticketData)
     } catch (err) {
       console.error("Error cargando tickets:", err)
@@ -215,16 +263,27 @@ export default function PaymentsPage() {
       const result = await AprobarTicket(paymentToApprove.idTicket, approveMotivo, token)
       console.log("Ticket aprobado:", result)
       
-      // Recargar la lista de pagos para reflejar los cambios
-      await loadPayments(false)
+      // Recargar la lista de pagos y métricas para reflejar los cambios
+      await Promise.all([loadPayments(false), loadMetricas()])
       
       // Cerrar el diálogo
       setIsApproveDialogOpen(false)
       setPaymentToApprove(null)
       setApproveMotivo("")
+      
+      // Mostrar notificación de éxito
+      toast({
+        title: "✅ Pago Aprobado",
+        description: `El pago #${paymentToApprove.idTicket} ha sido aprobado exitosamente. Puedes continuar.`,
+        variant: "default",
+      })
     } catch (err) {
       console.error("Error aprobando ticket:", err)
-      alert(err instanceof Error ? err.message : "Error al aprobar el ticket")
+      toast({
+        title: "❌ Error al Aprobar",
+        description: err instanceof Error ? err.message : "Error al aprobar el ticket",
+        variant: "destructive",
+      })
     } finally {
       setIsApproving(false)
     }
@@ -266,16 +325,27 @@ export default function PaymentsPage() {
       const result = await CamceladoTicket(paymentToCancel.idTicket, cancelMotivo, token)
       console.log("Ticket cancelado:", result)
       
-      // Recargar la lista de pagos para reflejar los cambios
-      await loadPayments(false)
+      // Recargar la lista de pagos y métricas para reflejar los cambios
+      await Promise.all([loadPayments(false), loadMetricas()])
       
       // Cerrar el diálogo
       setIsCancelDialogOpen(false)
       setPaymentToCancel(null)
       setCancelMotivo("")
+      
+      // Mostrar notificación de éxito
+      toast({
+        title: "✅ Pago Cancelado",
+        description: `El pago #${paymentToCancel.idTicket} ha sido cancelado exitosamente. Puedes continuar.`,
+        variant: "default",
+      })
     } catch (err) {
       console.error("Error cancelando ticket:", err)
-      alert(err instanceof Error ? err.message : "Error al cancelar el ticket")
+      toast({
+        title: "❌ Error al Cancelar",
+        description: err instanceof Error ? err.message : "Error al cancelar el ticket",
+        variant: "destructive",
+      })
     } finally {
       setIsCanceling(false)
     }
@@ -309,29 +379,75 @@ export default function PaymentsPage() {
         </div>
 
         <div className="container mx-auto px-4 py-12">
-          <div className="text-center mb-12 animate-fade-up">
-            <div className="inline-flex items-center gap-3 mb-4 bg-gradient-to-r from-[#F4A622] to-[#6A8E23] p-1 rounded-2xl">
-              <div className="bg-background rounded-xl px-6 py-3 flex items-center gap-3">
-                <CreditCard className="w-10 h-10 text-[#F4A622]" />
-                <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-[#F4A622] to-[#6A8E23] bg-clip-text text-transparent">
-                  Historial de Pagos
-                </h1>
+          <div className="relative mb-12 animate-fade-up">
+            {/* Cuadro de Métricas - Parte Superior Derecha */}
+            <div className="absolute top-0 right-0 z-50 hidden md:block">
+              <div className="bg-card/95 backdrop-blur-md border-2 border-[#6A8E23]/40 rounded-xl p-4 shadow-2xl">
+                <div className="flex items-center gap-2 mb-3">
+                  <Ticket className="w-5 h-5 text-[#F4A622]" />
+                  <h3 className="font-semibold text-white text-sm">Métricas de Tickets</h3>
+                </div>
+                {isLoadingMetricas ? (
+                  <div className="flex items-center justify-center py-4">
+                    <RefreshCw className="w-4 h-4 animate-spin text-[#6A8E23]" />
+                  </div>
+                ) : metricas ? (
+                  <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-2 p-2 bg-green-500/20 rounded-lg border border-green-500/30">
+                      <CheckCircle2 className="w-4 h-4 text-green-400" />
+                      <div className="flex flex-col">
+                        <span className="text-xs text-muted-foreground">Pagados</span>
+                        <span className="font-bold text-green-400 text-sm">{metricas.pagado}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 p-2 bg-red-500/20 rounded-lg border border-red-500/30">
+                      <XCircle className="w-4 h-4 text-red-400" />
+                      <div className="flex flex-col">
+                        <span className="text-xs text-muted-foreground">Cancelados</span>
+                        <span className="font-bold text-red-400 text-sm">{metricas.cancelado}</span>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-2 p-2 bg-yellow-500/20 rounded-lg border border-yellow-500/30">
+                      <Clock className="w-4 h-4 text-yellow-400" />
+                      <div className="flex flex-col">
+                        <span className="text-xs text-muted-foreground">Pendientes</span>
+                        <span className="font-bold text-yellow-400 text-sm">{metricas.penditen}</span>
+                      </div>
+                    </div>
+                  </div>
+                ) : (
+                  <p className="text-xs text-muted-foreground text-center py-2">No hay datos disponibles</p>
+                )}
               </div>
             </div>
-            <div className="flex items-center justify-center gap-4 mb-4">
-              <p className="text-muted-foreground text-lg">
-                Gestiona tus transacciones, <span className="text-[#F4A622] font-bold">{user?.name}</span>
-              </p>
-              <Button
-                onClick={() => loadPayments(false)}
-                disabled={isRefreshing || isLoading}
-                variant="outline"
-                size="sm"
-                className="border-2 border-[#6A8E23]/30 hover:border-[#6A8E23] bg-card/50 hover:bg-card/80 gap-2"
-              >
-                <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
-                {isRefreshing ? "Actualizando..." : "Actualizar"}
-              </Button>
+
+            <div className="text-center mb-12 pr-0 md:pr-[300px]">
+              <div className="inline-flex items-center gap-3 mb-4 bg-gradient-to-r from-[#F4A622] to-[#6A8E23] p-1 rounded-2xl">
+                <div className="bg-background rounded-xl px-6 py-3 flex items-center gap-3">
+                  <CreditCard className="w-10 h-10 text-[#F4A622]" />
+                  <h1 className="text-4xl md:text-5xl font-display font-bold bg-gradient-to-r from-[#F4A622] to-[#6A8E23] bg-clip-text text-transparent">
+                    Historial de Pagos
+                  </h1>
+                </div>
+              </div>
+              <div className="flex items-center justify-center gap-4 mb-4">
+                <p className="text-muted-foreground text-lg">
+                  Gestiona tus transacciones, <span className="text-[#F4A622] font-bold">{user?.name}</span>
+                </p>
+                <Button
+                  onClick={() => {
+                    loadPayments(false)
+                    loadMetricas()
+                  }}
+                  disabled={isRefreshing || isLoading}
+                  variant="outline"
+                  size="sm"
+                  className="border-2 border-[#6A8E23]/30 hover:border-[#6A8E23] bg-card/50 hover:bg-card/80 gap-2"
+                >
+                  <RefreshCw className={`w-4 h-4 ${isRefreshing ? "animate-spin" : ""}`} />
+                  {isRefreshing ? "Actualizando..." : "Actualizar"}
+                </Button>
+              </div>
             </div>
           </div>
 
@@ -468,6 +584,74 @@ export default function PaymentsPage() {
             )}
           </DialogHeader>
 
+          {/* Información del Usuario - Usar datos de selectedPayment */}
+          {selectedPayment && (selectedPayment.nombre || selectedPayment.apellidos || selectedPayment.telefono || selectedPayment.correo || selectedPayment.identidad || selectedPayment.nota) && (
+            <div className="mt-4 mb-6">
+              <div className="flex items-center gap-2 mb-3">
+                <User className="w-5 h-5 text-[#F4A622]" />
+                <h3 className="font-semibold text-white text-lg">Información del Usuario</h3>
+              </div>
+              <div className="bg-muted/50 rounded-xl p-5 border-2 border-[#6A8E23]/40">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {selectedPayment.nombre && (
+                    <div className="flex items-start gap-3 p-3 bg-background/30 rounded-lg">
+                      <User className="w-5 h-5 text-[#6A8E23] mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground mb-1">Nombre</p>
+                        <p className="text-sm font-semibold text-white">{selectedPayment.nombre}</p>
+                      </div>
+                    </div>
+                  )}
+                  {selectedPayment.apellidos && (
+                    <div className="flex items-start gap-3 p-3 bg-background/30 rounded-lg">
+                      <User className="w-5 h-5 text-[#6A8E23] mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground mb-1">Apellidos</p>
+                        <p className="text-sm font-semibold text-white">{selectedPayment.apellidos}</p>
+                      </div>
+                    </div>
+                  )}
+                  {selectedPayment.telefono && (
+                    <div className="flex items-start gap-3 p-3 bg-background/30 rounded-lg">
+                      <Phone className="w-5 h-5 text-[#6A8E23] mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground mb-1">Teléfono</p>
+                        <p className="text-sm font-semibold text-white">{selectedPayment.telefono}</p>
+                      </div>
+                    </div>
+                  )}
+                  {selectedPayment.correo && (
+                    <div className="flex items-start gap-3 p-3 bg-background/30 rounded-lg">
+                      <Mail className="w-5 h-5 text-[#6A8E23] mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground mb-1">Correo</p>
+                        <p className="text-sm font-semibold text-white break-all">{selectedPayment.correo}</p>
+                      </div>
+                    </div>
+                  )}
+                  {selectedPayment.identidad && (
+                    <div className="flex items-start gap-3 p-3 bg-background/30 rounded-lg md:col-span-2">
+                      <IdCard className="w-5 h-5 text-[#6A8E23] mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground mb-1">Identidad</p>
+                        <p className="text-sm font-semibold text-white">{selectedPayment.identidad}</p>
+                      </div>
+                    </div>
+                  )}
+                  {selectedPayment.nota && (
+                    <div className="flex items-start gap-3 p-3 bg-background/30 rounded-lg md:col-span-2">
+                      <FileText className="w-5 h-5 text-[#6A8E23] mt-0.5" />
+                      <div className="flex-1">
+                        <p className="text-xs text-muted-foreground mb-1">Nota</p>
+                        <p className="text-sm font-semibold text-white whitespace-pre-wrap break-words">{selectedPayment.nota}</p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          )}
+
           {/* Comprobante de Pago */}
           {selectedPayment && selectedPayment.comprobante && (
             <div className="mt-4 mb-6">
@@ -584,28 +768,41 @@ export default function PaymentsPage() {
       </Dialog>
 
       {/* Diálogo de Confirmación para Aprobar Ticket */}
-      <AlertDialog open={isApproveDialogOpen} onOpenChange={setIsApproveDialogOpen}>
+      <AlertDialog 
+        open={isApproveDialogOpen} 
+        onOpenChange={(open) => {
+          // No permitir cerrar el diálogo si está procesando
+          if (!isApproving) {
+            setIsApproveDialogOpen(open)
+            if (!open) {
+              setPaymentToApprove(null)
+              setApproveMotivo("")
+            }
+          }
+        }}
+      >
         <AlertDialogContent className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-[#6A8E23]">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-2xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
               Confirmar Aprobación de Pago
             </AlertDialogTitle>
             <AlertDialogDescription className="text-muted-foreground">
-              {paymentToApprove && (
-                <div className="space-y-2 mt-4">
-                  <p>
-                    <span className="font-semibold text-white">Compra:</span> #{paymentToApprove.idTicket}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-white">Título:</span> {paymentToApprove.title}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-white">Monto:</span> ${paymentToApprove.montoTotal.toLocaleString("es-CO")}
-                  </p>
-                </div>
-              )}
+              Ingresa el motivo de aprobación para continuar.
             </AlertDialogDescription>
           </AlertDialogHeader>
+          {paymentToApprove && (
+            <div className="space-y-2 mt-4 px-6">
+              <p className="text-sm text-white">
+                <span className="font-semibold text-white">Compra:</span> #{paymentToApprove.idTicket}
+              </p>
+              <p className="text-sm text-white">
+                <span className="font-semibold text-white">Título:</span> {paymentToApprove.title}
+              </p>
+              <p className="text-sm text-white">
+                <span className="font-semibold text-white">Monto:</span> ${paymentToApprove.montoTotal.toLocaleString("es-CO")}
+              </p>
+            </div>
+          )}
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="motivo" className="text-white font-semibold">
@@ -617,18 +814,22 @@ export default function PaymentsPage() {
                 value={approveMotivo}
                 onChange={(e) => setApproveMotivo(e.target.value)}
                 rows={4}
-                className="resize-none bg-muted/50 border-[#6A8E23]/30 focus:border-[#6A8E23]"
+                disabled={isApproving}
+                className="resize-none bg-muted/50 border-[#6A8E23]/30 focus:border-[#6A8E23] disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel
               onClick={() => {
-                setIsApproveDialogOpen(false)
-                setPaymentToApprove(null)
-                setApproveMotivo("")
+                if (!isApproving) {
+                  setIsApproveDialogOpen(false)
+                  setPaymentToApprove(null)
+                  setApproveMotivo("")
+                }
               }}
-              className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
+              disabled={isApproving}
+              className="border-[#6A8E23]/30 hover:border-[#6A8E23] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancelar
             </AlertDialogCancel>
@@ -654,28 +855,41 @@ export default function PaymentsPage() {
       </AlertDialog>
 
       {/* Diálogo de Confirmación para Cancelar Ticket */}
-      <AlertDialog open={isCancelDialogOpen} onOpenChange={setIsCancelDialogOpen}>
+      <AlertDialog 
+        open={isCancelDialogOpen} 
+        onOpenChange={(open) => {
+          // No permitir cerrar el diálogo si está procesando
+          if (!isCanceling) {
+            setIsCancelDialogOpen(open)
+            if (!open) {
+              setPaymentToCancel(null)
+              setCancelMotivo("")
+            }
+          }
+        }}
+      >
         <AlertDialogContent className="bg-gradient-to-br from-[#1a1a1a] to-[#2a2a2a] border-2 border-red-600">
           <AlertDialogHeader>
             <AlertDialogTitle className="text-2xl font-display font-bold bg-gradient-to-r from-red-600 to-red-700 bg-clip-text text-transparent">
               Confirmar Cancelación de Pago
             </AlertDialogTitle>
             <AlertDialogDescription className="text-muted-foreground">
-              {paymentToCancel && (
-                <div className="space-y-2 mt-4">
-                  <p>
-                    <span className="font-semibold text-white">Compra:</span> #{paymentToCancel.idTicket}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-white">Título:</span> {paymentToCancel.title}
-                  </p>
-                  <p>
-                    <span className="font-semibold text-white">Monto:</span> ${paymentToCancel.montoTotal.toLocaleString("es-CO")}
-                  </p>
-                </div>
-              )}
+              Ingresa el motivo de cancelación para continuar.
             </AlertDialogDescription>
           </AlertDialogHeader>
+          {paymentToCancel && (
+            <div className="space-y-2 mt-4 px-6 text-white">
+              <p className="text-sm text-white">
+                <span className="font-semibold text-white">Compra: #{paymentToCancel.idTicket}</span>
+              </p>
+              <p className="text-sm text-white">
+                <span className="font-semibold text-white">Título: {paymentToCancel.title}</span>
+              </p>
+              <p className="text-sm text-white">
+                <span className="font-semibold text-white">Monto: ${paymentToCancel.montoTotal.toLocaleString("es-CO")}</span>
+              </p>
+            </div>
+          )}
           <div className="space-y-4 py-4">
             <div className="space-y-2">
               <Label htmlFor="cancel-motivo" className="text-white font-semibold">
@@ -687,18 +901,22 @@ export default function PaymentsPage() {
                 value={cancelMotivo}
                 onChange={(e) => setCancelMotivo(e.target.value)}
                 rows={4}
-                className="resize-none bg-muted/50 border-red-600/30 focus:border-red-600"
+                disabled={isCanceling}
+                className="resize-none bg-muted/50 border-red-600/30 focus:border-red-600 disabled:opacity-50 disabled:cursor-not-allowed"
               />
             </div>
           </div>
           <AlertDialogFooter>
             <AlertDialogCancel
               onClick={() => {
-                setIsCancelDialogOpen(false)
-                setPaymentToCancel(null)
-                setCancelMotivo("")
+                if (!isCanceling) {
+                  setIsCancelDialogOpen(false)
+                  setPaymentToCancel(null)
+                  setCancelMotivo("")
+                }
               }}
-              className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
+              disabled={isCanceling}
+              className="border-[#6A8E23]/30 hover:border-[#6A8E23] disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Cancelar
             </AlertDialogCancel>

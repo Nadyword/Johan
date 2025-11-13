@@ -11,5 +11,11 @@
         public required string MetodoPago { get; set; }
         public required DateTime FechaCompra { get; set; }
         public required string Comprobante { get; set; }
+        public required string Nombre { get; set; }
+        public required string Apellidos { get; set; }
+        public required string Telefono { get; set; }
+        public required string Correo { get; set; }
+        public required string Identidad { get; set; }
+        public required string nota { get; set; }
     }
 }
