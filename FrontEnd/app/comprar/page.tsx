@@ -277,13 +277,13 @@ export default function BuyTicketsPage() {
                           <Label className="text-sm text-muted-foreground mb-2 block">Email de PayPal</Label>
                           <div className="flex items-center gap-2">
                             <code className="flex-1 p-2 bg-background rounded-md text-sm font-mono">
-                              contacto@chainoflucky.com
+                            Chainoflucky@gmail.com
                             </code>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => {
-                                navigator.clipboard.writeText("contacto@chainoflucky.com ")
+                                navigator.clipboard.writeText("Chainoflucky@gmail.com")
                               }}
                               className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
                             >
@@ -311,13 +311,13 @@ export default function BuyTicketsPage() {
                           <Label className="text-sm text-muted-foreground mb-2 block">Usuario Zinli</Label>
                           <div className="flex items-center gap-2">
                             <code className="flex-1 p-2 bg-background rounded-md text-sm font-mono">
-                              contacto@chainoflucky.com
+                              Chainoflucky@gmail.com
                             </code>
                             <Button
                               size="sm"
                               variant="outline"
                               onClick={() => {
-                                navigator.clipboard.writeText("contacto@chainoflucky.com ")
+                                navigator.clipboard.writeText("Chainoflucky@gmail.com")
                               }}
                               className="border-[#6A8E23]/30 hover:border-[#6A8E23]"
                             >
