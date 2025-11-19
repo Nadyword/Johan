@@ -137,16 +137,12 @@ class RafflesApi {
     }
 
     const result = await response.text();
-    console.log(result);
 
     try {
       const rawTickets = JSON.parse(result) as any[];
-      console.log("Raw tickets from API:", rawTickets);
-
       const tickets: TicketResponse[] = rawTickets.map((t) => {
         // Intentar diferentes posibles nombres del campo de imagen
         const imagenSorteo = t.imagenSorteo || t.ImagenSorteo || t.imagen || t.image || t.Imagen || '';
-        console.log("Ticket mapped:", { ...t, imagenSorteo });
         
         return {
           tituloSorteo: t.tituloSorteo,
@@ -158,6 +154,7 @@ class RafflesApi {
           idSorteo: t.idSorteo,
           idUsuario: t.idUsuario,
           imagenSorteo: imagenSorteo,
+          numerosTicket: t.numerosTicket,
         };
       });
 
@@ -181,11 +178,9 @@ class RafflesApi {
     }
 
     const result = await response.text();
-    console.log(result);
 
     try {
       const rawTickets = JSON.parse(result) as any[];
-      console.log("Raw tickets from API:", rawTickets);
 
       const tickets: TicketResponse[] = rawTickets.map((t) => {
         // Intentar diferentes posibles nombres del campo de imagen
@@ -198,9 +193,7 @@ class RafflesApi {
         const correo = t.correo || t.Correo || t.email || t.Email || t.correoElectronico || t.CorreoElectronico || '';
         const identidad = t.identidad || t.Identidad || t.cedula || t.Cedula || t.dni || t.DNI || t.documento || t.Documento || '';
         const nota = t.nota || t.Nota || t.note || t.Note || '';
-        console.log("Ticket raw data:", t);
-        console.log("Ticket mapped - usuario info:", { nombre, apellidos, telefono, correo, identidad });
-        
+        const numerosTicket = t.numerosTicket || t.NumerosTicket || t.numeros || t.Numeros || '';
         return {
           tituloSorteo: t.tituloSorteo,
           codigoTicket: t.codigoTicket,
@@ -217,6 +210,7 @@ class RafflesApi {
           correo: correo || undefined,
           identidad: identidad || undefined,
           nota: nota || undefined,
+          numerosTicket: numerosTicket,
         };
       });
 

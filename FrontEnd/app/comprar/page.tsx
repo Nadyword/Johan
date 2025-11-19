@@ -1,7 +1,8 @@
 "use client"
 
-import { Minus, Plus, ShoppingCart, Sparkles, Tag, Ticket, TrendingUp, CreditCard, Wallet, Check, Upload, X, Calendar, Copy, QrCode } from "lucide-react"
+import { Minus, Plus, ShoppingCart, Sparkles, Tag, Ticket, TrendingUp, CreditCard, Wallet, Check, Upload, X, Calendar, Copy, QrCode, Phone } from "lucide-react"
 import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
+import { MoonMessagingIcon } from "@/components/moon-messaging-icon"
 import { loadMockRafflesActive } from "@/lib/mock-data"
 import { Textarea } from "@/components/ui/textarea"
 import { Button } from "@/components/ui/button"
@@ -42,7 +43,6 @@ export default function BuyTicketsPage() {
   useEffect(() => {
     loadMockRafflesActive()
       .then((data) => {
-        console.log('Rifa activa cargada:', data)
         setRaffle(data[0]) // Tomar la primera rifa activa
       })
       .catch((error) => {
@@ -74,7 +74,9 @@ export default function BuyTicketsPage() {
     )
   }
 
-  const subtotal = raffle.price * quantity
+  // Precio por boleto según el método de pago
+  const pricePerTicket = selectedPaymentMethod === "pago-movil" ? 800 : raffle.price
+  const subtotal = pricePerTicket * quantity
   const total = subtotal
 
   const handleQuantityChange = (delta: number) => {
@@ -135,19 +137,20 @@ export default function BuyTicketsPage() {
         throw new Error("ID de usuario inválido")
       }
 
+      // Precio por boleto según el método de pago
+      const finalPricePerTicket = selectedPaymentMethod === "pago-movil" ? 800 : raffle.price
+
       // Llamar al método buyTickets
       const tickets = await rafflesApi.buyTickets(
         raffle.id,                    // raffleId
         userId,                       // userId
-        raffle.price,                 // pricePerTicket
+        finalPricePerTicket,          // pricePerTicket
         selectedPaymentMethod,        // modePay
         quantity,                     // ticketQuantity
         paymentFile,                  // imageFile (se convierte a base64 internamente)
         paymentNote || "",            // note
         raffle.image || ""            // PathImage (enviar la ruta de la imagen del sorteo)
       )
-
-      console.log("Boletos comprados exitosamente:", tickets)
 
       // Trigger confetti
       confetti({
@@ -226,8 +229,13 @@ export default function BuyTicketsPage() {
                       {selectedPaymentMethod === "zinli" && (
                         <img src="/Logo-zinli.svg" alt="Zinli" className="w-12 h-12 object-contain" />
                       )}
+                      {selectedPaymentMethod === "pago-movil" && (
+                        <div className="w-12 h-12 flex items-center justify-center bg-gradient-to-r from-[#6A8E23] to-[#F4A622] rounded-lg">
+                          <Phone className="w-6 h-6 text-background" />
+                        </div>
+                      )}
                       <div>
-                        <p className="font-semibold text-foreground capitalize">{selectedPaymentMethod}</p>
+                        <p className="font-semibold text-foreground capitalize">{selectedPaymentMethod === "pago-movil" ? "Pago Móvil" : selectedPaymentMethod}</p>
                         <p className="text-sm text-muted-foreground">Método seleccionado</p>
                       </div>
                     </div>
@@ -338,6 +346,39 @@ export default function BuyTicketsPage() {
                         </div>
                       </div>
                     )}
+
+                    {selectedPaymentMethod === "pago-movil" && (
+                      <div className="space-y-4">
+                        <div className="p-4 bg-muted/50 rounded-xl border border-[#6A8E23]/20">
+                          <Label className="text-sm text-muted-foreground mb-2 block">Monto a enviar</Label>
+                          <p className="text-2xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
+                            ${(800 * quantity).toLocaleString("es-CO")} bs
+                          </p>
+                        </div>
+                        <div className="p-4 bg-muted/50 rounded-xl border border-[#6A8E23]/20">
+                          <Label className="text-sm text-muted-foreground mb-3 block text-center">Escanea el código QR para realizar el pago</Label>
+                          <div className="flex justify-center">
+                            <img
+                              src="/QR.jpg"
+                              alt="Código QR Pago Móvil"
+                              className="w-64 h-64 object-contain rounded-lg border-2 border-[#6A8E23]/30"
+                              onError={(e) => {
+                                const target = e.target as HTMLImageElement
+                                target.style.display = 'none'
+                                const parent = target.parentElement
+                                if (parent) {
+                                  const placeholder = parent.querySelector('.qr-placeholder') as HTMLElement
+                                  if (placeholder) placeholder.style.display = 'flex'
+                                }
+                              }}
+                            />
+                            <div className="qr-placeholder hidden w-64 h-64 bg-muted rounded-lg border-2 border-[#6A8E23]/30 flex items-center justify-center">
+                              <QrCode className="w-24 h-24 text-muted-foreground/30" />
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="text-center py-12">
@@ -357,13 +398,13 @@ export default function BuyTicketsPage() {
                   </div>
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-muted-foreground">Método de pago:</span>
-                    <span className="font-bold text-foreground capitalize">{selectedPaymentMethod}</span>
+                    <span className="font-bold text-foreground capitalize">{selectedPaymentMethod === "pago-movil" ? "Pago Móvil" : selectedPaymentMethod}</span>
                   </div>
                   <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent my-3" />
                   <div className="flex items-center justify-between">
                     <span className="text-lg font-semibold text-foreground">Total a pagar:</span>
                     <span className="text-2xl font-display font-bold bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
-                      ${(raffle.price * quantity).toLocaleString("es-CO")}
+                      ${total.toLocaleString("es-CO")}{selectedPaymentMethod === "pago-movil" ? " bs" : ""}
                     </span>
                   </div>
                 </div>
@@ -663,9 +704,16 @@ export default function BuyTicketsPage() {
               <h3 className="font-display font-bold text-xl text-foreground mb-4">Resumen de Compra</h3>
 
               <div className="space-y-3">
+                {selectedPaymentMethod === "pago-movil" && (
+                  <div className="p-3 bg-blue-500/10 rounded-lg border border-blue-500/30">
+                    <p className="text-sm text-blue-600 dark:text-blue-400">
+                      <strong>Nota:</strong> Con Pago Móvil, cada boleto tiene un valor de 800 bs.
+                    </p>
+                  </div>
+                )}
                 <div className="flex items-center justify-between text-muted-foreground">
-                  <span>Subtotal ({quantity} boletos)</span>
-                  <span className="font-semibold">${subtotal.toLocaleString("es-CO")}</span>
+                  <span>Subtotal ({quantity} boletos @ {pricePerTicket.toLocaleString("es-CO")}{selectedPaymentMethod === "pago-movil" ? " bs" : ""} c/u)</span>
+                  <span className="font-semibold">${subtotal.toLocaleString("es-CO")}{selectedPaymentMethod === "pago-movil" ? " bs" : ""}</span>
                 </div>
 
                 <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent" />
@@ -673,7 +721,7 @@ export default function BuyTicketsPage() {
                 <div className="flex items-center justify-between text-3xl font-display font-bold">
                   <span className="text-foreground">Total</span>
                   <span className="bg-gradient-to-r from-[#6A8E23] to-[#F4A622] bg-clip-text text-transparent">
-                    ${total.toLocaleString("es-CO")}
+                    ${total.toLocaleString("es-CO")}{selectedPaymentMethod === "pago-movil" ? " bs" : ""}
                   </span>
                 </div>
               </div>
@@ -698,6 +746,11 @@ export default function BuyTicketsPage() {
                       name: "Zinli",
                       svg: "/Logo-zinli.svg",
                     },
+                    {
+                      id: "pago-movil",
+                      name: "Pago Móvil",
+                      svg: "/Logo-pago-movil.svg",
+                    },
                   ].map((method) => {
                     const isSelected = selectedPaymentMethod === method.id
                     return (
@@ -705,7 +758,9 @@ export default function BuyTicketsPage() {
                         key={method.id}
                         onClick={() => setSelectedPaymentMethod(method.id)}
                         className={`relative flex items-center gap-4 p-4 rounded-xl border-2 transition-all ${isSelected
-                          ? "border-[#6A8E23] bg-gradient-to-r from-[#6A8E23]/20 to-[#F4A622]/20 shadow-lg shadow-[#6A8E23]/30"
+                          ? method.id === "pago-movil"
+                            ? "border-[#6A8E23] bg-white shadow-lg shadow-[#6A8E23]/30"
+                            : "border-[#6A8E23] bg-gradient-to-r from-[#6A8E23]/20 to-[#F4A622]/20 shadow-lg shadow-[#6A8E23]/30"
                           : "border-[#6A8E23]/30 hover:border-[#6A8E23]/60 bg-card/50 hover:bg-card/80"
                           }`}
                       >
@@ -715,14 +770,21 @@ export default function BuyTicketsPage() {
                             : "bg-muted"
                             }`}
                         >
-                          <img
-                            src={method.svg}
-                            alt={`${method.name} logo`}
-                            className="w-12 h-12 object-contain rounded-lg"
-                          />
+                          {method.svg ? (
+                            <img
+                              src={method.svg}
+                              alt={`${method.name} logo`}
+                              className="w-12 h-12 object-contain rounded-lg"
+                            />
+                          ) : null}
                         </div>
                         <span
-                          className={`flex-1 text-left font-semibold ${isSelected ? "text-foreground" : "text-muted-foreground"
+                          className={`flex-1 text-left font-semibold ${
+                            isSelected 
+                              ? method.id === "pago-movil" 
+                                ? "text-[#6A8E23]" 
+                                : "text-foreground"
+                              : "text-muted-foreground"
                             }`}
                         >
                           {method.name}
@@ -759,6 +821,16 @@ export default function BuyTicketsPage() {
                 </p>
               )}
             </div>
+          </div>
+        </div>
+
+        {/* Icono de WhatsApp/Telegram fijo */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="hover:scale-105 transition-transform duration-300 drop-shadow-2xl">
+            <MoonMessagingIcon 
+              className="w-16 h-16" 
+              whatsappUrl="https://wa.me/584241325210"
+            />
           </div>
         </div>
       </div>

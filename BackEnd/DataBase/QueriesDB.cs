@@ -82,9 +82,32 @@ public class QueriesDB
                 EstadoPago = consul.Rows[i][5].ToString() ?? "",
                 IdSorteo = consul.Rows[i][6].ToString() ?? "",
                 IdUsuario = consul.Rows[i][7].ToString() ?? "",
-                ImagenSorteo = consul.Rows[i][8].ToString() ?? ""
+                ImagenSorteo = consul.Rows[i][8].ToString() ?? "",
+                IdTicket = Convert.ToInt32(consul.Rows[i][9]),
+                NumerosTicket = consul.Rows[i][10].ToString() ?? ""
             };
         }
+
+        return Tickets;
+    }
+
+    public async Task<ResponseTicketsByUser> QueriesViewTicketsByUserLastPurchase(string idUser)
+    {
+        DataTable consul = await ConnectionDB.ExecuteQueries<bool>("vista_tickets_sorteos", $"id_usuario = {idUser} ORDER BY fecha_compra DESC LIMIT 1 ");
+        ResponseTicketsByUser Tickets = new()
+        {
+            TituloSorteo = consul.Rows[0][0].ToString() ?? "",
+            CodigoTicket = consul.Rows[0][1].ToString() ?? "",
+            FechaCompra = Convert.ToDateTime(consul.Rows[0][2]),
+            FechaFinalizacion = consul.Rows[0][3] == DBNull.Value ? null : Convert.ToDateTime(consul.Rows[0][3]),
+            SorteoActivo = Convert.ToBoolean(consul.Rows[0][4]),
+            EstadoPago = consul.Rows[0][5].ToString() ?? "",
+            IdSorteo = consul.Rows[0][6].ToString() ?? "",
+            IdUsuario = consul.Rows[0][7].ToString() ?? "",
+            ImagenSorteo = consul.Rows[0][8].ToString() ?? "",
+            IdTicket = Convert.ToInt32(consul.Rows[0][9]),
+            NumerosTicket = consul.Rows[0][10].ToString() ?? ""
+        };
 
         return Tickets;
     }
@@ -106,7 +129,9 @@ public class QueriesDB
                 EstadoPago = consul.Rows[i][5].ToString() ?? "",
                 IdSorteo = consul.Rows[i][6].ToString() ?? "",
                 IdUsuario = consul.Rows[i][7].ToString() ?? "",
-                ImagenSorteo = consul.Rows[i][8].ToString() ?? ""
+                ImagenSorteo = consul.Rows[i][8].ToString() ?? "",
+                IdTicket = Convert.ToInt32(consul.Rows[i][9]),
+                NumerosTicket = consul.Rows[i][10].ToString() ?? ""
             };
         }
 
@@ -135,7 +160,7 @@ public class QueriesDB
                 Apellidos = consul.Rows[i][10].ToString() ?? "",
                 Telefono = consul.Rows[i][11].ToString() ?? "",
                 Correo = consul.Rows[i][12].ToString() ?? "",
-                Identidad = consul.Rows[i][13].ToString() ?? "" ,
+                Identidad = consul.Rows[i][13].ToString() ?? "",
                 nota = consul.Rows[i][14].ToString() ?? ""
             };
         }
@@ -186,10 +211,37 @@ public class QueriesDB
             Genero = consul.Rows[0][5].ToString() ?? "",
             Pais = consul.Rows[0][6].ToString() ?? "",
             Telefono = consul.Rows[0][8].ToString() ?? "",
-            Fec_naci =  "",
+            Fec_naci = "",
             Clave = "",
             ConfirmClave = ""
         };
+
+        return Usuario;
+    }
+
+    async public Task<Usuarios[]> InfoUsuarios()
+    {
+        DataTable consul = await ConnectionDB.ExecuteQueries<bool>("usuarios", $"id <> 753951");
+        Usuarios[] Usuario = new Usuarios[consul.Rows.Count];
+
+        for (int i = 0; i < consul.Rows.Count; i++)
+        {
+            Usuario[i] = new Usuarios
+            {
+                Id = Convert.ToInt32(consul.Rows[i][0]),
+                Identifi = consul.Rows[i][1].ToString() ?? "",
+                Nombre = consul.Rows[i][2].ToString() ?? "",
+                Apellido = consul.Rows[i][3].ToString() ?? "",
+                Email = consul.Rows[i][4].ToString() ?? "",
+                Genero = consul.Rows[i][5].ToString() ?? "",
+                Pais = consul.Rows[i][6].ToString() ?? "",
+                Telefono = consul.Rows[i][8].ToString() ?? "",
+                Fec_naci = "",
+                Clave = "",
+                ConfirmClave = ""
+            };
+        }
+        ;
 
         return Usuario;
     }

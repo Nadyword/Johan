@@ -78,6 +78,7 @@ export interface TicketResponse {
   correo?: string
   identidad?: string
   nota?: string
+  numerosTicket: string
 }
 
 export interface BuyTicketsRequest {
@@ -121,5 +122,20 @@ export interface PaginatedResponse<T> {
   page: number
   limit: number
   totalPages: number
+}
+
+// Respuestas de usuarios
+export interface UserResponse {
+  id: number
+  identifi: string
+  nombre: string
+  apellido: string
+  email: string
+  genero: string
+  pais: string
+  clave: string
+  confirmClave: string
+  telefono: string
+  fec_naci: string
 }
 

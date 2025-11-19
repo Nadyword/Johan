@@ -56,6 +56,13 @@ export {
   default as contactApiDefault,
 } from './contact'
 
+// API de Usuarios
+export {
+  usersApi,
+  default as usersApiDefault,
+  type UserResponse,
+} from './users'
+
 // Tipos generales
 export type {
   ContactMessageRequest,

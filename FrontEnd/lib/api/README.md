@@ -42,7 +42,6 @@ import { authApi } from '@/lib/api'
 // Login
 try {
   const userId = await authApi.login('usuario@example.com', 'password123')
-  console.log('Usuario autenticado:', userId)
 } catch (error) {
   console.error('Error al iniciar sesión:', error.message)
 }
@@ -58,7 +57,6 @@ try {
     '+56912345678',
     '1990-01-01'
   )
-  console.log('Usuario registrado:', response)
 } catch (error) {
   console.error('Error al registrar:', error.message)
 }

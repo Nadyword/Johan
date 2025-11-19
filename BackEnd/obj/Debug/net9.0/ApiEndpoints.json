@@ -27,6 +27,32 @@
   },
   {
     "ContainingType": "Api_inmobiliaria.Controllers.Buytickets",
+    "Method": "BuyTicketGenerado",
+    "RelativePath": "Sorteo/api/Buytickets/753951",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "request",
+        "Type": "Api_inmobiliaria.Models.Request.RequestBuyTicket",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Buytickets",
     "Method": "GetTicksByCodigo",
     "RelativePath": "Sorteo/api/Buytickets/Ticks/{ticks}",
     "HttpMethod": "GET",
@@ -310,6 +336,26 @@
     "ReturnTypes": [
       {
         "Type": "Api_inmobiliaria.Models.Response.ResponseMessage",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "Api_inmobiliaria.Controllers.Usuario",
+    "Method": "GetUsu",
+    "RelativePath": "Sorteo/api/Usuario",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "Api_inmobiliaria.Models.DTOs.Tablas.Usuarios[]",
         "MediaTypes": [
           "text/plain",
           "application/json",

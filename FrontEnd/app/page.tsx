@@ -4,6 +4,7 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { loadMockRafflesActive, loadMockRafflesDeactive } from "@/lib/mock-data"
 import { Sparkles, Trophy, Users, Clock } from "lucide-react"
 import { CloverIconImage } from "@/components/clover-icon"
+import { MoonMessagingIcon } from "@/components/moon-messaging-icon"
 import { AuthModal } from "@/components/auth-modal"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
@@ -32,7 +33,6 @@ export default function HomePage() {
   useEffect(() => {
     loadMockRafflesActive()
       .then((data) => {
-        console.log('Rifas activas cargadas:', data)
         setMockRafflesActive(data)
       })
       .catch((error) => {
@@ -41,7 +41,6 @@ export default function HomePage() {
     
     loadMockRafflesDeactive()
       .then((data) => {
-        console.log('Rifas anteriores cargadas:', data)
         setMockPreviousRaffles(data)
       })
       .catch((error) => {
@@ -348,6 +347,16 @@ export default function HomePage() {
 
       {/* Auth Modal */}
       <AuthModal open={showAuthModal} onOpenChange={setShowAuthModal} />
+
+      {/* Icono de WhatsApp/Telegram fijo */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <div className="hover:scale-105 transition-transform duration-300 drop-shadow-2xl">
+          <MoonMessagingIcon 
+            className="w-16 h-16" 
+            whatsappUrl="https://wa.me/584241325210"
+          />
+        </div>
+      </div>
     </div>
   )
 }

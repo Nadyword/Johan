@@ -11,5 +11,7 @@
         public required string IdSorteo { get; set; }
         public required string IdUsuario { get; set; }
         public required string ImagenSorteo { get; set; }
+        public required int IdTicket { get; set; }
+        public required string NumerosTicket { get; set; }
     }
 }

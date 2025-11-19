@@ -26,7 +26,6 @@ export async function AprobarTicket(IdCompra: string, Motivo: string, tokken: st
     }
 
     const result = await response.text();
-    console.log(result);
 
     try {
       return JSON.parse(result) as { message: string };
@@ -65,7 +64,6 @@ export async function CamceladoTicket(IdCompra: string, Motivo: string, tokken: 
     }
 
     const result = await response.text();
-    console.log(result);
 
     try {
       return JSON.parse(result) as { message: string };
@@ -97,7 +95,6 @@ export async function MetricasTicket(): Promise<{
     }
     
     const result = await response.text();
-    console.log(result);
     
     try {
       return JSON.parse(result) as {
@@ -108,6 +105,78 @@ export async function MetricasTicket(): Promise<{
     } catch (parseError) {
       throw new Error(`Respuesta inválida del servidor: ${result}`);
     }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+}
+
+/**
+ * Genera un ticket con los parámetros dados.
+ * @param params { 
+ *    RaffleId: string,
+ *    UserId: string | number,
+ *    PricevoTicket: number,
+ *    TicketQuantity: number,
+ *    Image?: string,
+ *    Note?: string,
+ *    ImagenSorteo?: string,
+ *    tokken: string | number
+ * }
+ */
+export async function GenerarTicket({
+  RaffleId,
+  UserId,
+  PricevoTicket,
+  TicketQuantity,
+  Note,
+  Image,
+  ImagenSorteo,
+  tokken
+}: {
+  RaffleId: string,
+  UserId: string | number,
+  PricevoTicket: number,
+  TicketQuantity: number,
+  Image?: string,
+  Note?: string,
+  ImagenSorteo?: string,
+  tokken: string | number
+}) {
+  // Valores por defecto para Note, Image y ModePay
+  const defaultModePay = "Generado";
+
+  const myHeaders = new Headers();
+  myHeaders.append("Content-Type", "application/json");
+
+  const requestBody = {
+    RaffleId,
+    UserId,
+    PricevoTicket,
+    ModePay: defaultModePay,      // Siempre "Generado"
+    TicketQuantity,
+    Image: Image || "Sin foto",
+    Note: Note || "nada",
+    ImagenSorteo: ImagenSorteo || "sin foto"
+  };
+
+  const raw = JSON.stringify(requestBody);
+
+  // Imprimir el body que se envía
+  console.log("📤 Body enviado al API:", JSON.stringify(requestBody, null, 2));
+
+  const requestOptions: RequestInit = {
+    method: "POST",
+    headers: myHeaders,
+    body: raw,
+    redirect: "follow"
+  };
+
+  try {
+    const response = await fetch(`http://localhost:1607/Sorteo/api/Buytickets/${tokken}`, requestOptions);
+    const result = await response.text();
+    console.log(result);
+    return result;
   } catch (error) {
     console.error(error);
     throw error;

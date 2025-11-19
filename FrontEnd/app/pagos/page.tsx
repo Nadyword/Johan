@@ -82,7 +82,6 @@ export default function PaymentsPage() {
 
       // Parsear la respuesta JSON
       const rawPayments = JSON.parse(result) as any[]
-      console.log("Pagos parseados:", rawPayments)
 
       // Mapear los datos de la API al formato Payment
       const mappedPayments: Payment[] = rawPayments.map((p) => ({
@@ -254,12 +253,6 @@ export default function PaymentsPage() {
         throw new Error("ID de usuario no disponible en localStorage")
       }
 
-      console.log("Enviando aprobación con:", {
-        idTicket: paymentToApprove.idTicket,
-        motivo: approveMotivo,
-        tokken: token
-      })
-
       const result = await AprobarTicket(paymentToApprove.idTicket, approveMotivo, token)
       console.log("Ticket aprobado:", result)
       
@@ -316,14 +309,8 @@ export default function PaymentsPage() {
         throw new Error("ID de usuario no disponible en localStorage")
       }
 
-      console.log("Enviando cancelación con:", {
-        idTicket: paymentToCancel.idTicket,
-        motivo: cancelMotivo,
-        tokken: token
-      })
 
       const result = await CamceladoTicket(paymentToCancel.idTicket, cancelMotivo, token)
-      console.log("Ticket cancelado:", result)
       
       // Recargar la lista de pagos y métricas para reflejar los cambios
       await Promise.all([loadPayments(false), loadMetricas()])

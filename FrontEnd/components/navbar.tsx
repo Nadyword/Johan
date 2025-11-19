@@ -32,6 +32,7 @@ export function Navbar() {
     { href: "/comprar", label: "Comprar" },
     { href: "/mis-tickets", label: "Mis Boletos" },
     { href: "/pagos", label: "Pagos", adminOnly: true },
+    { href: "/usuario", label: "Usuario", adminOnly: true },
     { href: "/rifas-anteriores", label: "Sorteos Anteriores" },
   ]
 
@@ -82,9 +83,14 @@ export function Navbar() {
                       <Link href="/mis-tickets">Mis boletos</Link>
                     </DropdownMenuItem>
                     {user && user.name?.toLowerCase() === "admin" && (
-                      <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
-                        <Link href="/pagos">Historial de Pagos</Link>
-                      </DropdownMenuItem>
+                      <>
+                        <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
+                          <Link href="/pagos">Historial de Pagos</Link>
+                        </DropdownMenuItem>
+                        <DropdownMenuItem asChild className="text-white hover:bg-[#6A8E23]/20 hover:text-[#F4A622]">
+                          <Link href="/usuario">Usuario</Link>
+                        </DropdownMenuItem>
+                      </>
                     )}
                     <DropdownMenuSeparator className="bg-[#6A8E23]/30" />
                     <DropdownMenuItem onClick={logout} className="text-red-400 hover:bg-red-500/20 hover:text-red-300">

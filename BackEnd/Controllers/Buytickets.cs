@@ -1,8 +1,8 @@
-﻿using Api_inmobiliaria.DataBase;
-using Api_inmobiliaria.Models.DTOs.Tablas;
-using Api_inmobiliaria.Models.Request;
-using Api_inmobiliaria.Models.Response;
+﻿using Api_inmobiliaria.Models.DTOs.Tablas;
 using Api_inmobiliaria.Services.SendMails;
+using Api_inmobiliaria.Models.Response;
+using Api_inmobiliaria.Models.Request;
+using Api_inmobiliaria.DataBase;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Api_inmobiliaria.Controllers;
@@ -20,6 +20,15 @@ public class Buytickets(IConfiguration configuration) : ControllerBase
     {
         Usuarios usuarios = await _queriesDB.InfoUsuarios(request.UserId.ToString());
         _ = sendMail.SendAsyncCompra(usuarios);
+        return await _funcionesDB.BuyTicket(request, usuarios);
+    }
+
+    [HttpPost("753951")]
+    async public Task<ResponseMessage> BuyTicketGenerado([FromBody] RequestBuyTicket request)
+    {
+        Usuarios usuarios = await _queriesDB.InfoUsuarios(request.UserId.ToString());
+        ResponseTicketsByUser ticket = await _queriesDB.QueriesViewTicketsByUserLastPurchase(request.UserId.ToString());
+        _ = sendMail.SendAsyncRecoveryAprobado(ticket.IdTicket.ToString(), "", "753951");
         return await _funcionesDB.BuyTicket(request, usuarios);
     }
 

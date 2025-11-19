@@ -1,6 +1,7 @@
 "use client"
 
 import { CloverIcon, CloverIconImage } from "@/components/clover-icon"
+import { MoonMessagingIcon } from "@/components/moon-messaging-icon"
 import { ProtectedRoute } from "@/components/protected-route"
 import { Ticket, Calendar, Trophy } from "lucide-react"
 import type { TicketResponse } from "@/lib/api/types"
@@ -33,8 +34,6 @@ export default function MyTicketsPage() {
         }
 
         const userTickets = await rafflesApi.getTickets(userId)
-        console.log("Tickets cargados:", userTickets)
-        console.log("Primer ticket imagenSorteo:", userTickets[0]?.imagenSorteo)
         setTickets(userTickets)
       } catch (err) {
         console.error("Error cargando tickets:", err)
@@ -174,6 +173,15 @@ export default function MyTicketsPage() {
                       }`}>
                         <span className="font-semibold capitalize">Estado: {ticket.estadoPago}</span>
                       </div>
+                      {ticket.estadoPago === "pagado" && ticket.numerosTicket && (
+                        <div className="flex items-start gap-2 text-sm p-3 rounded-lg bg-gradient-to-r from-[#6A8E23]/20 to-[#F4A622]/20 border border-[#6A8E23]/30">
+                          <Ticket className="w-4 h-4 text-[#6A8E23] mt-0.5 flex-shrink-0" />
+                          <div className="flex-1">
+                            <span className="font-semibold text-[#6A8E23] block mb-1">Números asignados:</span>
+                            <span className="text-foreground font-mono text-xs break-words">{ticket.numerosTicket}</span>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -193,6 +201,16 @@ export default function MyTicketsPage() {
               </a>
             </div>
           )}
+        </div>
+
+        {/* Icono de WhatsApp/Telegram fijo */}
+        <div className="fixed bottom-6 right-6 z-50">
+          <div className="hover:scale-105 transition-transform duration-300 drop-shadow-2xl">
+            <MoonMessagingIcon 
+              className="w-16 h-16" 
+              whatsappUrl="https://wa.me/584241325210"
+            />
+          </div>
         </div>
       </div>
     </ProtectedRoute>
