@@ -13,7 +13,7 @@ export function MoonMessagingIcon({
   className = "w-12 h-12", 
   style,
   size = 48,
-  whatsappUrl = "https://wa.me/584241325210",
+  whatsappUrl = "https://wa.me/34643907132",
   onWhatsAppClick
 }: MoonMessagingIconProps) {
   const handleWhatsAppClick = (e: React.MouseEvent) => {
