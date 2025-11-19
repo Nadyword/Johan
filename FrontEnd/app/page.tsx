@@ -353,7 +353,7 @@ export default function HomePage() {
         <div className="hover:scale-105 transition-transform duration-300 drop-shadow-2xl">
           <MoonMessagingIcon 
             className="w-16 h-16" 
-            whatsappUrl="https://wa.me/584241325210"
+            whatsappUrl="https://wa.me/34643907132"
           />
         </div>
       </div>
