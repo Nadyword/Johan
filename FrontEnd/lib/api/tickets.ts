@@ -173,7 +173,7 @@ export async function GenerarTicket({
   };
 
   try {
-    const response = await fetch(`http://localhost:1607/Sorteo/api/Buytickets/${tokken}`, requestOptions);
+    const response = await fetch(`${API_URL}/Sorteo/api/Buytickets/${tokken}`, requestOptions);
     const result = await response.text();
     console.log(result);
     return result;
