@@ -746,11 +746,11 @@ export default function BuyTicketsPage() {
                       name: "Zinli",
                       svg: "/Logo-zinli.svg",
                     },
-                    {
+                    /*{
                       id: "pago-movil",
                       name: "Pago Móvil",
                       svg: "/Logo-pago-movil.svg",
-                    },
+                    },*/
                   ].map((method) => {
                     const isSelected = selectedPaymentMethod === method.id
                     return (
