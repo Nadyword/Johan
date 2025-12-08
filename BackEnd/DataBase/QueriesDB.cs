@@ -83,7 +83,7 @@ public class QueriesDB
                 IdSorteo = consul.Rows[i][6].ToString() ?? "",
                 IdUsuario = consul.Rows[i][7].ToString() ?? "",
                 ImagenSorteo = consul.Rows[i][8].ToString() ?? "",
-                IdTicket = Convert.ToInt32(consul.Rows[i][9]),
+                IdTicket = Convert.ToInt32(consul.Rows[i][9].ToString().Trim() == "" ? 0: consul.Rows[i][9]),
                 NumerosTicket = consul.Rows[i][10].ToString() ?? ""
             };
         }
