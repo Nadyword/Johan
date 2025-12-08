@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Api inmobiliaria")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+79f12fbb997ba20a9cd2aeaf5d3ff2605f6f4f0d")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c7885f6284be9691b1c87678a4f7e9fdee9103a2")]
 [assembly: System.Reflection.AssemblyProductAttribute("Api inmobiliaria")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Api inmobiliaria")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
