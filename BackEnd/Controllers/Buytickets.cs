@@ -27,9 +27,10 @@ public class Buytickets(IConfiguration configuration) : ControllerBase
     async public Task<ResponseMessage> BuyTicketGenerado([FromBody] RequestBuyTicket request)
     {
         Usuarios usuarios = await _queriesDB.InfoUsuarios(request.UserId.ToString());
+        ResponseMessage reusl = await _funcionesDB.BuyTicket(request, usuarios);
         ResponseTicketsByUser ticket = await _queriesDB.QueriesViewTicketsByUserLastPurchase(request.UserId.ToString());
         _ = sendMail.SendAsyncRecoveryAprobado(ticket.IdTicket.ToString(), "", "753951");
-        return await _funcionesDB.BuyTicket(request, usuarios);
+        return reusl;
     }
 
     [HttpGet("User/{userId}")]
